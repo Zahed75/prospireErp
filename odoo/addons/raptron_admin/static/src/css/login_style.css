@@ -1,0 +1,404 @@
+:root {
+    --garshoub-green: #0B3D2E;
+    --garshoub-green-dark: #07261C;
+    --garshoub-green-light: #164D3A;
+    --garshoub-gold: #D4A843;
+    --garshoub-gold-dark: #B08D35;
+    --garshoub-text: #1f2937;
+    --garshoub-muted: #6b7280;
+    --garshoub-border: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body.o_web_login {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #f8fafc !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif !important;
+    overflow-x: hidden;
+    color: var(--garshoub-text);
+}
+
+/* Hide Odoo default layout */
+header, footer, #top_menu_container, .o_frontend_footer {
+    display: none !important;
+}
+
+#wrapwrap, main, #wrap {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+/* Main wrapper */
+.garshoub-auth-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Left side */
+.garshoub-auth-left {
+    width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 50px;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--garshoub-green-dark) 0%, var(--garshoub-green) 60%, var(--garshoub-green-light) 100%);
+}
+
+.garshoub-brand {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.garshoub-brand img {
+    height: 80px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.garshoub-content {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    margin-bottom: 30px;
+}
+
+.garshoub-left-image {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 520px;
+    margin-top: auto;
+    text-align: center;
+}
+
+.garshoub-left-image img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.25));
+}
+
+.garshoub-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(212, 168, 67, 0.15);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    color: var(--garshoub-gold);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.garshoub-content h1 {
+    margin: 0 0 20px 0;
+    color: white;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.garshoub-title-white {
+    color: white;
+}
+
+.garshoub-title-gold {
+    color: var(--garshoub-gold);
+}
+
+.garshoub-content p {
+    margin: 0;
+    max-width: 420px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Right side */
+.garshoub-auth-right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: #f8fafc;
+}
+
+/* Login card */
+.garshoub-login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f0f0f0;
+}
+
+.garshoub-login-logo {
+    display: none;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.garshoub-login-logo img {
+    height: 48px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.garshoub-login-card h2 {
+    margin: 0 0 8px 0;
+    color: var(--garshoub-text);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.garshoub-subtitle {
+    margin: 0 0 28px 0;
+    color: var(--garshoub-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Form fields */
+.garshoub-form-container label,
+.garshoub-form-container .col-form-label {
+    margin-bottom: 8px !important;
+    color: var(--garshoub-text) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    display: block !important;
+}
+
+.garshoub-form-container .form-control,
+.garshoub-form-container input[type="text"],
+.garshoub-form-container input[type="email"],
+.garshoub-form-container input[type="password"] {
+    width: 100% !important;
+    height: 48px !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--garshoub-border) !important;
+    background: #f9fafb !important;
+    padding: 0 14px !important;
+    font-size: 14px !important;
+    color: var(--garshoub-text) !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease;
+}
+
+.garshoub-form-container .form-control:focus,
+.garshoub-form-container input:focus {
+    background: white !important;
+    border-color: var(--garshoub-gold) !important;
+    box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12) !important;
+    outline: none !important;
+}
+
+/* Login button */
+.garshoub-form-container .btn-primary,
+.garshoub-form-container .oe_login_buttons > button {
+    width: 100% !important;
+    height: 48px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background: linear-gradient(135deg, var(--garshoub-gold), var(--garshoub-gold-dark)) !important;
+    color: white !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin-top: 8px !important;
+}
+
+.garshoub-form-container .btn-primary:hover,
+.garshoub-form-container .oe_login_buttons > button:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(212, 168, 67, 0.3) !important;
+}
+
+/* Forgot password link */
+.garshoub-form-container .field-password {
+    position: relative;
+}
+
+.garshoub-form-container .field-password a[href*="reset_password"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--garshoub-gold);
+    text-decoration: none;
+}
+
+.garshoub-form-container .field-password a[href*="reset_password"]:hover {
+    text-decoration: underline;
+}
+
+/* Password wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper .form-control {
+    padding-right: 48px !important;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 48px;
+    width: 48px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--garshoub-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: var(--garshoub-gold);
+}
+
+/* Error messages */
+.alert-danger {
+    background: #fef2f2 !important;
+    border: 1px solid #fecaca !important;
+    color: #dc2626 !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    font-size: 13px !important;
+    margin-bottom: 16px !important;
+}
+
+/* Hide Odoo default extra elements: passkey, signup, etc. */
+.garshoub-form-container .o_login_auth,
+.garshoub-form-container a[href*="/web/signup"],
+.garshoub-form-container .text-center.small.mt-4,
+.garshoub-form-container .text-center.small.mt-4.pt-3 {
+    display: none !important;
+}
+
+/* Ensure login button container is always visible */
+.garshoub-form-container .oe_login_buttons {
+    display: block !important;
+    margin-top: 12px;
+}
+
+/* Placeholder */
+::placeholder {
+    color: #9ca3af !important;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .garshoub-auth-wrapper {
+        flex-direction: column;
+    }
+
+    .garshoub-auth-left {
+        display: none !important;
+    }
+
+    .garshoub-auth-right {
+        width: 100% !important;
+        min-height: 100vh;
+        padding: 20px !important;
+        background: #f8fafc !important;
+    }
+
+    .garshoub-login-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 28px 20px;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+
+    .garshoub-login-logo {
+        display: block;
+    }
+
+    .garshoub-login-logo img {
+        height: 44px;
+    }
+
+    .garshoub-login-card h2 {
+        font-size: 22px;
+    }
+
+    .form-control,
+    input[type="email"],
+    input[type="password"] {
+        height: 46px !important;
+    }
+
+    .password-toggle {
+        height: 46px;
+        width: 46px;
+    }
+}
+
+@media (max-width: 480px) {
+    .garshoub-auth-right {
+        padding: 16px !important;
+    }
+
+    .garshoub-login-card {
+        padding: 24px 16px;
+    }
+
+    .garshoub-login-card h2 {
+        font-size: 20px;
+    }
+
+    .garshoub-subtitle {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .form-control,
+    input[type="email"],
+    input[type="password"] {
+        height: 44px !important;
+        font-size: 14px !important;
+    }
+
+    .password-toggle {
+        height: 44px;
+        width: 44px;
+    }
+}
