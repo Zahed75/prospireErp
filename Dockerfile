@@ -18,11 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-core \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    && curl -L http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -o libssl1.1.deb \
-    && dpkg -i libssl1.1.deb || apt-get install -f -y \
-    && curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb -o wkhtmltox.deb \
-    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    && rm libssl1.1.deb wkhtmltox.deb \
+    && apt-get install -y --no-install-recommends wkhtmltopdf \
     && rm -rf /var/lib/apt/lists/*
 
 # Create odoo user
