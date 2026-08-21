@@ -41,7 +41,7 @@ def post_init_hook(env):
         })
 
     # 3. Force Expiration
-    env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2099-12-31 23:59:59')
+    env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2126-12-31 23:59:59')
 
     # 4. Ensure our login template has highest priority
     # This prevents other modules (like website) from overriding our custom login

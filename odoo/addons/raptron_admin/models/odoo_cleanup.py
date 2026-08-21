@@ -8,7 +8,7 @@ class IrConfigParameter(models.Model):
     def _register_hook(self):
         """Force database expiration to 2099 on every registry load."""
         res = super()._register_hook()
-        self.set_param('database.expiration_date', '2099-12-31 23:59:59')
+        self.set_param('database.expiration_date', '2126-12-31 23:59:59')
         # Also remove any enterprise registration warning
         self.set_param('database.enterprise_code', 'SURRENDER-TO-SYCO')
         return res
@@ -17,12 +17,12 @@ class IrConfigParameter(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('key') == 'database.expiration_date':
-                vals['value'] = '2099-12-31 23:59:59'
+                vals['value'] = '2126-12-31 23:59:59'
         return super().create(vals_list)
 
     def write(self, vals):
         if vals.get('key') == 'database.expiration_date':
-            vals['value'] = '2099-12-31 23:59:59'
+            vals['value'] = '2126-12-31 23:59:59'
         return super().write(vals)
 
 class PublisherWarrantyContract(models.AbstractModel):
