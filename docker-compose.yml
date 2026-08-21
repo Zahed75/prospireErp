@@ -41,6 +41,10 @@ services:
       - DB_PASSWORD=${DB_PASSWORD:-prospire@2@26}
       - DB_NAME=${DB_NAME:-prospire_hq}
       - DB_PORT=5432
+      - ADMIN_LOGIN=${ADMIN_LOGIN:-prospirenext@gmail.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-prospire@2@26}
+      - BASE_URL=${BASE_URL:-https://prospirenext.com}
+      - WEBSITE_DOMAIN=${WEBSITE_DOMAIN:-prospirenext.com}
     restart: unless-stopped
     networks:
       - prospire-network

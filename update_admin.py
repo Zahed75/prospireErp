@@ -6,7 +6,7 @@ This is idempotent — safe to run multiple times.
 import os
 import odoo
 
-db_name = os.environ.get('DB_NAME', 'Garshoub HQ')
+db_name = os.environ.get('DB_NAME', 'prospire_hq')
 admin_login = os.environ.get('ADMIN_LOGIN', 'fgarshoub@gmail.com')
 admin_password = os.environ.get('ADMIN_PASSWORD', 'G@rsh@ub2@26')
 

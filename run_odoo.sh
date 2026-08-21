@@ -13,6 +13,20 @@ DB_USER="${DB_USER:-odoo}"
 DB_PASSWORD="${DB_PASSWORD:-prospire@2@26}"
 DB_NAME="${DB_NAME:-prospire_hq}"
 
+# Validate port is numeric
+if ! [[ "$PORT" =~ ^[0-9]+$ ]]; then
+    echo "ERROR: PORT must be a number. Got: '$PORT'"
+    echo "Usage: $0 [PORT] [CONFIG_FILE]"
+    exit 1
+fi
+
+# Validate config file exists
+if [ ! -f "$CONFIG" ]; then
+    echo "ERROR: Config file not found: $CONFIG"
+    echo "Usage: $0 [PORT] [CONFIG_FILE]"
+    exit 1
+fi
+
 echo "=================================="
 echo "Odoo Local Runner"
 echo "Port: $PORT"
