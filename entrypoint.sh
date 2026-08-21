@@ -83,7 +83,7 @@ try:
         
         # 2. Also find and update ANY user with the old login
         old_users = env['res.users'].search([
-            '|',
+            '|', '|',
             ('login', '=', 'tech.syscomatic@gmail.com'),
             ('login', '=', 'admin'),
             ('login', '=', 'fgarshoub@gmail.com')

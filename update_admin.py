@@ -7,8 +7,8 @@ import os
 import odoo
 
 db_name = os.environ.get('DB_NAME', 'prospire_hq')
-admin_login = os.environ.get('ADMIN_LOGIN', 'fgarshoub@gmail.com')
-admin_password = os.environ.get('ADMIN_PASSWORD', 'G@rsh@ub2@26')
+admin_login = os.environ.get('ADMIN_LOGIN', 'prospirenext@gmail.com')
+admin_password = os.environ.get('ADMIN_PASSWORD', 'prospire@2@26')
 
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])

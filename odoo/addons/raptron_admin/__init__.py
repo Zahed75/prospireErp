@@ -1,32 +1,42 @@
+import os
+
 from . import models
 from . import controllers
 
+
 def post_init_hook(env):
+    admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
+    admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
+
     # 1. Reset Admin Credentials
     # Search by any known old login
     admin = env['res.users'].search([
         '|', '|',
         ('login', '=', 'admin'),
         ('login', '=', 'tech.syscomatic@gmail.com'),
-        ('id', '=', env.ref('base.user_admin').id)
+        ('login', '=', 'fgarshoub@gmail.com'),
     ], limit=1, order='id desc')
+    if not admin:
+        admin = env.ref('base.user_admin', raise_if_not_found=False)
     if admin:
         admin.write({
-            'login': 'fgarshoub@gmail.com',
-            'password': 'G@rsh@ub2@26',
+            'login': admin_login,
+            'password': admin_password,
         })
 
     # 2. Configure SMTP
+    smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
+    smtp_pass = os.environ.get("SMTP_PASSWORD", "vats gsoy xiut xvwn")
     Smtp = env['ir.mail_server']
-    if not Smtp.search([('name', '=', 'Syscomatic Gmail SMTP')]):
+    if not Smtp.search([('name', '=', 'Prospire SMTP')]):
         Smtp.create({
-            'name': 'Garshoub Gmail SMTP',
+            'name': 'Prospire SMTP',
             'smtp_host': 'smtp.gmail.com',
             'smtp_port': 587,
-            'smtp_user': 'fgarshoub@gmail.com',
-            'smtp_pass': 'ythx yyrf dtwc zdni',
+            'smtp_user': smtp_user,
+            'smtp_pass': smtp_pass,
             'smtp_encryption': 'starttls',
-            'from_filter': 'fgarshoub@gmail.com',
+            'from_filter': smtp_user,
             'sequence': 1,
         })
 
