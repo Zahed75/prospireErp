@@ -29,11 +29,10 @@ class PublisherWarrantyContract(models.AbstractModel):
     _inherit = 'publisher_warranty.contract'
 
     @api.model
-    def _get_message(self):
+    def _get_sys_logs(self):
         """Disable phone-home to Odoo servers for subscription checks."""
-        return {}
+        return {"messages": [], "enterprise_info": {}}
 
-    @api.model
-    def _update_notification(self, cron_mode=True):
+    def update_notification(self, cron_mode=True):
         """Silence subscription notifications."""
         return True

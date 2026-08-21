@@ -42,7 +42,12 @@ try:
         param.set_param('web.base.url.freeze', '1')
         print(f'[entrypoint] web.base.url set to {base_url} (frozen)')
         
-        # 2. Ensure website domain is set correctly
+        # 2. Keep database expiration far in the future and clear any expiration reason
+        param.set_param('database.expiration_date', '2099-12-31 23:59:59')
+        param.set_param('database.expiration_reason', 'none')
+        print('[entrypoint] database expiration set to 2099-12-31')
+        
+        # 3. Ensure website domain is set correctly
         Website = env['website'].sudo()
         for website in Website.search([]):
             if website.domain != website_domain:

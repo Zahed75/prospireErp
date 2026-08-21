@@ -31,27 +31,7 @@ class IrHttp(models.AbstractModel):
         return scheme
 
     def session_info(self):
-        ICP = self.env['ir.config_parameter'].sudo()
-
-        if self.env.user.has_group('base.group_system'):
-            warn_enterprise = 'admin'
-        elif self.env.user._is_internal():
-            warn_enterprise = 'user'
-        else:
-            warn_enterprise = False
-
         result = super().session_info()
         result['support_url'] = "https://www.odoo.com/help"
-        if warn_enterprise:
-            result['warning'] = warn_enterprise
-            result['expiration_date'] = ICP.get_param('database.expiration_date')
-            result['expiration_reason'] = ICP.get_param('database.expiration_reason')
-            if ICP.get_param('sysadmin.message'):
-                try:
-                    sysadmin_message = json.loads(ICP.get_param('sysadmin.message'))
-                    if 'message' in sysadmin_message:
-                        sysadmin_message['message'] = html_sanitize(sysadmin_message['message'], sanitize_tags=False)
-                    result['sysadmin_message'] = sysadmin_message
-                except Exception:
-                    _logger.exception('Failed to load sysadmin.message in ir.config_parameter')
+        # Subscription expiration warning disabled — database is treated as perpetual.
         return result
