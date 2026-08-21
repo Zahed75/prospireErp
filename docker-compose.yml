@@ -1,19 +1,17 @@
-version: '3.8'
-
 services:
   db:
     image: pgvector/pgvector:pg15
-    container_name: odoo_postgres
+    container_name: prospire_postgres
     environment:
-      - POSTGRES_DB=${DB_NAME:-garshoub_hq}
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-G@rsh@ub2@26}
+      - POSTGRES_DB=${DB_NAME:-prospire_hq}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-prospire@2@26}
       - POSTGRES_USER=${DB_USER:-odoo}
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - prospire-db-data:/var/lib/postgresql/data/pgdata
     restart: unless-stopped
     networks:
-      - odoo-network
+      - prospire-network
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:-odoo}" ]
       interval: 10s
@@ -27,25 +25,25 @@ services:
 
   odoo:
     build: .
-    container_name: odoo_app
+    container_name: prospire_app
     depends_on:
       - db
     ports:
-      - "${ODOO_PORT:-8069}:8069"
-      - "8072:8072"
+      - "${ODOO_PORT:-8070}:8069"
+      - "${LONGPOLLING_PORT:-8071}:8072"
     volumes:
-      - odoo-web-data:/var/lib/odoo
-      - odoo-logs:/var/log/odoo
+      - prospire-web-data:/var/lib/odoo
+      - prospire-logs:/var/log/odoo
       - ./odoo.conf:/opt/odoo/odoo.conf:ro
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER:-odoo}
-      - DB_PASSWORD=${DB_PASSWORD:-G@rsh@ub2@26}
-      - DB_NAME=${DB_NAME:-garshoub_hq}
+      - DB_PASSWORD=${DB_PASSWORD:-prospire@2@26}
+      - DB_NAME=${DB_NAME:-prospire_hq}
       - DB_PORT=5432
     restart: unless-stopped
     networks:
-      - odoo-network
+      - prospire-network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8069/web/login" ]
       interval: 30s
@@ -60,15 +58,15 @@ services:
 
   backup:
     image: pgvector/pgvector:pg15
-    container_name: odoo_backup
+    container_name: prospire_backup
     depends_on:
       - db
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER:-odoo}
-      - DB_PASSWORD=${DB_PASSWORD:-G@rsh@ub2@26}
-      - DB_NAME=${DB_NAME:-garshoub_hq}
-      - PGPASSWORD=${DB_PASSWORD:-G@rsh@ub2@26}
+      - DB_PASSWORD=${DB_PASSWORD:-prospire@2@26}
+      - DB_NAME=${DB_NAME:-prospire_hq}
+      - PGPASSWORD=${DB_PASSWORD:-prospire@2@26}
     volumes:
       - ./backups:/backups
     entrypoint: |
@@ -84,7 +82,7 @@ services:
       '
     restart: unless-stopped
     networks:
-      - odoo-network
+      - prospire-network
     logging:
       driver: "json-file"
       options:
@@ -92,10 +90,10 @@ services:
         max-file: "2"
 
 volumes:
-  odoo-db-data:
-  odoo-web-data:
-  odoo-logs:
+  prospire-db-data:
+  prospire-web-data:
+  prospire-logs:
 
 networks:
-  odoo-network:
+  prospire-network:
     driver: bridge

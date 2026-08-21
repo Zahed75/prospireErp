@@ -18,7 +18,7 @@ echo "Database is ready!"
 # --init installs if missing, --update applies changes if already installed
 echo "Installing / Updating raptron_admin module..."
 python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
-    -d "${DB_NAME:-garshoub_hq}" \
+    -d "${DB_NAME:-prospire_hq}" \
     --init=raptron_admin \
     --update=raptron_admin \
     --stop-after-init || echo "Module update failed, continuing to start server..."
@@ -27,7 +27,7 @@ python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
 echo "Enforcing base URL and website domain settings..."
 python3 -c "
 import os, odoo
-db = os.environ.get('DB_NAME', 'garshoub_hq')
+db = os.environ.get('DB_NAME', 'prospire_hq')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = odoo.registry(db)
@@ -65,7 +65,7 @@ echo "Module update completed!"
 echo "Updating admin credentials..."
 python3 -c "
 import os, odoo
-db = os.environ.get('DB_NAME', 'garshoub_hq')
+db = os.environ.get('DB_NAME', 'prospire_hq')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = odoo.registry(db)
