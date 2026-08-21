@@ -55,8 +55,8 @@ class ResUsers(models.Model):
         """Safety-net cron: enforce login branding, favicon, admin credentials, and URLs."""
         admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
         admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
-        base_url = os.environ.get("BASE_URL", "https://prospirenext.com")
-        website_domain = os.environ.get("WEBSITE_DOMAIN", "prospirenext.com")
+        base_url = os.environ.get("BASE_URL", "https://hq.prospirenext.com")
+        website_domain = os.environ.get("WEBSITE_DOMAIN", "hq.prospirenext.com")
 
         try:
             # 1. Enforce admin credentials

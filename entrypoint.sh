@@ -28,8 +28,8 @@ echo "Enforcing base URL and website domain settings..."
 python3 -c "
 import os, odoo
 db = os.environ.get('DB_NAME', 'prospire_hq')
-base_url = os.environ.get('BASE_URL', 'https://prospirenext.com')
-website_domain = os.environ.get('WEBSITE_DOMAIN', 'prospirenext.com')
+base_url = os.environ.get('BASE_URL', 'https://hq.prospirenext.com')
+website_domain = os.environ.get('WEBSITE_DOMAIN', 'hq.prospirenext.com')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = odoo.registry(db)
