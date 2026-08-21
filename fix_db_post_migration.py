@@ -54,13 +54,13 @@ def fix_database(db_name, db_user, db_password, db_host, base_url):
         sys.exit(1)
 
 if __name__ == "__main__":
-    # Parameters for syscoHQ
+    # Parameters for Prospire ERP
     fix_database(
-        db_name="syscoHQ",
+        db_name="prospire_hq",
         db_user="odoo",
-        db_password="odoo_secure_password",
+        db_password="prospire@2@26",
         db_host="db",
-        base_url="https://hq.syscomatic.com"
+        base_url="https://hq.prospirenext.com"
     )
 
 
