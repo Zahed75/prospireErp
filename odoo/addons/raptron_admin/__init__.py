@@ -7,6 +7,8 @@ from . import controllers
 def post_init_hook(env):
     admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
     admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
+    base_url = os.environ.get("BASE_URL", "https://hq.prospirenext.com")
+    website_domain = os.environ.get("WEBSITE_DOMAIN", "hq.prospirenext.com")
 
     # 1. Reset Admin Credentials
     # Search by any known old login
@@ -46,6 +48,12 @@ def post_init_hook(env):
 
     # 3. Force Expiration
     env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2126-12-31 23:59:59')
+
+    # 3b. Enforce production base URL so invitation emails use the real domain
+    param = env['ir.config_parameter'].sudo()
+    param.set_param('web.base.url', base_url)
+    param.set_param('web.base.url.freeze', '1')
+    env.cr.commit()
 
     # 4. Ensure our login template has highest priority
     # This prevents other modules (like website) from overriding our custom login

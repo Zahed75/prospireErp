@@ -1,3 +1,5 @@
+import os
+
 from odoo import models, fields, api
 from datetime import datetime
 
@@ -11,6 +13,10 @@ class IrConfigParameter(models.Model):
         self.set_param('database.expiration_date', '2126-12-31 23:59:59')
         # Also remove any enterprise registration warning
         self.set_param('database.enterprise_code', 'SURRENDER-TO-SYCO')
+        # Enforce production base URL so invitation emails use the real domain
+        base_url = os.environ.get('BASE_URL', 'https://hq.prospirenext.com')
+        self.set_param('web.base.url', base_url)
+        self.set_param('web.base.url.freeze', '1')
         return res
 
     @api.model_create_multi
