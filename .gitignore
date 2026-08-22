@@ -1,6 +1,49 @@
-
 # Local development data
 local_data/
 *.pyc
 __pycache__/
 .env
+
+# Python virtual environments
+.venv/
+env/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Backups
+backups/
+*.sql
+*.dump
+
+# Logs
+*.log
+
+# One-off fix / migration scripts (kept in git history, not needed in repo)
+activate_data.py
+check_asif.py
+check_asif_again.py
+clean_dump.py
+clean_orphans.py
+fix_asif.py
+fix_attachments.py
+fix_db_post_migration.py
+fix_flowllet.py
+fix_password.py
+fix_password_final.py
+force_data.py
+inspect_db.py
+reset_admin.py
+restore_data.sh
+sanitize_practice.py
+set_admin.py
+update_admin.py
+update_user.py
+vps_sync.sh

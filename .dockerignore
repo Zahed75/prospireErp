@@ -1,16 +1,18 @@
 # Ignore everything by default
 **
 
-# Allow only what's needed
+# Allow only what's needed for the Odoo Docker image
 !odoo/
 !odoo.conf
 !requirements.txt
 !Dockerfile
 !docker-compose.yml
 !entrypoint.sh
-!deploy.sh
 !odoo-bin
-!update_admin.py
+!cleanup_old_db.sh
+!README.md
+!LICENSE
+!.env.example
 
 # Specific exclusions within allowed folders
 **/.git
@@ -20,7 +22,9 @@
 **/*.pyd
 **/.venv
 **/venv
+**/env
 **/node_modules
 **/odoo/data
 **/odoo/filestore
 **/odoo/sessions
+**/.DS_Store
