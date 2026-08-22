@@ -26,19 +26,23 @@ def post_init_hook(env):
 
     # 2. Configure SMTP
     smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
-    smtp_pass = os.environ.get("SMTP_PASSWORD", "vats gsoy xiut xvwn")
+    smtp_pass = os.environ.get("SMTP_PASSWORD", "cgnk vwjs yewk pgml")
     Smtp = env['ir.mail_server']
-    if not Smtp.search([('name', '=', 'Prospire SMTP')]):
-        Smtp.create({
-            'name': 'Prospire SMTP',
-            'smtp_host': 'smtp.gmail.com',
-            'smtp_port': 587,
-            'smtp_user': smtp_user,
-            'smtp_pass': smtp_pass,
-            'smtp_encryption': 'starttls',
-            'from_filter': smtp_user,
-            'sequence': 1,
-        })
+    existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
+    smtp_values = {
+        'name': 'Prospire SMTP',
+        'smtp_host': 'smtp.gmail.com',
+        'smtp_port': 587,
+        'smtp_user': smtp_user,
+        'smtp_pass': smtp_pass,
+        'smtp_encryption': 'starttls',
+        'from_filter': smtp_user,
+        'sequence': 1,
+    }
+    if existing_smtp:
+        existing_smtp.write(smtp_values)
+    else:
+        Smtp.create(smtp_values)
 
     # 3. Force Expiration
     env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2126-12-31 23:59:59')

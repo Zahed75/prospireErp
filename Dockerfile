@@ -18,7 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-core \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    && apt-get install -y --no-install-recommends wkhtmltopdf \
+    # Install wkhtmltopdf with patched Qt from official bookworm release.
+    # The distro wkhtmltopdf package often lacks the patched Qt needed for
+    # page breaks/JavaScript in PDF reports. Use the official 0.12.6.1-2
+    # bookworm build which links against libssl3 (no libssl1.1 required).
+    && curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bookworm_amd64.deb -o /tmp/wkhtmltox.deb \
+    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
+    && rm -f /tmp/wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/*
 
 # Create odoo user

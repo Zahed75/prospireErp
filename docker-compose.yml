@@ -46,7 +46,7 @@ services:
       - BASE_URL=${BASE_URL:-https://hq.prospirenext.com}
       - WEBSITE_DOMAIN=${WEBSITE_DOMAIN:-hq.prospirenext.com}
       - SMTP_USER=${SMTP_USER:-prospirenext@gmail.com}
-      - SMTP_PASSWORD=${SMTP_PASSWORD:-vats gsoy xiut xvwn}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-cgnk vwjs yewk pgml}
     restart: unless-stopped
     networks:
       - prospire-network
