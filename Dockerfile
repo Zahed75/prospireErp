@@ -16,16 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     node-less \
     git \
     xz-utils \
+    wkhtmltopdf \
     fonts-noto-core \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    # Install official wkhtmltopdf with patched Qt.
-    # There is no official bookworm .deb; the Ubuntu 22.04 (jammy) build
-    # links against libssl3 and installs cleanly on Debian bookworm.
-    && curl -fsSL -o /tmp/wkhtmltox.deb \
-       https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
-    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
-    && rm -f /tmp/wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/*
 
 # Create odoo user
