@@ -17,6 +17,8 @@ class IrConfigParameter(models.Model):
         base_url = os.environ.get('BASE_URL', 'https://hq.prospirenext.com')
         self.set_param('web.base.url', base_url)
         self.set_param('web.base.url.freeze', '1')
+        # Keep user sessions alive for 30 days instead of the 7-day default
+        self.set_param('sessions.max_inactivity_seconds', '2592000')
         return res
 
     @api.model_create_multi

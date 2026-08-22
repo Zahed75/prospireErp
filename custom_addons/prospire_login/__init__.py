@@ -20,7 +20,10 @@ def post_init_hook(env):
     ], limit=1, order='id desc')
     if not admin:
         admin = env.ref('base.user_admin', raise_if_not_found=False)
-    if admin:
+    # Only write when credentials actually differ: rewriting the password
+    # re-hashes it and invalidates all sessions (password is part of the
+    # session token), which caused "Session Expired" every few minutes.
+    if admin and not env['res.users']._credentials_current(admin, admin_login, admin_password):
         admin.write({
             'login': admin_login,
             'password': admin_password,

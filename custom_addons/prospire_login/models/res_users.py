@@ -51,6 +51,28 @@ class ResUsers(models.Model):
         return super()._update_presence(inactivity_period, identity_field, identity_value)
 
     @api.model
+    def _credentials_current(self, user, login, password):
+        """Return True if the user's login and password already match.
+
+        Verified directly against the stored hash so callers can skip a
+        password write that would otherwise rotate the hash and invalidate
+        all of the user's sessions.
+        """
+        if user.login != login:
+            return False
+        self.env.cr.execute(
+            "SELECT COALESCE(password, '') FROM res_users WHERE id=%s",
+            [user.id],
+        )
+        row = self.env.cr.fetchone()
+        if not row or not row[0]:
+            return False
+        try:
+            return bool(user._crypt_context().verify(password, row[0]))
+        except Exception:
+            return False
+
+    @api.model
     def _cron_enforce_garshoub_settings(self):
         """Safety-net cron: enforce login branding, favicon, admin credentials, and URLs."""
         admin_login = os.environ.get("ADMIN_LOGIN", "prospirenext@gmail.com")
@@ -59,9 +81,13 @@ class ResUsers(models.Model):
         website_domain = os.environ.get("WEBSITE_DOMAIN", "hq.prospirenext.com")
 
         try:
-            # 1. Enforce admin credentials
+            # 1. Enforce admin credentials — but ONLY when they actually differ.
+            # IMPORTANT: writing `password` re-hashes it, and the session token
+            # is derived from {id, login, password, active}. A blind rewrite
+            # every 5 minutes was invalidating all admin sessions
+            # ("Odoo Session Expired" every few minutes).
             admin = self.env.ref("base.user_admin", raise_if_not_found=False)
-            if admin:
+            if admin and not self._credentials_current(admin, admin_login, admin_password):
                 admin.write({
                     "login": admin_login,
                     "password": admin_password,

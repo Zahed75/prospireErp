@@ -91,12 +91,29 @@ try:
     registry = Registry(db)
     with registry.cursor() as cr:
         env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
-        
+
+        def credentials_current(user):
+            # Only rewrite when different: a password write re-hashes it and
+            # invalidates every session (password feeds the session token).
+            if user.login != admin_login:
+                return False
+            cr.execute("SELECT COALESCE(password, '') FROM res_users WHERE id=%s", [user.id])
+            row = cr.fetchone()
+            if not row or not row[0]:
+                return False
+            try:
+                return bool(user._crypt_context().verify(admin_password, row[0]))
+            except Exception:
+                return False
+
         # 1. Update base.user_admin
         admin = env.ref('base.user_admin')
-        admin.write({'login': admin_login, 'password': admin_password})
-        print(f'[entrypoint] base.user_admin updated: login={admin.login}')
-        
+        if not credentials_current(admin):
+            admin.write({'login': admin_login, 'password': admin_password})
+            print(f'[entrypoint] base.user_admin updated: login={admin.login}')
+        else:
+            print('[entrypoint] base.user_admin credentials already current, skipped')
+
         # 2. Also find and update ANY user with the old login
         old_users = env['res.users'].search([
             '|', '|',
@@ -105,10 +122,10 @@ try:
             ('login', '=', 'fgarshoub@gmail.com')
         ])
         for old in old_users:
-            if old.id != admin.id:
+            if old.id != admin.id and not credentials_current(old):
                 old.write({'login': admin_login, 'password': admin_password})
                 print(f'[entrypoint] Old user {old.id} updated to new credentials')
-        
+
         env.cr.commit()
         print('[entrypoint] Admin credentials updated successfully')
 except Exception as e:
