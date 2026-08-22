@@ -24,7 +24,8 @@
             'raptron_admin/static/src/css/cleanup.css',
         ],
         'web.assets_frontend': [
-            'raptron_admin/static/src/css/login_style.css',
+            'raptron_admin/static/src/css/prospire_login.css',
+            'raptron_admin/static/src/js/prospire_login.js',
         ],
     },
     'license': 'LGPL-3',

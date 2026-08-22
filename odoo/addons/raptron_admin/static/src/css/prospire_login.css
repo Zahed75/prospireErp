@@ -1,0 +1,572 @@
+/* ==========================================================================
+   Prospire Next Learning Hub — Login Page
+   Scoped under .prospire-login-page (set as body_classname in the template).
+   ========================================================================== */
+
+:root {
+    --prospire-primary: #6C2BD9;
+    --prospire-primary-light: #7C3AED;
+    --prospire-purple-soft: #A78BFA;
+    --prospire-lavender: #EDE9FE;
+    --prospire-background: #F8F7FF;
+    --prospire-text: #0F172A;
+    --prospire-muted: #64748B;
+    --prospire-border: #E2E8F0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body.prospire-login-page {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--prospire-background);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--prospire-text);
+}
+
+body.prospire-login-page header,
+body.prospire-login-page footer,
+body.prospire-login-page #top_menu_container,
+body.prospire-login-page .o_frontend_footer {
+    display: none !important;
+}
+
+body.prospire-login-page #wrapwrap,
+body.prospire-login-page main,
+body.prospire-login-page #wrap {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   Shell
+   -------------------------------------------------------------------------- */
+.prospire-login-shell {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Left: brand / marketing panel
+   -------------------------------------------------------------------------- */
+.prospire-brand-panel {
+    flex: 0 0 55%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 56px;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(600px 400px at 85% 110%, rgba(167, 139, 250, 0.25), transparent 60%),
+        radial-gradient(500px 380px at -10% -10%, rgba(124, 58, 237, 0.35), transparent 55%),
+        linear-gradient(150deg, #1E1B4B 0%, #4C1D95 52%, #6C2BD9 100%);
+}
+
+.prospire-brand-panel::after {
+    content: "";
+    position: absolute;
+    right: -140px;
+    top: -140px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 2px solid rgba(196, 181, 253, 0.18);
+    pointer-events: none;
+}
+
+.prospire-brand-top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.prospire-logo {
+    width: 42px;
+    height: 42px;
+    display: block;
+    flex: 0 0 auto;
+}
+
+.prospire-brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.prospire-brand-name strong {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #fff;
+}
+
+.prospire-brand-name span {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.prospire-brand-body {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+    margin-top: 56px;
+}
+
+.prospire-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(167, 139, 250, 0.14);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    color: var(--prospire-purple-soft);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+}
+
+.prospire-headline {
+    margin: 0 0 18px 0;
+    color: #fff;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+}
+
+.prospire-headline-gradient {
+    display: block;
+    background: linear-gradient(90deg, var(--prospire-purple-soft), var(--prospire-primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.prospire-lead {
+    margin: 0 0 34px 0;
+    max-width: 440px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.prospire-features {
+    position: relative;
+    z-index: 2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 460px;
+}
+
+.prospire-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.prospire-feature-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(237, 233, 254, 0.12);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+}
+
+.prospire-feature-icon img {
+    width: 22px;
+    height: 22px;
+    display: block;
+    filter: brightness(0) invert(1);
+}
+
+.prospire-feature strong {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.prospire-feature span {
+    display: block;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.prospire-hero {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    padding-top: 24px;
+    text-align: right;
+}
+
+.prospire-hero img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    max-height: 240px;
+    object-fit: contain;
+    object-position: right bottom;
+    filter: drop-shadow(0 16px 40px rgba(15, 23, 42, 0.35));
+}
+
+/* --------------------------------------------------------------------------
+   Right: login panel + card
+   -------------------------------------------------------------------------- */
+.prospire-login-panel {
+    flex: 1 1 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    background: var(--prospire-background);
+}
+
+.prospire-login-card {
+    width: 100%;
+    max-width: 460px;
+    background: #fff;
+    border: 1px solid var(--prospire-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(76, 29, 149, 0.08);
+    padding: 44px 40px 28px;
+}
+
+.prospire-card-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 26px;
+}
+
+.prospire-card-brand .prospire-logo {
+    width: 44px;
+    height: 44px;
+}
+
+.prospire-card-brand .prospire-brand-name strong {
+    color: var(--prospire-text);
+}
+
+.prospire-card-brand .prospire-brand-name span {
+    color: var(--prospire-muted);
+}
+
+.prospire-card-title {
+    margin: 0 0 6px 0;
+    color: var(--prospire-text);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.prospire-card-subtitle {
+    margin: 0 0 28px 0;
+    color: var(--prospire-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.prospire-card-footer {
+    margin: 26px -40px -28px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--prospire-border);
+    color: var(--prospire-muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Odoo login form (rendered inside .prospire-form-container via t-out="0")
+   Field names / structure come from web.login — do not change markup here.
+   -------------------------------------------------------------------------- */
+.prospire-form-container .oe_login_form {
+    width: 100%;
+}
+
+.prospire-form-container label,
+.prospire-form-container .form-label {
+    margin-bottom: 6px;
+    color: var(--prospire-text);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.prospire-form-container .form-control {
+    width: 100%;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid var(--prospire-border);
+    background-color: #F8FAFC;
+    padding: 0 16px 0 46px;
+    font-size: 15px;
+    color: var(--prospire-text);
+    box-shadow: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.prospire-form-container .form-control::placeholder {
+    color: #94A3B8;
+}
+
+.prospire-form-container .form-control:focus {
+    background-color: #fff;
+    border-color: var(--prospire-primary-light);
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+    outline: none;
+}
+
+/* Email input icon */
+.prospire-form-container #login {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='m22 7-10 6L2 7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 18px 18px;
+}
+
+/* Database selector input (shown only when multiple DBs exist) */
+.prospire-form-container #db {
+    padding-left: 16px;
+    background-image: none;
+}
+
+/* Password input icon + reveal button */
+.prospire-form-container #password,
+.prospire-form-container #confirm_password {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 18px 18px;
+}
+
+.prospire-form-container .input-group {
+    border-radius: 12px;
+}
+
+.prospire-form-container .input-group > .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.prospire-form-container .o_show_password {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    border: 1px solid var(--prospire-border);
+    border-left: 0;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: #F8FAFC;
+    color: var(--prospire-muted);
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.prospire-form-container .o_show_password:hover {
+    color: var(--prospire-primary);
+    background-color: #fff;
+}
+
+/* Reset password link (added by auth_signup next to the password label) */
+.prospire-form-container a[href*="/web/reset_password"] {
+    color: var(--prospire-primary);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.prospire-form-container a[href*="/web/reset_password"]:hover {
+    text-decoration: underline;
+}
+
+/* Alerts: style Odoo errors/messages into clean components */
+.prospire-form-container .alert {
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.prospire-form-container .alert-danger {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #B91C1C;
+}
+
+.prospire-form-container .alert-success {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #15803D;
+}
+
+/* Submit button */
+.prospire-form-container .oe_login_buttons {
+    margin-top: 4px;
+}
+
+.prospire-form-container .oe_login_buttons .btn-primary {
+    width: 100%;
+    height: 54px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--prospire-primary-light), var(--prospire-primary));
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.prospire-form-container .oe_login_buttons .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(108, 43, 217, 0.35);
+}
+
+.prospire-form-container .oe_login_buttons .btn-primary:active {
+    transform: translateY(0);
+}
+
+.prospire-form-container .oe_login_buttons .btn-primary:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Secondary links (signup, superuser) */
+.prospire-form-container .oe_login_buttons .btn-link {
+    color: var(--prospire-muted);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.prospire-form-container .oe_login_buttons .btn-link:hover {
+    color: var(--prospire-primary);
+}
+
+/* OAuth providers — only rendered when configured */
+.prospire-form-container .o_login_auth em {
+    color: var(--prospire-muted);
+    font-size: 12px;
+}
+
+.prospire-form-container .o_login_auth .list-group-item {
+    border: 1px solid var(--prospire-border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    color: var(--prospire-text);
+    font-size: 14px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.prospire-form-container .o_login_auth .list-group-item:hover {
+    border-color: var(--prospire-purple-soft);
+    background: var(--prospire-lavender);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+    .prospire-headline {
+        font-size: 40px;
+    }
+
+    .prospire-hero img {
+        max-height: 210px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .prospire-brand-panel {
+        padding: 40px 40px;
+    }
+
+    .prospire-headline {
+        font-size: 36px;
+    }
+
+    .prospire-hero img {
+        max-height: 180px;
+    }
+}
+
+/* Mobile / tablet: single column, brand panel hidden */
+@media (max-width: 992px) {
+    .prospire-login-shell {
+        flex-direction: column;
+    }
+
+    .prospire-brand-panel {
+        display: none;
+    }
+
+    .prospire-login-panel {
+        flex: 1 1 auto;
+        min-height: 100vh;
+        padding: 32px 20px;
+    }
+
+    .prospire-login-card {
+        padding: 36px 28px 24px;
+    }
+
+    .prospire-card-footer {
+        margin: 24px -28px -24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .prospire-login-panel {
+        padding: 20px 16px;
+    }
+
+    .prospire-login-card {
+        padding: 28px 20px 20px;
+        border-radius: 16px;
+    }
+
+    .prospire-card-title {
+        font-size: 22px;
+    }
+
+    .prospire-card-subtitle {
+        font-size: 13px;
+        margin-bottom: 22px;
+    }
+
+    .prospire-card-footer {
+        margin: 22px -20px -20px;
+    }
+}
