@@ -12,17 +12,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     postgresql-client \
     curl \
+    ca-certificates \
     node-less \
     git \
     xz-utils \
     fonts-noto-core \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    # Install wkhtmltopdf with patched Qt from official bookworm release.
-    # The distro wkhtmltopdf package often lacks the patched Qt needed for
-    # page breaks/JavaScript in PDF reports. Use the official 0.12.6.1-2
-    # bookworm build which links against libssl3 (no libssl1.1 required).
-    && curl -L https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bookworm_amd64.deb -o /tmp/wkhtmltox.deb \
+    # Install official wkhtmltopdf with patched Qt.
+    # There is no official bookworm .deb; the Ubuntu 22.04 (jammy) build
+    # links against libssl3 and installs cleanly on Debian bookworm.
+    && curl -fsSL -o /tmp/wkhtmltox.deb \
+       https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
     && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
     && rm -f /tmp/wkhtmltox.deb \
     && rm -rf /var/lib/apt/lists/*
