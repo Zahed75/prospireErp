@@ -36,12 +36,13 @@ python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
 echo "Enforcing base URL and website domain settings..."
 python3 -c "
 import os, odoo
+from odoo.modules.registry import Registry
 db = os.environ.get('DB_NAME', 'prospire_hq')
 base_url = os.environ.get('BASE_URL', 'https://hq.prospirenext.com')
 website_domain = os.environ.get('WEBSITE_DOMAIN', 'hq.prospirenext.com')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
-    registry = odoo.registry(db)
+    registry = Registry(db)
     with registry.cursor() as cr:
         env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
         
@@ -81,12 +82,13 @@ echo "Module update completed!"
 echo "Updating admin credentials..."
 python3 -c "
 import os, odoo
+from odoo.modules.registry import Registry
 db = os.environ.get('DB_NAME', 'prospire_hq')
 admin_login = os.environ.get('ADMIN_LOGIN', 'prospirenext@gmail.com')
 admin_password = os.environ.get('ADMIN_PASSWORD', 'prospire@2@26')
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
-    registry = odoo.registry(db)
+    registry = Registry(db)
     with registry.cursor() as cr:
         env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
         
