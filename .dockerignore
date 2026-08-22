@@ -2,6 +2,7 @@
 **
 
 # Allow only what's needed for the Odoo Docker image
+!custom_addons/
 !odoo/
 !odoo.conf
 !requirements.txt

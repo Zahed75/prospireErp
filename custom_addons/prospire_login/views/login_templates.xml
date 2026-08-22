@@ -27,14 +27,14 @@
                 <t t-set="no_footer" t-value="True"/>
                 <t t-set="body_classname" t-value="'prospire-login-page'"/>
 
-                <link rel="stylesheet" href="/raptron_admin/static/src/css/prospire_login.css"/>
+                <link rel="stylesheet" href="/prospire_login/static/src/css/prospire_login.css"/>
 
                 <div class="prospire-login-shell">
 
                     <!-- Left: brand / marketing -->
                     <aside class="prospire-brand-panel">
                         <div class="prospire-brand-top">
-                            <img class="prospire-logo" src="/raptron_admin/static/src/img/prospire-logo.svg" alt="Prospire Next" width="42" height="42"/>
+                            <img class="prospire-logo" src="/prospire_login/static/src/img/prospire-logo.svg" alt="Prospire Next" width="42" height="42"/>
                             <div class="prospire-brand-name">
                                 <strong>PROSPIRE NEXT</strong>
                                 <span>Learning Hub</span>
@@ -52,21 +52,21 @@
 
                             <ul class="prospire-features">
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/smart-learning.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/smart-learning.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Smart Learning</strong>
                                         <span>Interactive courses and personalized learning paths</span>
                                     </div>
                                 </li>
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/manage-easily.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/manage-easily.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Manage Easily</strong>
                                         <span>Streamline students, educators and course management</span>
                                     </div>
                                 </li>
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/track-progress.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/track-progress.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Track Progress</strong>
                                         <span>Real-time analytics and performance insights</span>
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="prospire-hero">
-                            <img src="/raptron_admin/static/src/img/prospire-hero.svg" alt="Prospire Next learning illustration"/>
+                            <img src="/prospire_login/static/src/img/prospire-hero.svg" alt="Prospire Next learning illustration"/>
                         </div>
                     </aside>
 
@@ -84,7 +84,7 @@
                     <main class="prospire-login-panel">
                         <div class="prospire-login-card">
                             <div class="prospire-card-brand">
-                                <img class="prospire-logo" src="/raptron_admin/static/src/img/prospire-logo.svg" alt="Prospire Next" width="44" height="44"/>
+                                <img class="prospire-logo" src="/prospire_login/static/src/img/prospire-logo.svg" alt="Prospire Next" width="44" height="44"/>
                                 <div class="prospire-brand-name">
                                     <strong>PROSPIRE NEXT</strong>
                                     <span>Learning Hub</span>
@@ -120,13 +120,13 @@
                 <t t-set="no_footer" t-value="True"/>
                 <t t-set="body_classname" t-value="'prospire-login-page'"/>
 
-                <link rel="stylesheet" href="/raptron_admin/static/src/css/prospire_login.css"/>
+                <link rel="stylesheet" href="/prospire_login/static/src/css/prospire_login.css"/>
 
                 <div class="prospire-login-shell">
 
                     <aside class="prospire-brand-panel">
                         <div class="prospire-brand-top">
-                            <img class="prospire-logo" src="/raptron_admin/static/src/img/prospire-logo.svg" alt="Prospire Next" width="42" height="42"/>
+                            <img class="prospire-logo" src="/prospire_login/static/src/img/prospire-logo.svg" alt="Prospire Next" width="42" height="42"/>
                             <div class="prospire-brand-name">
                                 <strong>PROSPIRE NEXT</strong>
                                 <span>Learning Hub</span>
@@ -144,21 +144,21 @@
 
                             <ul class="prospire-features">
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/smart-learning.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/smart-learning.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Smart Learning</strong>
                                         <span>Interactive courses and personalized learning paths</span>
                                     </div>
                                 </li>
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/manage-easily.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/manage-easily.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Manage Easily</strong>
                                         <span>Streamline students, educators and course management</span>
                                     </div>
                                 </li>
                                 <li class="prospire-feature">
-                                    <span class="prospire-feature-icon"><img src="/raptron_admin/static/src/img/track-progress.svg" alt="" width="22" height="22"/></span>
+                                    <span class="prospire-feature-icon"><img src="/prospire_login/static/src/img/track-progress.svg" alt="" width="22" height="22"/></span>
                                     <div>
                                         <strong>Track Progress</strong>
                                         <span>Real-time analytics and performance insights</span>
@@ -168,14 +168,14 @@
                         </div>
 
                         <div class="prospire-hero">
-                            <img src="/raptron_admin/static/src/img/prospire-hero.svg" alt="Prospire Next learning illustration"/>
+                            <img src="/prospire_login/static/src/img/prospire-hero.svg" alt="Prospire Next learning illustration"/>
                         </div>
                     </aside>
 
                     <main class="prospire-login-panel">
                         <div class="prospire-login-card">
                             <div class="prospire-card-brand">
-                                <img class="prospire-logo" src="/raptron_admin/static/src/img/prospire-logo.svg" alt="Prospire Next" width="44" height="44"/>
+                                <img class="prospire-logo" src="/prospire_login/static/src/img/prospire-logo.svg" alt="Prospire Next" width="44" height="44"/>
                                 <div class="prospire-brand-name">
                                     <strong>PROSPIRE NEXT</strong>
                                     <span>Learning Hub</span>

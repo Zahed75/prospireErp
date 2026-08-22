@@ -116,7 +116,7 @@ Replace `server_name` with `hq.flowllet.com`.
 
 2. **WebSocket Requirement**: Without the `/websocket` location block in nginx, users will always appear offline and real-time chat/notifications will not work.
 
-3. **Module Updates**: The `entrypoint.sh` automatically detects changes in `raptron_admin` and updates the module on container restart. For other modules, manual update via UI or command line is required.
+3. **Module Updates**: The `entrypoint.sh` automatically detects changes in `prospire_login` and updates the module on container restart. For other modules, manual update via UI or command line is required.
 
 4. **Database Names**: 
    - Production uses database `odoo`

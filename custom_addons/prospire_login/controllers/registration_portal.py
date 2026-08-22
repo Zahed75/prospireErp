@@ -6,7 +6,7 @@ from odoo.http import request
 _logger = logging.getLogger(__name__)
 
 
-class RaptronAdminPortal(http.Controller):
+class ProspireAdminPortal(http.Controller):
 
     # ─── PUBLIC REGISTRATION FORM ────────────────────────────────────────────
 
@@ -43,7 +43,7 @@ class RaptronAdminPortal(http.Controller):
 
     @http.route('/thank-you', type='http', auth='public', website=False, csrf=False)
     def thank_you(self, **kw):
-        return request.render('raptron_admin.portal_thank_you')
+        return request.render('prospire_login.portal_thank_you')
 
     # ─── STANDALONE ADMIN DASHBOARD ──────────────────────────────────────────
 
@@ -60,7 +60,7 @@ class RaptronAdminPortal(http.Controller):
         active_list = SaasReg.search([('state', '=', 'approved')], limit=20, order='approved_date desc')
         countries = request.env['res.country'].sudo().search([])
         msg = kw.get('msg')
-        return request.render('raptron_admin.admin_dashboard_template', {
+        return request.render('prospire_login.admin_dashboard_template', {
             'stats': stats,
             'pending_list': pending_list,
             'active_list': active_list,

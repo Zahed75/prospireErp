@@ -102,7 +102,7 @@ class SaasRegistration(models.Model):
                     f"Contact: {self.contact_name}\n"
                     f"Size: {self.company_size or '-'}\n"
                     f"Interest: {self.primary_interest or '-'}\n"
-                    f"Source: Raptron ERP Self-Registration"
+                    f"Source: Prospire Next Self-Registration"
                 ),
                 'type': 'lead',
             })
@@ -126,7 +126,7 @@ class SaasRegistration(models.Model):
             rec.write({
                 'state': 'approved',
                 'approved_date': datetime.now(),
-                'subdomain': f"{rec.db_name}.raptron.com",
+                'subdomain': f"{rec.db_name}.prospirenext.com",
             })
             rec._send_onboarding_email()
             # Update CRM lead to Won
@@ -198,7 +198,7 @@ class SaasRegistration(models.Model):
         """Send onboarding credentials email to client."""
         self.ensure_one()
         template = self.env.ref(
-            'raptron_admin.email_template_saas_onboarding',
+            'prospire_login.email_template_saas_onboarding',
             raise_if_not_found=False,
         )
         if template:

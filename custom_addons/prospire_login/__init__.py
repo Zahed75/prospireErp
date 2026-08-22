@@ -58,7 +58,7 @@ def post_init_hook(env):
     # 4. Ensure our login template has highest priority
     # This prevents other modules (like website) from overriding our custom login
     login_template = env['ir.ui.view'].search([
-        ('xml_id', '=', 'raptron_admin.garshoub_login_layout')
+        ('xml_id', '=', 'prospire_login.garshoub_login_layout')
     ], limit=1)
     if login_template:
         # Bump priority to ensure it wins over website_login_layout etc.
@@ -67,7 +67,7 @@ def post_init_hook(env):
 
     # 5. Ensure web_layout (favicon) also has high priority
     layout_template = env['ir.ui.view'].search([
-        ('xml_id', '=', 'raptron_admin.garshoub_web_favicon')
+        ('xml_id', '=', 'prospire_login.garshoub_web_favicon')
     ], limit=1)
     if layout_template:
         layout_template.write({'priority': 1})
@@ -76,7 +76,7 @@ def post_init_hook(env):
     # 6. Ensure website login template has priority=30 (applied AFTER website.login_layout priority=20)
     # NOTE: garshoub_login_layout handles both website and non-website cases
     website_login = env['ir.ui.view'].search([
-        ('xml_id', '=', 'raptron_admin.garshoub_login_layout')
+        ('xml_id', '=', 'prospire_login.garshoub_login_layout')
     ], limit=1)
     if website_login:
         website_login.write({'priority': 30})

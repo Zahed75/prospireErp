@@ -1,0 +1,15 @@
+{
+  "name": "Prospire Next",
+  "short_name": "Prospire Next",
+  "start_url": "/web",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6C2BD9",
+  "icons": [
+    {
+      "src": "/prospire_login/static/src/img/prospire-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

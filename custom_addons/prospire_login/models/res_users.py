@@ -71,10 +71,10 @@ class ResUsers(models.Model):
             # garshoub_login_layout_base must be priority=1 (applied first, before website.login_layout)
             # garshoub_login_layout must be priority=30 (applied AFTER website.login_layout priority=20)
             view_priorities = {
-                "raptron_admin.garshoub_login_layout_base": 1,
-                "raptron_admin.garshoub_login_layout": 30,
-                "raptron_admin.garshoub_web_favicon": 1,
-                "raptron_admin.garshoub_website_favicon": 1,
+                "prospire_login.garshoub_login_layout_base": 1,
+                "prospire_login.garshoub_login_layout": 30,
+                "prospire_login.garshoub_web_favicon": 1,
+                "prospire_login.garshoub_website_favicon": 1,
             }
             for xml_id, priority in view_priorities.items():
                 view = self.env.ref(xml_id, raise_if_not_found=False)

@@ -1,14 +1,14 @@
 {
-    'name': 'Raptron Admin Portal',
+    'name': 'Prospire Next Login',
     'version': '19.0.1.0.0',
-    'summary': 'Standalone SaaS admin portal served at /admin — not an Odoo app',
+    'summary': 'Prospire Next branding: login page, favicon, admin portal and SaaS helpers',
     'category': 'Hidden',
     'author': 'Zahed Hasan',
-    'website': 'https://raptron.com',
+    'website': 'https://prospirenext.com',
     # website is included so our login/favicon overrides load AFTER website's templates
     'depends': ['base', 'mail', 'web', 'crm', 'account', 'website'],
     'data': [
-        'security/raptron_admin_groups.xml',
+        'security/prospire_login_groups.xml',
         'security/ir.model.access.csv',
         'data/mail_templates.xml',
         'data/enforce_settings_cron.xml',
@@ -21,11 +21,11 @@
     'post_init_hook': 'post_init_hook',
     'assets': {
         'web.assets_backend': [
-            'raptron_admin/static/src/css/cleanup.css',
+            'prospire_login/static/src/css/cleanup.css',
         ],
         'web.assets_frontend': [
-            'raptron_admin/static/src/css/prospire_login.css',
-            'raptron_admin/static/src/js/prospire_login.js',
+            'prospire_login/static/src/css/prospire_login.css',
+            'prospire_login/static/src/js/prospire_login.js',
         ],
     },
     'license': 'LGPL-3',

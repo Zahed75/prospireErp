@@ -2,9 +2,9 @@
 <odoo>
     <data noupdate="1">
         <record id="email_template_saas_onboarding" model="mail.template">
-            <field name="name">Raptron ERP — Client Onboarding Credentials</field>
-            <field name="model_id" ref="raptron_admin.model_saas_registration"/>
-            <field name="subject">Your Raptron ERP workspace is ready — Login credentials inside</field>
+            <field name="name">Prospire Next — Client Onboarding Credentials</field>
+            <field name="model_id" ref="prospire_login.model_saas_registration"/>
+            <field name="subject">Your Prospire Next workspace is ready — Login credentials inside</field>
             <field name="email_from">tech.syscomatic@gmail.com</field>
             <field name="email_to">{{ object.email }}</field>
             <field name="body_html"><![CDATA[
@@ -15,14 +15,14 @@
     <div style="background:linear-gradient(135deg,#714b67,#c0748f);padding:36px 32px;text-align:center;">
       <div style="font-size:36px;margin-bottom:8px;">🎉</div>
       <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700;">Your Workspace is Ready!</h1>
-      <p style="color:rgba(255,255,255,.85);margin:8px 0 0;font-size:14px;">Raptron ERP — Enterprise Resource Planning</p>
+      <p style="color:rgba(255,255,255,.85);margin:8px 0 0;font-size:14px;">Prospire Next — Enterprise Resource Planning</p>
     </div>
 
     <!-- Body -->
     <div style="padding:32px;">
       <p style="color:#374151;font-size:15px;margin:0 0 20px;">Dear <strong>{{ object.contact_name }}</strong>,</p>
       <p style="color:#6b7280;font-size:14px;line-height:1.6;margin:0 0 24px;">
-        Your company workspace for <strong>{{ object.name }}</strong> has been provisioned on Raptron ERP.
+        Your company workspace for <strong>{{ object.name }}</strong> has been provisioned on Prospire Next.
         Below are your login credentials and quick-start steps.
       </p>
 
@@ -98,9 +98,9 @@
     <!-- Footer -->
     <div style="padding:16px 32px;background:#fafafa;border-top:1px solid #f0f0f0;text-align:center;">
       <p style="color:#9ca3af;font-size:11px;margin:0;">
-        Raptron ERP — Powered by Odoo 19 &nbsp;|&nbsp;
-        <a href="https://raptron.com" style="color:#714b67;text-decoration:none;">raptron.com</a> &nbsp;|&nbsp;
-        Support: <a href="mailto:support@raptron.com" style="color:#714b67;text-decoration:none;">support@raptron.com</a>
+        Prospire Next — Powered by Odoo 19 &nbsp;|&nbsp;
+        <a href="https://prospirenext.com" style="color:#714b67;text-decoration:none;">prospirenext.com</a> &nbsp;|&nbsp;
+        Support: <a href="mailto:support@prospirenext.com" style="color:#714b67;text-decoration:none;">support@prospirenext.com</a>
       </p>
     </div>
   </div>

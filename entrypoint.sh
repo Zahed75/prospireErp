@@ -14,13 +14,22 @@ until pg_isready -h "${DB_HOST:-db}" -p 5432 -U "${DB_USER:-odoo}"; do
 done
 echo "Database is ready!"
 
-# ALWAYS ensure raptron_admin is installed and up-to-date on every startup
+# Migrate legacy module name in the database (raptron_admin -> prospire_login)
+# so existing installs keep their state, views and settings after the rename.
+echo "Migrating legacy module name if present..."
+PGPASSWORD="${DB_PASSWORD:-}" psql \
+    -h "${DB_HOST:-db}" -p 5432 -U "${DB_USER:-odoo}" -d "${DB_NAME:-prospire_hq}" \
+    -c "UPDATE ir_module_module SET name='prospire_login' WHERE name='raptron_admin';" \
+    -c "UPDATE ir_model_data SET module='prospire_login' WHERE module='raptron_admin';" \
+    || echo "Module rename migration skipped (fresh database or already migrated)."
+
+# ALWAYS ensure prospire_login is installed and up-to-date on every startup
 # --init installs if missing, --update applies changes if already installed
-echo "Installing / Updating raptron_admin module..."
+echo "Installing / Updating prospire_login module..."
 python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
     -d "${DB_NAME:-prospire_hq}" \
-    --init=raptron_admin \
-    --update=raptron_admin \
+    --init=prospire_login \
+    --update=prospire_login \
     --stop-after-init || echo "Module update failed, continuing to start server..."
 
 # Enforce correct base URL and website domain settings

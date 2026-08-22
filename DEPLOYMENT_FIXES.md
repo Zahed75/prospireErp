@@ -4,25 +4,25 @@
 
 ### 1. ❌ Broken CSS / Assets on `https://erp.garshoub.com`
 **Root Cause:**
-- `raptron_admin` module was **not installed** in the database, so the `ir_http.py` redirect (`/` → `/web`) never fired
+- `prospire_login` module was **not installed** in the database, so the `ir_http.py` redirect (`/` → `/web`) never fired
 - Without the redirect, the **website module** served its homepage on `erp.garshoub.com`
 - `web.base.url` was either unset or pointing to `http://...`, causing browsers to block mixed-content assets
 - aaPanel/nginx was **not sending** `X-Forwarded-Proto: https` to Odoo
 
 **Fixes applied:**
-- `entrypoint.sh` now uses `--init=raptron_admin --update=raptron_admin` so the module is **installed if missing** and **updated on every startup**
+- `entrypoint.sh` now uses `--init=prospire_login --update=prospire_login` so the module is **installed if missing** and **updated on every startup**
 - `entrypoint.sh` now enforces `web.base.url = https://erp.garshoub.com` and `web.base.url.freeze = 1` on every startup
 - `nginx/` configs added with proper `X-Forwarded-*` headers
 - `models/res_users.py` cron now also enforces `web.base.url` and `web.base.url.freeze` every 5 minutes
 
 ### 2. ❌ Custom Login Screen Not Showing
 **Root Cause:**
-- `raptron_admin` module was **not installed**, so the login template overrides (`garshoub_login_layout`) were never loaded
+- `prospire_login` module was **not installed**, so the login template overrides (`garshoub_login_layout`) were never loaded
 - `post_init_hook` referenced a non-existent view `garshoub_website_login_layout` (bug)
 
 **Fixes applied:**
 - `entrypoint.sh` now installs the module on startup (see above)
-- `odoo/addons/raptron_admin/__init__.py` fixed to reference the correct view ID `garshoub_login_layout`
+- `odoo/addons/prospire_login/__init__.py` fixed to reference the correct view ID `garshoub_login_layout`
 
 ### 3. ❌ `deploy.sh` Destroyed Data
 **Root Cause:**
@@ -46,9 +46,9 @@
 
 | File | Change |
 |------|--------|
-| `entrypoint.sh` | Install+update raptron_admin; enforce web.base.url & freeze; enforce website domain |
-| `odoo/addons/raptron_admin/__init__.py` | Fixed non-existent view reference `garshoub_website_login_layout` → `garshoub_login_layout` |
-| `odoo/addons/raptron_admin/models/res_users.py` | Added `web.base.url` + `web.base.url.freeze` enforcement to cron; fixed website domain logic |
+| `entrypoint.sh` | Install+update prospire_login; enforce web.base.url & freeze; enforce website domain |
+| `odoo/addons/prospire_login/__init__.py` | Fixed non-existent view reference `garshoub_website_login_layout` → `garshoub_login_layout` |
+| `odoo/addons/prospire_login/models/res_users.py` | Added `web.base.url` + `web.base.url.freeze` enforcement to cron; fixed website domain logic |
 | `deploy.sh` | Removed `-v` flag from `docker-compose down` |
 | `odoo.conf` | Added `local_data/addons/19.0` to `addons_path` |
 | `nginx/erp.garshoub.com.conf` | **New** — reverse proxy with proper `X-Forwarded-*` headers |
@@ -73,7 +73,7 @@ See `nginx/README.md` for full instructions.
 ### Step 2 — Commit & Push
 ```bash
 git add .
-git commit -m "fix: install raptron_admin on startup, enforce base URL, add nginx configs, fix deploy script"
+git commit -m "fix: install prospire_login on startup, enforce base URL, add nginx configs, fix deploy script"
 git push origin production
 ```
 
@@ -133,6 +133,6 @@ location / {
 4. Check if `web.base.url` is correct in Odoo: Settings → Technical → System Parameters
 
 ### Login still shows default Odoo?
-1. Make sure `raptron_admin` shows as **Installed** in Apps
+1. Make sure `prospire_login` shows as **Installed** in Apps
 2. Go to Settings → Technical → Views → search `garshoub_login_layout` → ensure it exists
 3. Restart the container to trigger entrypoint again

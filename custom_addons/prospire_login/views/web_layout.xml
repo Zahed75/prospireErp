@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Override favicon and title for web.layout (when website NOT installed) -->
+    <template id="garshoub_web_favicon" inherit_id="web.layout" name="Prospire Next Favicon" priority="1">
+        <xpath expr="//title" position="replace">
+            <title t-esc="title or 'Prospire Next'"/>
+        </xpath>
+        <xpath expr="//link[@rel='shortcut icon']" position="replace">
+            <link type="image/svg+xml" rel="shortcut icon" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <link rel="apple-touch-icon" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <link rel="icon" type="image/svg+xml" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <meta name="theme-color" content="#6C2BD9"/>
+            <meta name="apple-mobile-web-app-title" content="Prospire Next"/>
+            <meta name="application-name" content="Prospire Next"/>
+        </xpath>
+    </template>
+
+    <!-- Override favicon and title for website.layout (when website IS installed) -->
+    <template id="garshoub_website_favicon" inherit_id="website.layout" name="Prospire Next Website Favicon" priority="1">
+        <xpath expr="//title" position="replace">
+            <title t-esc="title or 'Prospire Next'"/>
+        </xpath>
+        <xpath expr="//link[@rel='shortcut icon']" position="replace">
+            <link type="image/svg+xml" rel="shortcut icon" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <link rel="apple-touch-icon" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <link rel="icon" type="image/svg+xml" href="/prospire_login/static/src/img/prospire-logo.svg"/>
+            <meta name="theme-color" content="#6C2BD9"/>
+            <meta name="apple-mobile-web-app-title" content="Prospire Next"/>
+            <meta name="application-name" content="Prospire Next"/>
+        </xpath>
+    </template>
+
+</odoo>

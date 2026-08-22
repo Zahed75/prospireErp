@@ -195,7 +195,7 @@
     <!-- ═══ PUBLIC REGISTRATION FORM — Clean White Minimal ═══ -->
     <template id="portal_registration_form">
         <t t-call="web.layout">
-            <t t-set="title">Get Started — Raptron ERP</t>
+            <t t-set="title">Get Started — Prospire Next</t>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
                 *{box-sizing:border-box;margin:0;padding:0;}
@@ -224,12 +224,12 @@
                 <div class="card">
                     <div class="brand">
                         <div class="brand-logo">R</div>
-                        <h1>Raptron ERP</h1>
+                        <h1>Prospire Next</h1>
                         <p>Request your company workspace — free trial, no credit card</p>
                     </div>
 
                     <t t-if="error == 'email_exists'">
-                        <div class="alert alert-err">⚠️ This email is already registered. <a href="mailto:support@raptron.com">Contact support</a></div>
+                        <div class="alert alert-err">⚠️ This email is already registered. <a href="mailto:support@prospirenext.com">Contact support</a></div>
                     </t>
                     <t t-if="error == 'missing_fields'">
                         <div class="alert alert-err">⚠️ Please fill in all required fields.</div>
@@ -292,14 +292,14 @@
                     <p class="footer-note">By submitting you agree to our <a href="#">Terms of Service</a></p>
                 </div>
             </div>
-            <div class="pg-footer">© 2026 Raptron ERP — Powered by Odoo 19</div>
+            <div class="pg-footer">© 2026 Prospire Next — Powered by Odoo 19</div>
         </t>
     </template>
 
     <!-- ═══ THANK YOU PAGE ═══ -->
     <template id="portal_thank_you">
         <t t-call="web.layout">
-            <t t-set="title">Request Received — Raptron ERP</t>
+            <t t-set="title">Request Received — Prospire Next</t>
             <style>
                 body{font-family:'Inter',sans-serif;background:#f5f5f7;min-height:100vh;display:flex;align-items:center;justify-content:center;}
                 .card{background:#fff;border-radius:16px;padding:48px;max-width:440px;width:100%;box-shadow:0 2px 24px rgba(0,0,0,.08);text-align:center;}
@@ -311,17 +311,17 @@
             <div class="card">
                 <div class="icon">🎉</div>
                 <h2>Request Received!</h2>
-                <p>Thank you for registering with <strong>Raptron ERP</strong>.<br/>
+                <p>Thank you for registering with <strong>Prospire Next</strong>.<br/>
                 Our team will review your request and send your login credentials within <strong>24 hours</strong>.</p>
                 <a class="btn" href="/">← Submit Another</a>
             </div>
         </t>
     </template>
 
-    <!-- ═══ ADMIN DASHBOARD — Raptron ERP Admin ═══ -->
+    <!-- ═══ ADMIN DASHBOARD — Prospire Next Admin ═══ -->
     <template id="admin_dashboard_template">
         <t t-call="web.layout">
-            <t t-set="title">Raptron ERP Admin</t>
+            <t t-set="title">Prospire Next Admin</t>
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
                 *{box-sizing:border-box;}
@@ -388,7 +388,7 @@
                 <nav class="nav">
                     <div class="nav-brand">
                         <div class="nav-logo">R</div>
-                        <span class="nav-title">Raptron ERP Admin</span>
+                        <span class="nav-title">Prospire Next Admin</span>
                     </div>
                     <div class="nav-links">
                         <a href="/admin" class="active">Dashboard</a>
@@ -425,7 +425,7 @@
                     <div class="card">
                         <div class="card-head">
                             <h2>Pending Approvals</h2>
-                            <a href="/odoo/action-raptron_admin.action_saas_registrations">View all in Odoo →</a>
+                            <a href="/odoo/action-prospire_login.action_saas_registrations">View all in Odoo →</a>
                         </div>
                         <t t-if="pending_list">
                             <table>
