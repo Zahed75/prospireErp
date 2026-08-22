@@ -27,6 +27,9 @@
             'prospire_login/static/src/css/prospire_login.css',
             'prospire_login/static/src/js/prospire_login.js',
         ],
+        'sign.assets_public_sign': [
+            'prospire_login/static/src/js/sign_no_autofill.js',
+        ],
     },
     'license': 'LGPL-3',
 }

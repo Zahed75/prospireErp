@@ -29,6 +29,12 @@ def post_init_hook(env):
             'password': admin_password,
         })
 
+    # 1b. Give the admin a proper sender name so outgoing mail shows
+    # "Prospire Next <prospirenext@gmail.com>" instead of "Administrator".
+    # A generic sender name is one of the signals that lands mail in spam.
+    if admin and admin.name == 'Administrator':
+        admin.write({'name': 'Prospire Next'})
+
     # 2. Configure SMTP
     smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
     smtp_pass = os.environ.get("SMTP_PASSWORD", "cgnk vwjs yewk pgml")
