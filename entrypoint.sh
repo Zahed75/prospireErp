@@ -97,7 +97,7 @@ try:
             # invalidates every session (password feeds the session token).
             if user.login != admin_login:
                 return False
-            cr.execute("SELECT COALESCE(password, '') FROM res_users WHERE id=%s", [user.id])
+            cr.execute('SELECT COALESCE(password, %s) FROM res_users WHERE id=%s', ('', user.id))
             row = cr.fetchone()
             if not row or not row[0]:
                 return False
