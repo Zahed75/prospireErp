@@ -35,6 +35,12 @@ def post_init_hook(env):
     if admin and admin.name == 'Administrator':
         admin.write({'name': 'Prospire Next'})
 
+    # 1c. Align the admin partner email with the SMTP account. Sign and
+    # notification mails use the sender's partner email as email_from; if it
+    # doesn't match the mail server's from_filter, delivery silently fails.
+    if admin and admin.partner_id and admin.partner_id.email != admin_login:
+        admin.partner_id.write({'email': admin_login})
+
     # 2. Configure SMTP
     smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
     smtp_pass = os.environ.get("SMTP_PASSWORD", "cgnk vwjs yewk pgml")
