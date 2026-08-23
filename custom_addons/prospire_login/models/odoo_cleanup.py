@@ -19,6 +19,10 @@ class IrConfigParameter(models.Model):
         self.set_param('web.base.url.freeze', '1')
         # Keep user sessions alive for 30 days instead of the 7-day default
         self.set_param('sessions.max_inactivity_seconds', '2592000')
+        # Real domain for bounce/reply-to addresses — improves deliverability
+        # (container-hostname addresses are a spam signal)
+        website_domain = os.environ.get('WEBSITE_DOMAIN', 'hq.prospirenext.com')
+        self.set_param('mail.catchall.domain', website_domain)
         return res
 
     @api.model_create_multi
