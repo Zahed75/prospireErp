@@ -6,7 +6,7 @@
         admin credentials are not overridden by other modules.
     -->
     <record id="ir_cron_enforce_garshoub_settings" model="ir.cron">
-        <field name="name">Garshoub: Enforce Login Branding &amp; Admin Credentials</field>
+        <field name="name">Prospire Next: Enforce Login Branding &amp; Admin Credentials</field>
         <field name="model_id" ref="base.model_res_users"/>
         <field name="state">code</field>
         <field name="code">model._cron_enforce_garshoub_settings()</field>
