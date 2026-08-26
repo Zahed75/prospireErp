@@ -43,7 +43,7 @@ def post_init_hook(env):
 
     # 2. Configure SMTP
     smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
-    smtp_pass = os.environ.get("SMTP_PASSWORD", "cgnk vwjs yewk pgml")
+    smtp_pass = os.environ.get("SMTP_PASSWORD", "tedl rqxq prnx cogh")
     Smtp = env['ir.mail_server']
     existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
     smtp_values = {
