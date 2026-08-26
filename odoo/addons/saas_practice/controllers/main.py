@@ -100,33 +100,38 @@ class SaaSAdminController(Home):
                         cron.active = False
                 new_cr.commit()
             
-            # Send Onboarding Email
+            # Send Onboarding Email using the configured SMTP account
+            import os
             import smtplib
             from email.mime.text import MIMEText
             from email.mime.multipart import MIMEMultipart
-            
+
+            smtp_user = os.environ.get('SMTP_USER', 'prospirenext@gmail.com')
+            smtp_pass = os.environ.get('SMTP_PASSWORD', 'tmxx nglq gguu frzm')
+            base_url = os.environ.get('BASE_URL', 'https://hq.prospirenext.com')
+
             msg = MIMEMultipart()
-            msg['From'] = 'tech.syscomatic@gmail.com'
+            msg['From'] = smtp_user
             msg['To'] = admin_email
-            msg['Subject'] = f"Welcome to Syscomatic SaaS - {db_name}"
-            
+            msg['Subject'] = f"Welcome to Prospire Next - {db_name}"
+
             body = f"""Hello,
-            
+
 Your company workspace has been successfully created!
 
 Here are your login credentials:
-URL: http://localhost:8069/web/login
+URL: {base_url}/web/login
 Email: {admin_email}
 Password: {admin_password}
 
 Best regards,
-Syscomatic Team
+Prospire Next Team
 """
             msg.attach(MIMEText(body, 'plain'))
             try:
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.starttls()
-                server.login('tech.syscomatic@gmail.com', 'boqs tsjb jppz gknm')
+                server.login(smtp_user, smtp_pass)
                 server.send_message(msg)
                 server.quit()
                 _logger.info(f"Onboarding email sent to {admin_email}")

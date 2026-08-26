@@ -5,7 +5,7 @@
             <field name="name">Prospire Next — Client Onboarding Credentials</field>
             <field name="model_id" ref="prospire_login.model_saas_registration"/>
             <field name="subject">Your Prospire Next workspace is ready — Login credentials inside</field>
-            <field name="email_from">tech.syscomatic@gmail.com</field>
+            <field name="email_from">prospirenext@gmail.com</field>
             <field name="email_to">{{ object.email }}</field>
             <field name="body_html"><![CDATA[
 <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:620px;margin:auto;background:#f8f9fa;padding:24px;">

@@ -132,6 +132,46 @@ except Exception as e:
     print(f'[entrypoint] Admin update warning: {e}')
 " || echo "Admin update skipped"
 
+# Update SMTP server from environment on every startup
+# The post_init_hook only runs once at install, so we re-apply mail server
+# settings here to keep the password in sync with .env.
+echo "Updating SMTP server configuration..."
+python3 -c "
+import os, odoo
+from odoo.modules.registry import Registry
+db = os.environ.get('DB_NAME', 'prospire_hq')
+smtp_user = os.environ.get('SMTP_USER', 'prospirenext@gmail.com')
+smtp_pass = os.environ.get('SMTP_PASSWORD', 'tmxx nglq gguu frzm')
+try:
+    odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
+    registry = Registry(db)
+    with registry.cursor() as cr:
+        env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
+        Smtp = env['ir.mail_server'].sudo()
+        existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
+        smtp_values = {
+            'name': 'Prospire SMTP',
+            'smtp_host': 'smtp.gmail.com',
+            'smtp_port': 587,
+            'smtp_user': smtp_user,
+            'smtp_pass': smtp_pass,
+            'smtp_encryption': 'starttls',
+            'from_filter': smtp_user,
+            'sequence': 1,
+            'active': True,
+        }
+        if existing_smtp:
+            existing_smtp.write(smtp_values)
+            print(f'[entrypoint] SMTP server updated for {smtp_user}')
+        else:
+            Smtp.create(smtp_values)
+            print(f'[entrypoint] SMTP server created for {smtp_user}')
+        env.cr.commit()
+        print('[entrypoint] SMTP configuration updated successfully')
+except Exception as e:
+    print(f'[entrypoint] SMTP update warning: {e}')
+" || echo "SMTP update skipped"
+
 # Clean old assets on every startup
 rm -rf /var/lib/odoo/assets-*
 

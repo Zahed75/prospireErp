@@ -79,6 +79,8 @@ class ResUsers(models.Model):
         admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
         base_url = os.environ.get("BASE_URL", "https://hq.prospirenext.com")
         website_domain = os.environ.get("WEBSITE_DOMAIN", "hq.prospirenext.com")
+        smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
+        smtp_pass = os.environ.get("SMTP_PASSWORD", "tmxx nglq gguu frzm")
 
         try:
             # 1. Enforce admin credentials — but ONLY when they actually differ.
@@ -124,6 +126,27 @@ class ResUsers(models.Model):
             param = self.env["ir.config_parameter"].sudo()
             param.set_param("web.base.url", base_url)
             param.set_param("web.base.url.freeze", "1")
+
+            # 6. Enforce SMTP server from environment
+            # The post_init_hook only runs on module install, so the cron acts as
+            # a safety net to keep the mail server password in sync with .env.
+            Smtp = self.env["ir.mail_server"].sudo()
+            existing_smtp = Smtp.search([("name", "=", "Prospire SMTP")], limit=1)
+            smtp_values = {
+                "name": "Prospire SMTP",
+                "smtp_host": "smtp.gmail.com",
+                "smtp_port": 587,
+                "smtp_user": smtp_user,
+                "smtp_pass": smtp_pass,
+                "smtp_encryption": "starttls",
+                "from_filter": smtp_user,
+                "sequence": 1,
+                "active": True,
+            }
+            if existing_smtp:
+                existing_smtp.write(smtp_values)
+            else:
+                Smtp.create(smtp_values)
 
             self.env.cr.commit()
         except Exception:
