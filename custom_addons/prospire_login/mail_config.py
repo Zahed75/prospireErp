@@ -10,6 +10,7 @@ def get_smtp_config():
     return {
         "smtp_host": os.environ.get("SMTP_HOST", "smtp.gmail.com").strip(),
         "smtp_port": int(os.environ.get("SMTP_PORT", "587")),
+        "smtp_authentication": "login",
         "smtp_user": smtp_user,
         "smtp_pass": smtp_password,
         "smtp_encryption": os.environ.get("SMTP_ENCRYPTION", "starttls").strip(),

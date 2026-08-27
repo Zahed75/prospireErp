@@ -156,6 +156,7 @@ try:
         existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
         smtp_values = {
             'name': 'Prospire SMTP',
+            'smtp_authentication': 'login',
             'smtp_host': os.environ.get('SMTP_HOST', 'smtp.gmail.com').strip(),
             'smtp_port': int(os.environ.get('SMTP_PORT', '587')),
             'smtp_user': smtp_user,
@@ -174,8 +175,9 @@ try:
         env.cr.commit()
         print('[entrypoint] SMTP configuration updated successfully')
 except Exception as e:
-    print(f'[entrypoint] SMTP update warning: {e}')
-" || echo "SMTP update skipped"
+    print(f'[entrypoint] SMTP update FAILED: {e}')
+    raise
+"
 
 # Clean old assets on every startup
 rm -rf /var/lib/odoo/assets-*

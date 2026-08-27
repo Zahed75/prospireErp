@@ -26,6 +26,8 @@ services:
   odoo:
     build: .
     container_name: prospire_app
+    env_file:
+      - .env
     # Real hostname so outgoing mail Message-IDs use a valid domain
     # (<...@hq.prospirenext.com>) instead of the container id — a major
     # spam signal for Gmail.
