@@ -6,6 +6,13 @@
 
 set -e
 
+# Keep local runs aligned with Docker Compose, which loads .env automatically.
+if [ -f .env ]; then
+    set -a
+    . ./.env
+    set +a
+fi
+
 PORT="${1:-8069}"
 CONFIG="${2:-odoo.local.conf}"
 
@@ -75,6 +82,10 @@ fi
 
 source .venv/bin/activate
 
+SMTP_HOST="${SMTP_HOST:-smtp.gmail.com}"
+SMTP_PORT="${SMTP_PORT:-587}"
+SMTP_PASSWORD_NORMALIZED="$(printf '%s' "${SMTP_PASSWORD:-}" | tr -d '[:space:]')"
+
 # Install or update requirements when they change
 if [ ! -f ".venv/.requirements-installed" ] || [ "requirements.txt" -nt ".venv/.requirements-installed" ]; then
     echo "Installing Python requirements..."
@@ -87,4 +98,7 @@ echo "=================================="
 echo "Starting Odoo on http://localhost:$PORT"
 echo "=================================="
 
-./odoo-bin -c "$CONFIG" --http-port="$PORT"
+./odoo-bin -c "$CONFIG" --http-port="$PORT" \
+    --smtp="$SMTP_HOST" --smtp-port="$SMTP_PORT" \
+    --smtp-user="${SMTP_USER:-}" --smtp-password="$SMTP_PASSWORD_NORMALIZED" \
+    --smtp-ssl

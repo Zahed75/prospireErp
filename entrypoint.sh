@@ -2,6 +2,11 @@
 
 set -e
 
+if [ -z "${SMTP_USER:-}" ] || [ -z "${SMTP_PASSWORD:-}" ]; then
+    echo "ERROR: SMTP_USER and SMTP_PASSWORD must be set in the production environment."
+    exit 1
+fi
+
 echo "========================================="
 echo "Odoo Production Deployment Starting..."
 echo "========================================="
@@ -140,8 +145,8 @@ python3 -c "
 import os, odoo
 from odoo.modules.registry import Registry
 db = os.environ.get('DB_NAME', 'prospire_hq')
-smtp_user = os.environ.get('SMTP_USER', 'prospirenext@gmail.com')
-smtp_pass = os.environ.get('SMTP_PASSWORD', 'tmxx nglq gguu frzm')
+smtp_user = os.environ['SMTP_USER'].strip()
+smtp_pass = ''.join(os.environ['SMTP_PASSWORD'].split())
 try:
     odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
     registry = Registry(db)
@@ -151,11 +156,11 @@ try:
         existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
         smtp_values = {
             'name': 'Prospire SMTP',
-            'smtp_host': 'smtp.gmail.com',
-            'smtp_port': 587,
+            'smtp_host': os.environ.get('SMTP_HOST', 'smtp.gmail.com').strip(),
+            'smtp_port': int(os.environ.get('SMTP_PORT', '587')),
             'smtp_user': smtp_user,
             'smtp_pass': smtp_pass,
-            'smtp_encryption': 'starttls',
+            'smtp_encryption': os.environ.get('SMTP_ENCRYPTION', 'starttls').strip(),
             'from_filter': smtp_user,
             'sequence': 1,
             'active': True,

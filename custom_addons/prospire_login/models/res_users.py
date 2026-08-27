@@ -1,6 +1,7 @@
 import os
 
 from odoo import api, fields, models
+from ..mail_config import get_smtp_config
 
 
 class ResUsers(models.Model):
@@ -79,9 +80,6 @@ class ResUsers(models.Model):
         admin_password = os.environ.get("ADMIN_PASSWORD", "prospire@2@26")
         base_url = os.environ.get("BASE_URL", "https://hq.prospirenext.com")
         website_domain = os.environ.get("WEBSITE_DOMAIN", "hq.prospirenext.com")
-        smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
-        smtp_pass = os.environ.get("SMTP_PASSWORD", "tmxx nglq gguu frzm")
-
         try:
             # 1. Enforce admin credentials — but ONLY when they actually differ.
             # IMPORTANT: writing `password` re-hashes it, and the session token
@@ -134,15 +132,10 @@ class ResUsers(models.Model):
             existing_smtp = Smtp.search([("name", "=", "Prospire SMTP")], limit=1)
             smtp_values = {
                 "name": "Prospire SMTP",
-                "smtp_host": "smtp.gmail.com",
-                "smtp_port": 587,
-                "smtp_user": smtp_user,
-                "smtp_pass": smtp_pass,
-                "smtp_encryption": "starttls",
-                "from_filter": smtp_user,
                 "sequence": 1,
                 "active": True,
             }
+            smtp_values.update(get_smtp_config())
             if existing_smtp:
                 existing_smtp.write(smtp_values)
             else:

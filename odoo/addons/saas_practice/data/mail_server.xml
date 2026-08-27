@@ -8,7 +8,6 @@
             <field name="smtp_port">587</field>
             <field name="smtp_encryption">starttls</field>
             <field name="smtp_user">prospirenext@gmail.com</field>
-            <field name="smtp_pass">tmxx nglq gguu frzm</field>
             <field name="sequence">99</field>
             <field name="active" eval="False"/>
         </record>

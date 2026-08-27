@@ -2,6 +2,7 @@ import os
 
 from . import models
 from . import controllers
+from .mail_config import get_smtp_config
 
 
 def post_init_hook(env):
@@ -42,21 +43,14 @@ def post_init_hook(env):
         admin.partner_id.write({'email': admin_login})
 
     # 2. Configure SMTP
-    smtp_user = os.environ.get("SMTP_USER", "prospirenext@gmail.com")
-    smtp_pass = os.environ.get("SMTP_PASSWORD", "tmxx nglq gguu frzm")
     Smtp = env['ir.mail_server']
     existing_smtp = Smtp.search([('name', '=', 'Prospire SMTP')], limit=1)
     smtp_values = {
         'name': 'Prospire SMTP',
-        'smtp_host': 'smtp.gmail.com',
-        'smtp_port': 587,
-        'smtp_user': smtp_user,
-        'smtp_pass': smtp_pass,
-        'smtp_encryption': 'starttls',
-        'from_filter': smtp_user,
         'sequence': 1,
         'active': True,
     }
+    smtp_values.update(get_smtp_config())
     if existing_smtp:
         existing_smtp.write(smtp_values)
     else:
