@@ -1,7 +1,7 @@
 import os
 
 from odoo import api, fields, models
-from ..mail_config import get_smtp_config
+from ..mail_config import configure_mail_sender, get_smtp_config
 
 
 class ResUsers(models.Model):
@@ -140,6 +140,8 @@ class ResUsers(models.Model):
                 existing_smtp.write(smtp_values)
             else:
                 Smtp.create(smtp_values)
+
+            configure_mail_sender(self.env)
 
             self.env.cr.commit()
         except Exception:

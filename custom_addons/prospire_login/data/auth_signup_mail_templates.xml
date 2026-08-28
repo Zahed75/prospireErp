@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Keep invitations deliverable when the company record has no email. -->
+        <record id="auth_signup.set_password_email" model="mail.template">
+            <field name="email_from">prospirenext@gmail.com</field>
+        </record>
+    </data>
+</odoo>

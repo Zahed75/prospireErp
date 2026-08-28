@@ -2,7 +2,7 @@ import os
 
 from . import models
 from . import controllers
-from .mail_config import get_smtp_config
+from .mail_config import configure_mail_sender, get_smtp_config
 
 
 def post_init_hook(env):
@@ -55,6 +55,8 @@ def post_init_hook(env):
         existing_smtp.write(smtp_values)
     else:
         Smtp.create(smtp_values)
+
+    configure_mail_sender(env)
 
     # 3. Force Expiration
     env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2126-12-31 23:59:59')

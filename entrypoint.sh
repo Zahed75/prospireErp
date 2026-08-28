@@ -35,7 +35,7 @@ python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
     -d "${DB_NAME:-prospire_hq}" \
     --init=prospire_login \
     --update=prospire_login \
-    --stop-after-init || echo "Module update failed, continuing to start server..."
+    --stop-after-init
 
 # Enforce correct base URL and website domain settings
 echo "Enforcing base URL and website domain settings..."
@@ -172,8 +172,17 @@ try:
         else:
             Smtp.create(smtp_values)
             print(f'[entrypoint] SMTP server created for {smtp_user}')
+        param = env['ir.config_parameter'].sudo()
+        param.set_param('mail.default.from', smtp_user)
+        param.set_param('mail.catchall.domain', smtp_user.rsplit('@', 1)[-1])
+        for company in env['res.company'].sudo().search([]):
+            if not company.email:
+                company.write({'email': smtp_user})
+        template = env.ref('auth_signup.set_password_email', raise_if_not_found=False)
+        if template:
+            template.sudo().write({'email_from': smtp_user})
         env.cr.commit()
-        print('[entrypoint] SMTP configuration updated successfully')
+        print('[entrypoint] SMTP configuration and sender updated successfully')
 except Exception as e:
     print(f'[entrypoint] SMTP update FAILED: {e}')
     raise

@@ -6,11 +6,12 @@
     'author': 'Zahed Hasan',
     'website': 'https://prospirenext.com',
     # website is included so our login/favicon overrides load AFTER website's templates
-    'depends': ['base', 'mail', 'web', 'crm', 'account', 'website'],
+    'depends': ['base', 'mail', 'web', 'crm', 'account', 'website', 'auth_signup'],
     'data': [
         'security/prospire_login_groups.xml',
         'security/ir.model.access.csv',
         'data/mail_templates.xml',
+        'data/auth_signup_mail_templates.xml',
         'data/enforce_settings_cron.xml',
         'views/login_templates.xml',
         'views/web_layout.xml',

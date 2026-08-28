@@ -85,6 +85,54 @@ source .venv/bin/activate
 SMTP_HOST="${SMTP_HOST:-smtp.gmail.com}"
 SMTP_PORT="${SMTP_PORT:-587}"
 SMTP_PASSWORD_NORMALIZED="$(printf '%s' "${SMTP_PASSWORD:-}" | tr -d '[:space:]')"
+export CONFIG SMTP_HOST SMTP_PORT SMTP_PASSWORD_NORMALIZED
+
+echo "Updating prospire_login module..."
+./.venv/bin/python ./odoo-bin -c "$CONFIG" -d "$DB_NAME" \
+    --update=prospire_login --stop-after-init >/tmp/prospire_login_update.log 2>&1
+cat /tmp/prospire_login_update.log
+
+# The database mail server takes precedence over CLI SMTP options. Keep the
+# persisted local record synchronized with .env before starting Odoo.
+python3 - <<'PY'
+import os
+import odoo
+from odoo.modules.registry import Registry
+
+odoo.tools.config.parse_config(['-c', os.environ['CONFIG']])
+registry = Registry(os.environ['DB_NAME'])
+with registry.cursor() as cr:
+    env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
+    values = {
+        'name': 'Prospire SMTP',
+        'smtp_authentication': 'login',
+        'smtp_host': os.environ['SMTP_HOST'],
+        'smtp_port': int(os.environ['SMTP_PORT']),
+        'smtp_user': os.environ.get('SMTP_USER', '').strip(),
+        'smtp_pass': os.environ['SMTP_PASSWORD_NORMALIZED'],
+        'smtp_encryption': os.environ.get('SMTP_ENCRYPTION', 'starttls').strip(),
+        'from_filter': os.environ.get('SMTP_USER', '').strip(),
+        'sequence': 1,
+        'active': True,
+    }
+    server = env['ir.mail_server'].sudo().search([('name', '=', 'Prospire SMTP')], limit=1)
+    if server:
+        server.write(values)
+    else:
+        env['ir.mail_server'].sudo().create(values)
+    params = env['ir.config_parameter'].sudo()
+    smtp_user = values['smtp_user']
+    params.set_param('mail.default.from', smtp_user)
+    params.set_param('mail.catchall.domain', smtp_user.rsplit('@', 1)[-1])
+    for company in env['res.company'].sudo().search([]):
+        if not company.email:
+            company.write({'email': smtp_user})
+    template = env.ref('auth_signup.set_password_email', raise_if_not_found=False)
+    if template:
+        template.sudo().write({'email_from': smtp_user})
+    env.cr.commit()
+print('SMTP database record and sender synchronized')
+PY
 
 # Install or update requirements when they change
 if [ ! -f ".venv/.requirements-installed" ] || [ "requirements.txt" -nt ".venv/.requirements-installed" ]; then

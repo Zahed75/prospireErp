@@ -16,3 +16,21 @@ def get_smtp_config():
         "smtp_encryption": os.environ.get("SMTP_ENCRYPTION", "starttls").strip(),
         "from_filter": smtp_user,
     }
+
+
+def configure_mail_sender(env):
+    smtp_user = get_smtp_config()["smtp_user"]
+    if not smtp_user:
+        return
+
+    params = env["ir.config_parameter"].sudo()
+    params.set_param("mail.default.from", smtp_user)
+    params.set_param("mail.catchall.domain", smtp_user.rsplit("@", 1)[-1])
+
+    for company in env["res.company"].sudo().search([]):
+        if not company.email:
+            company.email = smtp_user
+
+    template = env.ref("auth_signup.set_password_email", raise_if_not_found=False)
+    if template:
+        template.sudo().write({"email_from": smtp_user})
