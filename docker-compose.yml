@@ -57,11 +57,14 @@ services:
     networks:
       - prospire-network
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8069/web/login" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 120s
+      # workers=0 means Odoo handles one request at a time; heavy operations
+      # like signing a PDF can block the single worker. Give the healthcheck
+      # plenty of time to queue and respond so Docker does not restart Odoo.
+      test: [ "CMD", "curl", "-f", "--max-time", "30", "http://localhost:8069/web/login" ]
+      interval: 60s
+      timeout: 30s
+      retries: 10
+      start_period: 300s
     logging:
       driver: "json-file"
       options:
