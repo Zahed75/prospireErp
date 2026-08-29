@@ -143,6 +143,14 @@ class ResUsers(models.Model):
 
             configure_mail_sender(self.env)
 
+            # 7. Disable base auto-vacuum cron
+            # With workers=0, cron jobs run in the same process and can grab locks
+            # (e.g. ir_attachment SHARE MODE) while a user is signing a PDF,
+            # causing canceling statement due to lock timeout and 502 Bad Gateway.
+            autovacuum = self.env.ref("base.autovacuum_job", raise_if_not_found=False)
+            if autovacuum and autovacuum.active:
+                autovacuum.write({"active": False})
+
             self.env.cr.commit()
         except Exception:
             # Don't crash the cron if something goes wrong

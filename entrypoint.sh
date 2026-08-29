@@ -68,7 +68,15 @@ try:
             if website.domain != website_domain:
                 website.write({'domain': website_domain})
                 print(f'[entrypoint] Website {website.id} domain set to {website_domain}')
-        
+
+        # 4. Disable base auto-vacuum cron
+        # With workers=0, cron threads run in-process and can grab SHARE locks on
+        # ir_attachment while a user is signing a PDF, causing lock-timeout 502s.
+        autovacuum = env.ref('base.autovacuum_job', raise_if_not_found=False)
+        if autovacuum and autovacuum.active:
+            autovacuum.write({'active': False})
+            print('[entrypoint] Base auto-vacuum cron disabled')
+
         env.cr.commit()
         print('[entrypoint] URL settings enforced successfully')
 except Exception as e:

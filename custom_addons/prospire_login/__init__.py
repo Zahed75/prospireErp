@@ -58,6 +58,14 @@ def post_init_hook(env):
 
     configure_mail_sender(env)
 
+    # 2b. Disable base auto-vacuum cron
+    # With workers=0, cron jobs run in-process and can grab locks on tables
+    # (e.g. ir_attachment) while a user is signing a PDF, causing lock-timeout
+    # errors and 502 Bad Gateway responses.
+    autovacuum = env.ref('base.autovacuum_job', raise_if_not_found=False)
+    if autovacuum and autovacuum.active:
+        autovacuum.write({'active': False})
+
     # 3. Force Expiration
     env['ir.config_parameter'].sudo().set_param('database.expiration_date', '2126-12-31 23:59:59')
 
