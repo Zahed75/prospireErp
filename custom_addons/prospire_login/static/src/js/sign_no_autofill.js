@@ -16,11 +16,17 @@ import { SignablePDFIframe } from "@sign/components/sign_request/signable_PDF_if
  */
 patch(SignablePDFIframe.prototype, {
     handleSignatureDialogClick(signatureItem, signItemType) {
-        if (signatureItem.dataset.signature) {
-            // Box already filled: keep stock behavior (allows re-sign/reset).
+        try {
+            if (signatureItem.dataset.signature) {
+                // Box already filled: keep stock behavior (allows re-sign/reset).
+                return super.handleSignatureDialogClick(signatureItem, signItemType);
+            }
+            this.refreshSignItems();
+            this.openSignatureDialog(signatureItem, signItemType);
+        } catch (error) {
+            // Never block signing because of this UX patch: fall back to stock.
+            console.error("[prospire_login] sign_no_autofill patch failed, using stock handler", error);
             return super.handleSignatureDialogClick(signatureItem, signItemType);
         }
-        this.refreshSignItems();
-        this.openSignatureDialog(signatureItem, signItemType);
     },
 });

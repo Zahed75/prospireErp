@@ -23,6 +23,9 @@
     'assets': {
         'web.assets_backend': [
             'prospire_login/static/src/css/cleanup.css',
+            # Same no-autofill guard for the backend SignableDocument action
+            # (the public sign page uses sign.assets_public_sign below).
+            'prospire_login/static/src/js/sign_no_autofill.js',
         ],
         'web.assets_frontend': [
             'prospire_login/static/src/css/prospire_login.css',
