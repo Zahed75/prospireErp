@@ -147,9 +147,9 @@ def _apply_channel_branding(env, channel):
         'description_short': CHANNEL_DESCRIPTION_SHORT,
         'description': CHANNEL_DESCRIPTION,
         'description_html': CHANNEL_DESCRIPTION_HTML,
-        # Paid course: only members see content; joining requires an
-        # invitation or a coupon (see /slides/coupon_join).
-        'visibility': 'members',
+        # Paid course: the channel is public so visitors can preview the free
+        # sections, but joining (unlocking the rest) requires an invite/coupon.
+        'visibility': 'public',
         'enroll': 'invite',
     }
     env['ir.config_parameter'].sudo().set_param(COUPON_PARAM, COUPON_CODE)
