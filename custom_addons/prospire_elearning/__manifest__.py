@@ -7,9 +7,6 @@
     'website': 'https://prospirenext.com',
     'license': 'LGPL-3',
     'depends': ['website_slides', 'website'],
-    'data': [
-        'data/course_data.xml',
-    ],
     'assets': {
         'web.assets_frontend': [
             'prospire_elearning/static/src/scss/prospire_elearning.scss',
