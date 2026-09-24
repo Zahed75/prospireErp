@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import base64
+import json
 import logging
 import os
 
@@ -129,6 +130,18 @@ def _apply_channel_branding(env, channel):
     )
     if trainer:
         values['user_id'] = trainer.id
+    # The course header background comes from cover_properties, not from
+    # image_1920: stock slides channels hardcode a purple gradient there.
+    # Point the background-image at the channel cover and neutralize the
+    # purple so our dark banner shows full-width.
+    try:
+        props = json.loads(channel.cover_properties) if channel.cover_properties else {}
+    except ValueError:
+        props = {}
+    props['background-image'] = 'url(/web/image/slide.channel/%s/image_1920)' % channel.id
+    props['background_color_style'] = 'background-color: #0D0B1E; background-image: none;'
+    props['opacity'] = '0'
+    values['cover_properties'] = json.dumps(props)
     channel.write(values)
     _logger.info(
         'prospire_elearning: channel %r branding refreshed (cover=%s, trainer=%s)',
