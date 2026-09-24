@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ==============================================================
+             Level tags (slide.tag has a unique name constraint)
+             ============================================================== -->
+        <record id="slide_tag_level_beginner" model="slide.tag">
+            <field name="name">Beginner</field>
+        </record>
+        <record id="slide_tag_level_intermediate" model="slide.tag">
+            <field name="name">Intermediate</field>
+        </record>
+        <record id="slide_tag_level_advanced" model="slide.tag">
+            <field name="name">Advanced</field>
+        </record>
+
+        <!-- ==============================================================
+             Course
+             ============================================================== -->
+        <record id="channel_sdtekh_odoo_technical" model="slide.channel">
+            <field name="name">SDTEKH — Odoo Technical Training</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="channel_type">training</field>
+            <field name="visibility">public</field>
+            <field name="enroll">public</field>
+            <field name="is_published" eval="True"/>
+            <field name="allow_comment" eval="True"/>
+            <field name="description_short">Joint venture between ProspireNext and SDTEK. 16 classes + capstone, ~38 hours: Python, SQL &amp; PostgreSQL, FastAPI integration and full Odoo 18 module development.</field>
+            <field name="description">&lt;div class="prospire-course-intro"&gt;
+  &lt;p&gt;&lt;strong&gt;SDTEKH — Odoo Technical Training&lt;/strong&gt; is a joint venture between &lt;strong&gt;ProspireNext&lt;/strong&gt; and &lt;strong&gt;SDTEK&lt;/strong&gt;. It takes you from zero Python to shipping production-grade Odoo 18 custom modules and FastAPI integrations.&lt;/p&gt;
+  &lt;p&gt;The program runs &lt;strong&gt;16 classes plus a capstone project&lt;/strong&gt; — about &lt;strong&gt;38 hours&lt;/strong&gt; of guided, exercise-driven lessons covering Python fundamentals, SQL &amp;amp; PostgreSQL, FastAPI integration and full Odoo 18 module development.&lt;/p&gt;
+  &lt;h3&gt;Who this course is for&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Beginner developers who want a structured path into Python and Odoo development.&lt;/li&gt;
+    &lt;li&gt;Working developers (PHP, Java, .NET, JavaScript) transitioning to Python and the Odoo framework.&lt;/li&gt;
+    &lt;li&gt;Technical consultants and implementers who need to build and deploy custom Odoo modules with confidence.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;Prerequisites&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Basic computer literacy and command-line comfort (terminal / shell usage).&lt;/li&gt;
+    &lt;li&gt;A laptop able to run Python 3.12, PostgreSQL and VSCode (Windows, macOS or Linux).&lt;/li&gt;
+    &lt;li&gt;No prior Python or Odoo experience required — we start from the absolute basics.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;Roadmap&lt;/h3&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;Phase 1 — Foundations:&lt;/strong&gt; Python Fundamentals; Database Query (SQL &amp;amp; PostgreSQL).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Phase 2 — Integration:&lt;/strong&gt; FastAPI + Odoo Integration (JSON-RPC, REST endpoints, Pydantic, auth).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Phase 3 — Odoo Development:&lt;/strong&gt; architecture &amp;amp; environment, first module, ORM models &amp;amp; fields, computed fields &amp;amp; constraints, ORM methods, views (form, list, search), inheritance, workflows, wizards, security, QWeb reports, scheduled actions, external API, deployment.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Phase 4 — Capstone:&lt;/strong&gt; a full custom Service Request Management module, built and deployed end-to-end (6 hours).&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</field>
+            <field name="description_html">&lt;div class="prospire-course-detail"&gt;
+  &lt;h3&gt;About this training&lt;/h3&gt;
+  &lt;p&gt;Delivered as a joint venture between ProspireNext and SDTEK, this instructor-led style eLearning track mirrors the SDTEKH technical bootcamp. Every lesson pairs concise theory with a hands-on exercise, and every section ends with a deliverable you can show in a portfolio or at work.&lt;/p&gt;
+  &lt;h3&gt;What you will be able to do&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Write idiomatic Python: data structures, functions, OOP, files and error handling.&lt;/li&gt;
+    &lt;li&gt;Design and query PostgreSQL databases: joins, aggregates, subqueries, indexes.&lt;/li&gt;
+    &lt;li&gt;Build FastAPI services that talk to Odoo over JSON-RPC / XML-RPC, with Pydantic schemas and proper auth.&lt;/li&gt;
+    &lt;li&gt;Develop complete Odoo 18 modules: models, views, security, workflows, wizards, PDF reports, cron jobs and external endpoints.&lt;/li&gt;
+    &lt;li&gt;Deploy Odoo on Ubuntu with Nginx, SSL and automated PostgreSQL backups.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3&gt;Format&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;16 classes + 1 capstone project, ~38 hours total.&lt;/li&gt;
+    &lt;li&gt;Each lesson states its level (Beginner / Intermediate / Advanced) and duration.&lt;/li&gt;
+    &lt;li&gt;Lessons are text outlines today; video walkthroughs are added progressively.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 1 — Python Fundamentals (Beginner)
+             ============================================================== -->
+        <record id="section_01_python_fundamentals" model="slide.slide">
+            <field name="name">Python Fundamentals</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="lesson_01_a_python_setup" model="slide.slide">
+            <field name="name">Python Setup &amp; Developer Roadmap</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">11</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Install Python 3.12, pip, venv and VSCode, run your first scripts, and preview the full beginner-to-advanced Python developer roadmap.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Get a professional Python environment running and understand where this course is taking you.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Installing Python 3.12 on Windows, macOS and Linux; verifying with &lt;code&gt;python --version&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;pip: installing, upgrading and listing packages.&lt;/li&gt;
+    &lt;li&gt;Virtual environments with &lt;code&gt;venv&lt;/code&gt;: create, activate, deactivate, why isolation matters.&lt;/li&gt;
+    &lt;li&gt;VSCode setup: Python extension, interpreters, running and debugging scripts, the integrated terminal.&lt;/li&gt;
+    &lt;li&gt;Running scripts: &lt;code&gt;python app.py&lt;/code&gt;, the REPL, and &lt;code&gt;if __name__ == "__main__"&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Developer roadmap: syntax basics → data structures → functions → OOP → files/exceptions → packages → testing → web APIs (FastAPI) → databases (SQL) → Odoo framework.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Install Python 3.12 and VSCode, create a virtual environment &lt;code&gt;sdtekh-env&lt;/code&gt;, and run a script &lt;code&gt;hello.py&lt;/code&gt; that prints your name, Python version and the path of the active interpreter.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_b_variables_types" model="slide.slide">
+            <field name="name">Variables, Data Types &amp; Operators</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">12</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Names, values and the core built-in types, plus every operator group you will use daily.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Master the vocabulary of Python: how values are stored, typed and combined.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Variables as names bound to objects; assignment and reassignment; naming rules and conventions (snake_case).&lt;/li&gt;
+    &lt;li&gt;Core types: &lt;code&gt;int&lt;/code&gt;, &lt;code&gt;float&lt;/code&gt;, &lt;code&gt;str&lt;/code&gt;, &lt;code&gt;bool&lt;/code&gt;, &lt;code&gt;NoneType&lt;/code&gt;; &lt;code&gt;type()&lt;/code&gt; and &lt;code&gt;isinstance()&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Strings: indexing, slicing, immutability, f-strings, common methods (&lt;code&gt;strip&lt;/code&gt;, &lt;code&gt;split&lt;/code&gt;, &lt;code&gt;join&lt;/code&gt;, &lt;code&gt;replace&lt;/code&gt;).&lt;/li&gt;
+    &lt;li&gt;Operators: arithmetic, comparison, logical (&lt;code&gt;and&lt;/code&gt;/&lt;code&gt;or&lt;/code&gt;/&lt;code&gt;not&lt;/code&gt;), membership (&lt;code&gt;in&lt;/code&gt;), identity (&lt;code&gt;is&lt;/code&gt;), assignment shortcuts; operator precedence.&lt;/li&gt;
+    &lt;li&gt;Truthiness and type conversion (&lt;code&gt;int()&lt;/code&gt;, &lt;code&gt;str()&lt;/code&gt;, &lt;code&gt;float()&lt;/code&gt;).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build a &lt;code&gt;profile_card.py&lt;/code&gt; that stores your name, age, height and "is enrolled" flag in variables, then prints a one-line summary using an f-string with a type shown for each value.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_c_control_flow" model="slide.slide">
+            <field name="name">Control Flow: if/elif/else, loops</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">13</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Decision-making and repetition: conditionals, for/while loops, break/continue and comprehensions.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Control the path your program takes: branch on conditions and repeat work without repeating code.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;if&lt;/code&gt; / &lt;code&gt;elif&lt;/code&gt; / &lt;code&gt;else&lt;/code&gt;; nested conditions; ternary expressions.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;for&lt;/code&gt; loops over ranges, strings and collections; &lt;code&gt;range()&lt;/code&gt;, &lt;code&gt;enumerate()&lt;/code&gt;, &lt;code&gt;zip()&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;while&lt;/code&gt; loops and sentinel values; avoiding infinite loops.&lt;/li&gt;
+    &lt;li&gt;Loop control: &lt;code&gt;break&lt;/code&gt;, &lt;code&gt;continue&lt;/code&gt;, &lt;code&gt;else&lt;/code&gt; on loops.&lt;/li&gt;
+    &lt;li&gt;List and dictionary comprehensions; when they help and when they hurt readability.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write a number-classifier script: for numbers 1–50 print "Fizz" (÷3), "Buzz" (÷5), "FizzBuzz" (both) or the number, then count and display how many of each category were printed using a loop — no hard-coded counts.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_d_functions" model="slide.slide">
+            <field name="name">Functions, Arguments &amp; Modules</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">14</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Defining functions, every argument flavor, return values, lambda expressions, and organizing code into modules.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Functions are the unit of reuse in Python — and the building blocks of every Odoo model method you will write later.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;def&lt;/code&gt;, parameters vs arguments, return values, multiple returns, early returns.&lt;/li&gt;
+    &lt;li&gt;Positional, keyword, default, &lt;code&gt;*args&lt;/code&gt; and &lt;code&gt;**kwargs&lt;/code&gt;; keyword-only arguments.&lt;/li&gt;
+    &lt;li&gt;Scope: local vs global, the LEGB rule, why globals are avoided.&lt;/li&gt;
+    &lt;li&gt;Lambda expressions and the key functions &lt;code&gt;sorted()&lt;/code&gt;, &lt;code&gt;min()&lt;/code&gt;, &lt;code&gt;max()&lt;/code&gt;, &lt;code&gt;filter()&lt;/code&gt;, &lt;code&gt;map()&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Modules and imports: &lt;code&gt;import&lt;/code&gt;, &lt;code&gt;from ... import&lt;/code&gt;, &lt;code&gt;__name__&lt;/code&gt;, the standard library tour (datetime, json, csv, os, sys).&lt;/li&gt;
+    &lt;li&gt;Docstrings and type hints as documentation habits.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Create a module &lt;code&gt;text_utils.py&lt;/code&gt; with &lt;code&gt;slugify(text)&lt;/code&gt;, &lt;code&gt;word_count(text)&lt;/code&gt; and &lt;code&gt;censor(text, *words)&lt;/code&gt;; import it from &lt;code&gt;main.py&lt;/code&gt; and demo each function with printed output.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_e_data_structures" model="slide.slide">
+            <field name="name">Data Structures: list, tuple, dict, set</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">15</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. The four built-in collections, when to use each, and the operations that cover 95% of real code.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Choosing the right collection is half of Python programming — and Odoo recordsets behave like specialized lists.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;list&lt;/code&gt;: ordered, mutable; append/insert/remove/pop, slicing, sorting (&lt;code&gt;sort()&lt;/code&gt; vs &lt;code&gt;sorted()&lt;/code&gt;), list methods.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;tuple&lt;/code&gt;: ordered, immutable; packing/unpacking, named tuples.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;dict&lt;/code&gt;: key-value storage; get/setdefault/pop, keys/values/items, dict comprehensions, nesting; why dict keys must be hashable.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;set&lt;/code&gt;: uniqueness and set algebra (union, intersection, difference).&lt;/li&gt;
+    &lt;li&gt;Mutability vs immutability; shallow vs deep copies; common pitfalls (mutable default arguments).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build an inventory tracker: a dict of products → stock counts, a list of restock transactions, and functions using set operations to report "products sold but never restocked" and low-stock items.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_f_oop" model="slide.slide">
+            <field name="name">OOP Basics: classes, objects, inheritance</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">16</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Classes, instances, methods, inheritance and dunder methods — the exact concepts the Odoo ORM is built on.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Odoo models &lt;em&gt;are&lt;/em&gt; Python classes — this lesson is the direct on-ramp to the framework.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Class vs instance; &lt;code&gt;__init__&lt;/code&gt; and instance attributes; class attributes and shared state.&lt;/li&gt;
+    &lt;li&gt;Instance methods, &lt;code&gt;@classmethod&lt;/code&gt;, &lt;code&gt;@staticmethod&lt;/code&gt;; &lt;code&gt;self&lt;/code&gt; explained.&lt;/li&gt;
+    &lt;li&gt;Inheritance: extending and overriding methods, &lt;code&gt;super()&lt;/code&gt;, multiple inheritance basics.&lt;/li&gt;
+    &lt;li&gt;Encapsulation conventions (public, &lt;code&gt;_protected&lt;/code&gt;, &lt;code&gt;__private&lt;/code&gt;); &lt;code&gt;@property&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Dunder methods: &lt;code&gt;__str__&lt;/code&gt;, &lt;code&gt;__repr__&lt;/code&gt;, &lt;code&gt;__eq__&lt;/code&gt;, &lt;code&gt;__len__&lt;/code&gt;, &lt;code&gt;__getitem__&lt;/code&gt; — how objects plug into Python syntax.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Model a mini LMS: a &lt;code&gt;Course&lt;/code&gt; class (title, lessons list, add/remove lesson, &lt;code&gt;duration_hours&lt;/code&gt; property) and an inherited &lt;code&gt;PublishedCourse&lt;/code&gt; that adds publish state and overrides &lt;code&gt;__str__&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_g_files_exceptions" model="slide.slide">
+            <field name="name">File Handling &amp; Exceptions</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">17</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Reading and writing files safely, and handling errors with try/except instead of crashing.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Real programs read files and survive bad input — here is how to do both cleanly.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The &lt;code&gt;with open(...) as f&lt;/code&gt; pattern; read/write/append modes; text vs binary.&lt;/li&gt;
+    &lt;li&gt;Reading line by line, &lt;code&gt;read()&lt;/code&gt; vs &lt;code&gt;readlines()&lt;/code&gt;; writing and &lt;code&gt;json&lt;/code&gt;/&lt;code&gt;csv&lt;/code&gt; module basics.&lt;/li&gt;
+    &lt;li&gt;Exceptions: try/except/else/finally; catching specific exceptions; raising with &lt;code&gt;raise&lt;/code&gt;; custom exception classes.&lt;/li&gt;
+    &lt;li&gt;EAFP vs LBYL styles; the exception hierarchy; never bare &lt;code&gt;except:&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Path handling with &lt;code&gt;pathlib&lt;/code&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write &lt;code&gt;expenses.py&lt;/code&gt;: load a CSV of expenses, skip malformed rows with per-row error messages, compute totals per category, and write a JSON summary — then handle a missing file gracefully.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_01_h_lab" model="slide.slide">
+            <field name="name">Problem-Solving Lab — 10 Python Exercises</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_01_python_fundamentals"/>
+            <field name="sequence">18</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~1h. Ten small real exercises — from FizzBuzz to a CSV summarizer — each with a solution hint to unblock you.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Ten exercises that combine everything from this section. Try each for 10 minutes before reading the hint.&lt;/p&gt;
+  &lt;h4&gt;Exercises&lt;/h4&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;FizzBuzz:&lt;/strong&gt; print 1–100; multiples of 3 → "Fizz", of 5 → "Buzz", of both → "FizzBuzz". &lt;em&gt;Hint: check the combined condition first, or use a list of parts and &lt;code&gt;"".join&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Palindrome checker:&lt;/strong&gt; return True if a string reads the same ignoring case, spaces and punctuation. &lt;em&gt;Hint: filter with &lt;code&gt;str.isalnum&lt;/code&gt;, then compare &lt;code&gt;s == s[::-1]&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Word counter:&lt;/strong&gt; read a text and return the 5 most frequent words with counts. &lt;em&gt;Hint: &lt;code&gt;dict.get(word, 0) + 1&lt;/code&gt;, then &lt;code&gt;sorted(items, key=lambda kv: kv[1], reverse=True)&lt;/code&gt; or &lt;code&gt;collections.Counter&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Fibonacci:&lt;/strong&gt; return the first N Fibonacci numbers, both as a list and as a generator. &lt;em&gt;Hint: iterate with two variables &lt;code&gt;a, b = b, a + b&lt;/code&gt;; &lt;code&gt;yield&lt;/code&gt; for the generator.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Duplicate remover:&lt;/strong&gt; given a list, return it deduplicated while preserving order. &lt;em&gt;Hint: &lt;code&gt;list(dict.fromkeys(items))&lt;/code&gt;, or a set for seen membership in a loop.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;CSV reader summary:&lt;/strong&gt; read &lt;code&gt;sales.csv&lt;/code&gt; (date, product, amount) and print total and average amount per product. &lt;em&gt;Hint: &lt;code&gt;csv.DictReader&lt;/code&gt; + a dict of lists, or running totals with &lt;code&gt;float(row["amount"])&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Prime numbers:&lt;/strong&gt; list all primes below N using a simple sieve. &lt;em&gt;Hint: start from a list of True flags, cross out multiples of each prime up to √N.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Password strength validator:&lt;/strong&gt; score a password 0–4 for length ≥ 8, upper+lower, digit, symbol. &lt;em&gt;Hint: sum boolean checks; use &lt;code&gt;any(c.isupper() for c in pw)&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Contact book:&lt;/strong&gt; dict-backed add/search/delete/list commands in a loop, persisted to JSON on exit. &lt;em&gt;Hint: &lt;code&gt;while True&lt;/code&gt; + &lt;code&gt;input()&lt;/code&gt; dispatch, &lt;code&gt;json.dump&lt;/code&gt; in a &lt;code&gt;finally&lt;/code&gt;.&lt;/em&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Number guessing game:&lt;/strong&gt; the program picks 1–100 and answers "higher/lower" until guessed; count attempts. &lt;em&gt;Hint: &lt;code&gt;random.randint&lt;/code&gt;, &lt;code&gt;int(input())&lt;/code&gt; wrapped in try/except for non-numeric input.&lt;/em&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;h4&gt;Deliverable&lt;/h4&gt;
+  &lt;p&gt;One &lt;code&gt;lab01.py&lt;/code&gt; (or a &lt;code&gt;lab01/&lt;/code&gt; package) where each exercise is a function with a docstring, plus a small demo block that runs all ten.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 2 — Database Query (SQL & PostgreSQL)
+             ============================================================== -->
+        <record id="section_02_sql_postgresql" model="slide.slide">
+            <field name="name">Database Query (SQL &amp; PostgreSQL)</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="lesson_02_a_relational_setup" model="slide.slide">
+            <field name="name">Relational Databases &amp; PostgreSQL Setup</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">21</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. Relational concepts (tables, keys, relationships) and a working local PostgreSQL with a practice database.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Odoo stores everything in PostgreSQL — understanding relational basics makes the whole framework click.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Relational model: tables, rows, columns; primary keys, foreign keys, NULL semantics.&lt;/li&gt;
+    &lt;li&gt;Relationship types: one-to-many, many-to-many (join tables); normalization in one paragraph.&lt;/li&gt;
+    &lt;li&gt;Installing PostgreSQL (Windows installer, macOS Homebrew, apt on Ubuntu); the &lt;code&gt;psql&lt;/code&gt; shell and pgAdmin.&lt;/li&gt;
+    &lt;li&gt;Creating a database and user: &lt;code&gt;CREATE DATABASE training;&lt;/code&gt;, roles and passwords.&lt;/li&gt;
+    &lt;li&gt;Data types: INTEGER, NUMERIC/DECIMAL, VARCHAR/TEXT, BOOLEAN, DATE/TIMESTAMP, JSONB; choosing wisely.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Install PostgreSQL, create database &lt;code&gt;sdtekh_training&lt;/code&gt; with user &lt;code&gt;student&lt;/code&gt;, and design on paper (or SQL) two related tables — &lt;code&gt;customers&lt;/code&gt; and &lt;code&gt;orders&lt;/code&gt; — linked by a foreign key.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_02_b_select" model="slide.slide">
+            <field name="name">SELECT, WHERE, ORDER BY, LIMIT</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">22</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~0.5h. The 90%-of-queries toolkit: projecting columns, filtering rows, sorting and paging results.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;The core SELECT statement — every ORM, including Odoo's, compiles down to this.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;SELECT&lt;/code&gt; column lists, aliases, &lt;code&gt;DISTINCT&lt;/code&gt;, expressions and computed columns.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;WHERE&lt;/code&gt; filters: comparison, &lt;code&gt;AND/OR/NOT&lt;/code&gt;, &lt;code&gt;IN&lt;/code&gt;, &lt;code&gt;BETWEEN&lt;/code&gt;, &lt;code&gt;LIKE&lt;/code&gt; with wildcards, &lt;code&gt;IS NULL&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;ORDER BY&lt;/code&gt; multi-column asc/desc; &lt;code&gt;LIMIT&lt;/code> / &lt;code&gt;OFFSET&lt;/code&gt; paging.&lt;/li&gt;
+    &lt;li&gt;NULL three-valued logic and why &lt;code&gt;= NULL&lt;/code&gt; never matches.&lt;/li&gt;
+    &lt;li&gt;Logical order of execution: FROM → WHERE → SELECT → ORDER BY → LIMIT.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;On your &lt;code&gt;orders&lt;/code&gt; table: write queries for (1) orders above $500 sorted newest-first, (2) unique cities of customers, (3) the 10 most recent pending orders — save them in &lt;code&gt;queries/02_select.sql&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_02_c_joins" model="slide.slide">
+            <field name="name">JOINs: INNER, LEFT, RIGHT</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">23</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~0.5h. Combining tables: INNER vs LEFT vs RIGHT joins, join conditions, and the classic mistakes.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Odoo's relational fields (Many2one, One2many) are JOINs underneath — read this lesson and the ORM stops being magic.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;INNER JOIN: only matching rows on both sides; the join condition in &lt;code&gt;ON&lt;/code&gt; vs &lt;code&gt;WHERE&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;LEFT JOIN: keep all left rows, NULLs where no match; the canonical "orders with customer names" pattern.&lt;/li&gt;
+    &lt;li&gt;RIGHT JOIN and why most people rewrite it as a LEFT JOIN; FULL OUTER JOIN for completeness.&lt;/li&gt;
+    &lt;li&gt;Self joins and joining more than two tables; aliasing tables.&lt;/li&gt;
+    &lt;li&gt;Pitfalls: filtering on the right table in &lt;code&gt;WHERE&lt;/code&gt; silently turning a LEFT JOIN into an INNER JOIN; accidental row multiplication.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write three reports over &lt;code&gt;customers&lt;/code&gt;/&lt;code&gt;orders&lt;/code&gt;: all orders with customer name (INNER), all customers including those without orders (LEFT), and all customers who have &lt;em&gt;never&lt;/em&gt; ordered (LEFT + &lt;code&gt;IS NULL&lt;/code&gt;).&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_02_d_group_by" model="slide.slide">
+            <field name="name">GROUP BY, Aggregates &amp; HAVING</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">24</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~0.5h. Summarizing data: COUNT/SUM/AVG/MIN/MAX, grouping rules, and filtering groups with HAVING.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Aggregations turn rows into answers — the same math Odoo shows in its pivot and graph views.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Aggregate functions: &lt;code&gt;COUNT(*)&lt;/code&gt; vs &lt;code&gt;COUNT(col)&lt;/code&gt;, &lt;code&gt;SUM&lt;/code&gt;, &lt;code&gt;AVG&lt;/code&gt;, &lt;code&gt;MIN&lt;/code&gt;, &lt;code&gt;MAX&lt;/code&gt;; NULL handling in aggregates.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;GROUP BY&lt;/code&gt; one or several columns; every selected column must be aggregated or grouped.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;HAVING&lt;/code&gt; vs &lt;code&gt;WHERE&lt;/code&gt;: filter rows before grouping vs filter groups after.&lt;/li&gt;
+    &lt;li&gt;Grouping with joins; &lt;code&gt;GROUP BY&lt;/code&gt; with expressions (e.g. date parts).&lt;/li&gt;
+    &lt;li&gt;Odoo connection: &lt;code&gt;read_group()&lt;/code&gt; in the ORM is exactly this lesson in Python form.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Produce a sales report: revenue and order count per customer, only customers with 3+ orders and revenue over $1000, sorted by revenue descending.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_02_e_subqueries_indexes" model="slide.slide">
+            <field name="name">Subqueries &amp; Indexes</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">25</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~0.5h. Queries inside queries, and the indexes that keep them fast as data grows.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Two skills separate hobby SQL from professional SQL: composing subqueries, and understanding indexes.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Subquery types: scalar, IN, EXISTS (and NOT EXISTS); correlated vs non-correlated.&lt;/li&gt;
+    &lt;li&gt;Subqueries in SELECT/WHERE/FROM; when a JOIN is clearer than a subquery.&lt;/li&gt;
+    &lt;li&gt;Indexes: B-tree default, how they speed lookups and sorts, the cost on writes.&lt;/li&gt;
+    &lt;li&gt;Composite indexes and column order; partial and unique indexes.&lt;/li&gt;
+    &lt;li&gt;Reading a query plan with &lt;code&gt;EXPLAIN ANALYZE&lt;/code&gt;; spotting sequential scans; why Odoo indexes every &lt;code&gt;xxx_id&lt;/code&gt; column automatically.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write "customers whose latest order is above average" using a subquery, then re-implement with a JOIN; add an index supporting your most common filter and show the plan difference with &lt;code&gt;EXPLAIN ANALYZE&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_02_f_sql_from_python" model="slide.slide">
+            <field name="name">SQL from Python (psycopg2) &amp; SQL vs Odoo ORM</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_02_sql_postgresql"/>
+            <field name="sequence">26</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~0.5h. Executing SQL from Python with psycopg2, parameterized queries, and when to use raw SQL vs the Odoo ORM.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Bridge the two worlds: talk to PostgreSQL directly from Python, then understand how the Odoo ORM relates to it.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;psycopg2 setup: &lt;code&gt;pip install psycopg2-binary&lt;/code&gt;, connecting with &lt;code&gt;psycopg2.connect&lt;/code&gt;, connection/cursor lifecycle.&lt;/li&gt;
+    &lt;li&gt;Executing queries: &lt;code&gt;execute()&lt;/code&gt;, &lt;code&gt;fetchall/fetchone&lt;/code&gt;, row factories, dict cursors; transactions, &lt;code&gt;commit()&lt;/code&gt;/&lt;code&gt;rollback()&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;SQL injection and parameterized queries (&lt;code&gt;%s&lt;/code&gt; placeholders) — never f-strings for values.&lt;/li&gt;
+    &lt;li&gt;SQL vs Odoo ORM: &lt;code&gt;search()/browse()&lt;/code&gt; generate SQL but add access rights, record rules, caching and computed fields; &lt;code&gt;cr.execute()&lt;/code&gt; when you truly need raw SQL.&lt;/li&gt;
+    &lt;li&gt;Rule of thumb: ORM by default, SQL for reporting/performance, always parameterized.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write &lt;code&gt;db_report.py&lt;/code&gt;: connect with psycopg2, take a customer name as a &lt;em&gt;parameterized&lt;/em&gt; input, print their order totals; then write the equivalent Odoo &lt;code&gt;env['sale.order'].search([...])&lt;/code&gt; call and note the differences.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 3 — FastAPI + Odoo Integration (Advanced)
+             ============================================================== -->
+        <record id="section_03_fastapi_odoo" model="slide.slide">
+            <field name="name">FastAPI + Odoo Integration</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="lesson_03_a_fastapi_setup" model="slide.slide">
+            <field name="name">FastAPI Project Setup &amp; Uvicorn</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">31</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Scaffold a FastAPI project, understand the app/router structure, and run it with Uvicorn (with auto-reload).</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;FastAPI is our integration layer: a modern, fast Python web framework that will sit in front of Odoo's RPC APIs.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Project scaffold: &lt;code&gt;pip install fastapi uvicorn&lt;/code&gt;, the &lt;code&gt;main.py&lt;/code&gt; entry point, virtualenv layout.&lt;/li&gt;
+    &lt;li&gt;First app: &lt;code&gt;app = FastAPI()&lt;/code&gt;, path operations (&lt;code&gt;@app.get/post/put/delete&lt;/code&gt;), path and query parameters.&lt;/li&gt;
+    &lt;li&gt;Running with Uvicorn: &lt;code&gt;uvicorn main:app --reload&lt;/code&gt;, host/port options, what the ASGI server does.&lt;/li&gt;
+    &lt;li&gt;Interactive docs out of the box: &lt;code&gt;/docs&lt;/code&gt; (Swagger UI) and &lt;code&gt;/redoc&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Project structure: routers, &lt;code&gt;APIRouter&lt;/code&gt; prefixes, settings via environment variables.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Create the &lt;code&gt;odoo-bridge&lt;/code&gt; project: a &lt;code&gt;/health&lt;/code&gt; endpoint returning &lt;code&gt;{"status": "ok"}&lt;/code&gt; and a &lt;code&gt;/hello/{name}&lt;/code&gt; endpoint, both visible and testable in &lt;code&gt;/docs&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_b_odoo_rpc" model="slide.slide">
+            <field name="name">Odoo JSON-RPC &amp; xmlrpc.client from FastAPI</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">32</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Two ways to call Odoo from FastAPI: JSON-RPC over HTTP and Python's built-in xmlrpc.client.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Odoo exposes its whole ORM over RPC. This lesson connects FastAPI to a live Odoo instance both ways.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The RPC landscape: &lt;code&gt;/jsonrpc&lt;/code&gt; endpoint, common methods &lt;code&gt;authenticate&lt;/code&gt;, &lt;code&gt;execute_kw&lt;/code&gt;; session cookies vs explicit credentials.&lt;/li&gt;
+    &lt;li&gt;JSON-RPC from FastAPI with &lt;code&gt;httpx&lt;/code&gt; or &lt;code&gt;requests&lt;/code&gt;: payload shape, &lt;code&gt;jsonrpc=2.0&lt;/code&gt; envelope, reading &lt;code&gt;result&lt;/code&gt;/&lt;code&gt;error&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;xmlrpc.client&lt;/code&gt;: &lt;code&gt;ServerProxy&lt;/code&gt; for &lt;code&gt;common&lt;/code&gt; (uid) and &lt;code&gt;models&lt;/code&gt; (&lt;code&gt;execute_kw&lt;/code&gt;) — no extra dependency.&lt;/li&gt;
+    &lt;li&gt;Typical flow: authenticate → uid → &lt;code&gt;execute_kw(db, uid, password, model, method, args, kwargs)&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Hiding credentials in env vars; connection reuse; timeouts and error envelopes.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build &lt;code&gt;odoo_client.py&lt;/code&gt; with a small client class exposing &lt;code&gt;search_read(model, domain, fields)&lt;/code&gt; over &lt;code&gt;xmlrpc.client&lt;/code&gt;; call it from a FastAPI endpoint that lists CRM leads.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_c_rest_endpoints" model="slide.slide">
+            <field name="name">REST Endpoints Reading &amp; Writing Odoo Models</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">33</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Design clean REST resources (GET/POST/PUT/DELETE) that map onto Odoo model operations via RPC.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Turn Odoo's ORM into a clean REST API you control — the pattern used in real integrations.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Resource design: nouns in URLs (&lt;code&gt;/leads&lt;/code&gt;, &lt;code&gt;/leads/{id}&lt;/code&gt;), verbs via HTTP methods, status codes (200/201/404/422/500).&lt;/li&gt;
+    &lt;li&gt;Read side: &lt;code&gt;search_read&lt;/code&gt; with domains, field lists, limits and offsets; pagination with &lt;code&gt;count&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Write side: &lt;code&gt;create&lt;/code&gt; (returns id), &lt;code&gt;write&lt;/code&gt;, &lt;code&gt;unlink&lt;/code&gt;; mapping JSON bodies to Odoo field values.&lt;/li&gt;
+    &lt;li&gt;Calling model methods over RPC (e.g. &lt;code&gt;action_confirm&lt;/code&gt;) from a POST endpoint.&lt;/li&gt;
+    &lt;li&gt;Error translation: Odoo exceptions → meaningful HTTP errors, never raw tracebacks to clients.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Implement &lt;code&gt;GET /leads&lt;/code&gt; (paged, filterable by stage) and &lt;code&gt;GET /leads/{id}&lt;/code&gt; (404 when missing) against Odoo &lt;code&gt;crm.lead&lt;/code&gt;, returning clean JSON.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_d_auth" model="slide.slide">
+            <field name="name">Auth: API Key vs Session Token</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">34</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Secure the bridge: FastAPI API keys for service clients, Odoo session tokens for user-delegated calls, and when to use which.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Every integration answers one question first: &lt;em&gt;who is calling, and on whose behalf?&lt;/em&gt;&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;FastAPI-side API keys: &lt;code&gt;Header(...)&lt;/code&gt; or &lt;code&gt;APIKeyHeader&lt;/code&gt;, dependency injection with &lt;code&gt;Depends&lt;/code&gt;, key storage and rotation.&lt;/li&gt;
+    &lt;li&gt;Odoo-side identities: service account (dedicated user, least-privilege groups) vs end-user delegation.&lt;/li&gt;
+    &lt;li&gt;Odoo session tokens: logging in via &lt;code&gt;/web/session/authenticate&lt;/code&gt; (JSON-RPC) and reusing the session cookie for subsequent calls.&lt;/li&gt;
+    &lt;li&gt;Trade-offs: API key = simple, service-level permissions; session token = acts as the real user, inherits their rights and record rules.&lt;/li&gt;
+    &lt;li&gt;TLS everywhere, key in headers (never query strings), rejecting unknown keys with 401 vs 403.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Protect your &lt;code&gt;/leads&lt;/code&gt; endpoints with a FastAPI API-key dependency, and implement an &lt;code&gt;/auth/session&lt;/code&gt; endpoint that exchanges Odoo credentials for a session cookie and returns the user's rights summary.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_e_pydantic" model="slide.slide">
+            <field name="name">Pydantic Schemas</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">35</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Validate and document payloads with Pydantic models: request bodies, response models, field types and constraints.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Pydantic gives you validation, serialization and OpenAPI documentation from one class definition.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Defining &lt;code&gt;BaseModel&lt;/code&gt; schemas: field types, defaults, &lt;code&gt;Optional&lt;/code&gt;, nested models, lists of models.&lt;/li&gt;
+    &lt;li&gt;Validation: constraints (&lt;code&gt;gt/ge/lt/le&lt;/code&gt;, &lt;code&gt;min_length&lt;/code&gt;, &lt;code&gt;regex&lt;/code&gt;), custom validators with &lt;code&gt;@field_validator&lt;/code&gt;, &lt;code&gt;EmailStr&lt;/code&gt; and friends.&lt;/li&gt;
+    &lt;li&gt;Request bodies (&lt;code&gt;payload: LeadCreate&lt;/code&gt;) and response models (&lt;code&gt;response_model=LeadOut&lt;/code&gt;); how they shape the OpenAPI schema.&lt;/li&gt;
+    &lt;li&gt;Serialization helpers: &lt;code&gt;model_dump()&lt;/code&gt;, &lt;code&gt;model_dump(by_alias=True)&lt;/code&gt;, &lt;code&gt;from_attributes&lt;/code&gt; for ORM/RPC rows.&lt;/li&gt;
+    &lt;li&gt;422 responses for free: FastAPI turns validation errors into structured error responses.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Define &lt;code&gt;LeadCreate&lt;/code&gt; (name required, email validated, expected_revenue ≥ 0, optional phone) and &lt;code&gt;LeadOut&lt;/code&gt;; wire them as request/response models on your lead endpoints.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_f_background_errors" model="slide.slide">
+            <field name="name">Background Tasks &amp; Error Handling</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">36</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Keep endpoints fast with background tasks, and handle failures consistently across the service.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Slow Odoo calls shouldn't block your API — and failures must be observable, not silent.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;FastAPI &lt;code&gt;BackgroundTasks&lt;/code&gt;: fire-and-forget work after the response; when it is (and isn't) enough.&lt;/li&gt;
+    &lt;li&gt;Heavier workloads: task queues in one paragraph (Celery/RQ), and why cron-style Odoo jobs sometimes replace them entirely.&lt;/li&gt;
+    &lt;li&gt;Exception handlers: &lt;code&gt;@app.exception_handler&lt;/code&gt; mapping Odoo/XML-RPC faults to HTTP errors; consistent error body shape.&lt;/li&gt;
+    &lt;li&gt;Logging: structured logs with request ids; never log secrets or full credentials.&lt;/li&gt;
+    &lt;li&gt;Resilience: timeouts on every RPC call, retries with backoff for transient failures, circuit-breaker mindset.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Add a &lt;code&gt;POST /leads/{id}/notify&lt;/code&gt; endpoint that responds immediately and sends the notification via a background task; add a global exception handler returning &lt;code&gt;{"detail": ...}&lt;/code&gt; with the right status codes.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <record id="lesson_03_g_leads_exercise" model="slide.slide">
+            <field name="name">Exercise: Build a FastAPI Service — POST /leads → Odoo CRM Lead</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_03_fastapi_odoo"/>
+            <field name="sequence">37</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">0.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~0.5h. Capstone exercise for the section: a validated, secured POST /leads endpoint that creates a real CRM lead in Odoo.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Combine the whole section: a public, validated endpoint that writes into Odoo CRM.&lt;/p&gt;
+  &lt;h4&gt;Requirements&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;POST /leads&lt;/code&gt; accepting a Pydantic-validated body (name, email, phone, expected_revenue, notes).&lt;/li&gt;
+    &lt;li&gt;Create the lead in Odoo via &lt;code&gt;execute_kw(..., 'crm.lead', 'create', [values])&lt;/code&gt; using a least-privilege Odoo service account.&lt;/li&gt;
+    &lt;li&gt;Respond &lt;code&gt;201 Created&lt;/code&gt; with the new lead id and Odoo link; &lt;code&gt;422&lt;/code&gt; on invalid payloads; &lt;code&gt;502&lt;/code&gt; with a safe message when Odoo is unreachable.&lt;/li&gt;
+    &lt;li&gt;Protect the route with an API key; log the creation with a request id.&lt;/li&gt;
+    &lt;li&gt;Optional stretch goal: send a confirmation email from a background task.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Deliverable&lt;/h4&gt;
+  &lt;p&gt;A working service: &lt;code&gt;curl -X POST /leads&lt;/code&gt; creates a visible lead in the Odoo CRM pipeline, with a README covering setup, env vars and example calls.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 4 — Odoo Architecture & Dev Environment Setup
+             ============================================================== -->
+        <record id="section_04_odoo_architecture" model="slide.slide">
+            <field name="name">Odoo Architecture &amp; Dev Environment Setup</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <record id="lesson_04_odoo_architecture" model="slide.slide">
+            <field name="name">Odoo Architecture &amp; Dev Environment Setup</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_04_odoo_architecture"/>
+            <field name="sequence">41</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1h. MVC in Odoo, installing Odoo 18/19 Community from source, VSCode + odoo.conf + debug mode, and the anatomy of a module's file structure.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Before writing modules, understand the machine: Odoo's MVC-flavored architecture and a source install you control.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;MVC in Odoo: Models (Python/ORM), Views (XML/QWeb), Controllers (HTTP); where business logic belongs and why fat models beat fat controllers.&lt;/li&gt;
+    &lt;li&gt;Source install of Odoo 18/19 Community: system dependencies, PostgreSQL, Python virtualenv, &lt;code&gt;pip install -r requirements.txt&lt;/code&gt;, running from source with &lt;code&gt;odoo-bin&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;VSCode configuration: Python interpreter, launch.json for debugging &lt;code&gt;odoo-bin&lt;/code&gt;, breakpoints in framework code.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;odoo.conf&lt;/code&gt;: addons_path, db_host/port/user/password, xmlrpc_port, workers, log_level; the &lt;code&gt;-c&lt;/code&gt; flag, &lt;code&gt;-d&lt;/code&gt;, &lt;code&gt;-u&lt;/code&gt;, &lt;code&gt;--dev=xml&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Developer mode: activating it (&lt;code&gt;?debug=1&lt;/code&gt;), what the UI reveals — fields, views, model metadata, the technical menu.&lt;/li&gt;
+    &lt;li&gt;Module file structure: &lt;code&gt;__manifest__.py&lt;/code&gt;, &lt;code&gt;__init__.py&lt;/code&gt;, &lt;code&gt;models/&lt;/code&gt;, &lt;code&gt;views/&lt;/code&gt;, &lt;code&gt;security/&lt;/code&gt;, &lt;code&gt;data/&lt;/code&gt;, &lt;code&gt;static/&lt;/code&gt;, &lt;code&gt;controllers/&lt;/code&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Install Odoo 18 (or 19) Community from source with its own virtualenv and database, start it with a custom &lt;code&gt;odoo.conf&lt;/code&gt;, connect VSCode and hit a breakpoint in &lt;code&gt;odoo-bin&lt;/code&gt;, and activate developer mode in the UI.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 5 — Creating Your First Custom Module
+             ============================================================== -->
+        <record id="section_05_first_module" model="slide.slide">
+            <field name="name">Creating Your First Custom Module</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">50</field>
+        </record>
+
+        <record id="lesson_05_first_module" model="slide.slide">
+            <field name="name">Creating Your First Custom Module</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_05_first_module"/>
+            <field name="sequence">51</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_beginner'))]"/>
+            <field name="description">Level: Beginner | Duration: ~1h. Every key of __manifest__.py, the __init__.py import chain, categories, dependencies, and the install/upgrade cycle — ending in a Hello World module.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Your first module, built line by line so nothing in the boilerplate stays mysterious.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;__manifest__.py&lt;/code&gt; keys: &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; (&lt;code&gt;18.0.1.0.0&lt;/code&gt;), &lt;code&gt;summary&lt;/code&gt;, &lt;code&gt;category&lt;/code&gt;, &lt;code&gt;author&lt;/code&gt;, &lt;code&gt;license&lt;/code&gt;, &lt;code&gt;depends&lt;/code&gt;, &lt;code&gt;data&lt;/code&gt; (ordered file list), &lt;code&gt;assets&lt;/code&gt;, &lt;code&gt;installable&lt;/code&gt;, &lt;code&gt;application&lt;/code&gt;, &lt;code&gt;post_init_hook&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;The &lt;code&gt;__init__.py&lt;/code&gt; import chain: root imports &lt;code&gt;models&lt;/code&gt;, &lt;code&gt;models/__init__.py&lt;/code&gt; imports each model file; forgotten imports as the #1 "my code doesn't load" bug.&lt;/li&gt;
+    &lt;li&gt;Module categories and what they change (grouping in the apps list — nothing technical); &lt;code&gt;application: True/False&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Dependencies: depending on &lt;code&gt;base&lt;/code&gt; vs &lt;code&gt;sale&lt;/code&gt;; load order; never depends on what you don't use.&lt;/li&gt;
+    &lt;li&gt;The cycle: install (-i), upgrade/update (-u), uninstall; when a full restart is required; reading tracebacks during install.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build module &lt;code&gt;hello_world&lt;/code&gt;: a &lt;code&gt;hello.world&lt;/code&gt; model with a &lt;code&gt;name&lt;/code&gt; field, a menu + action + form/list views, installable from the apps list with no warnings. Screenshot the working list view.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 6 — Models & Fields — The Odoo ORM
+             ============================================================== -->
+        <record id="section_06_models_fields" model="slide.slide">
+            <field name="name">Models &amp; Fields — The Odoo ORM</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">60</field>
+        </record>
+
+        <record id="lesson_06_models_fields" model="slide.slide">
+            <field name="name">Models &amp; Fields — The Odoo ORM</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_06_models_fields"/>
+            <field name="sequence">61</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. Scalar and relational field types (Char, Integer, Float, Boolean, Date, Binary, Many2one, One2many, Many2many, Selection, Html) plus _name, _rec_name and _order.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;The ORM is Odoo's heart: define models in Python, get tables, forms and APIs for free.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Model basics: &lt;code&gt;class ProjectTask(models.Model)&lt;/code&gt;, &lt;code&gt;_name&lt;/code&gt;, &lt;code&gt;_description&lt;/code&gt;, &lt;code&gt;_rec_name&lt;/code&gt; (display name field), &lt;code&gt;_order&lt;/code&gt; (default sort).&lt;/li&gt;
+    &lt;li&gt;Scalar fields: &lt;code&gt;Char&lt;/code&gt;, &lt;code&gt;Text&lt;/code&gt;, &lt;code&gt;Html&lt;/code&gt;, &lt;code&gt;Integer&lt;/code&gt;, &lt;code&gt;Float&lt;/code&gt; (&lt;code&gt;digits&lt;/code&gt;), &lt;code&gt;Boolean&lt;/code&gt;, &lt;code&gt;Date&lt;/code&gt;, &lt;code&gt;Datetime&lt;/code&gt;, &lt;code&gt;Binary&lt;/code&gt; (attachments), &lt;code&gt;Selection&lt;/code&gt; (list of key-label pairs).&lt;/li&gt;
+    &lt;li&gt;Common field attributes: &lt;code&gt;string&lt;/code&gt;, &lt;code&gt;required&lt;/code&gt;, &lt;code&gt;readonly&lt;/code&gt;, &lt;code&gt;default&lt;/code&gt; (value or callable), &lt;code&gt;index&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt;, &lt;code&gt;help&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Relational fields: &lt;code&gt;Many2one('res.partner')&lt;/code&gt; (and &lt;code&gt;ondelete&lt;/code&gt;), &lt;code&gt;One2many('model', 'inverse_field')&lt;/code&gt; — never stored, a window on the other side; &lt;code&gt;Many2many&lt;/code&gt; with the auto-created relation table.&lt;/li&gt;
+    &lt;li&gt;Automatic fields: &lt;code&gt;id&lt;/code&gt;, &lt;code&gt;create_date/write_date&lt;/code&gt;, &lt;code&gt;create_uid/write_uid&lt;/code&gt;, &lt;code&gt;display_name&lt;/code&gt;; conventions: model names singular dotted (&lt;code&gt;project.task&lt;/code&gt;), tables auto-named.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Model a &lt;code&gt;project.task&lt;/code&gt; with 6+ field types: Char (title), Text (description), Selection (priority), Date (deadline), Float (planned_hours, digits), Many2one (assigned user → res.users), plus Boolean (is_done) and Html (notes). Install and inspect the generated table in PostgreSQL.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 7 — Computed Fields, Constraints & Onchange
+             ============================================================== -->
+        <record id="section_07_computed_constraints" model="slide.slide">
+            <field name="name">Computed Fields, Constraints &amp; Onchange</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">70</field>
+        </record>
+
+        <record id="lesson_07_computed_constraints" model="slide.slide">
+            <field name="name">Computed Fields, Constraints &amp; Onchange</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_07_computed_constraints"/>
+            <field name="sequence">71</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. @api.depends with stored vs real-time computed fields, @api.constrains, @api.onchange and _sql_constraints — with an auto-computed total plus a validation rule.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Make the ORM work for you: values that compute themselves, rules that reject bad data, and forms that react while you type.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Computed fields: &lt;code&gt;compute='_compute_total'&lt;/code&gt; with &lt;code&gt;@api.depends('line_ids.price')&lt;/code&gt;; non-stored (real-time, not writable/searchable) vs &lt;code&gt;store=True&lt;/code&gt; (written to DB, searchable, recomputed on dependency change).&lt;/li&gt;
+    &lt;li&gt;Inverse methods (&lt;code&gt;inverse='_set_total'&lt;/code&gt;) and computed defaults; multi-record compute loops.&lt;/li&gt;
+    &lt;li&gt;Python constraints: &lt;code&gt;@api.constrains('amount')&lt;/code&gt; raising &lt;code&gt;ValidationError&lt;/code&gt;; when they run (create/write).&lt;/li&gt;
+    &lt;li&gt;SQL constraints: &lt;code&gt;_sql_constraints&lt;/code&gt; (&lt;code&gt;UNIQUE&lt;/code&gt;, &lt;code&gt;CHECK&lt;/code&gt;) — faster, DB-level, but no custom messages per context; the modern &lt;code&gt;models.Constraint&lt;/code> syntax.&lt;/li&gt;
+    &lt;li&gt;Onchange: &lt;code&gt;@api.onchange('partner_id')&lt;/code&gt; updating fields live in the form and returning warning domains; why onchange is UI-only (never rely on it for data integrity).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Extend your task model: a stored computed field &lt;code&gt;total_hours&lt;/code&gt; summing a One2many of time entries (with &lt;code&gt;@api.depends&lt;/code&gt;), a &lt;code&gt;@api.constrains&lt;/code&gt; rule rejecting negative hours, an &lt;code&gt;_sql_constraint&lt;/code&gt; making task titles unique per project, and an onchange that sets a default deadline 7 days out when a project is chosen.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 8 — ORM Methods & Recordset Operations
+             ============================================================== -->
+        <record id="section_08_orm_methods" model="slide.slide">
+            <field name="name">ORM Methods &amp; Recordset Operations</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">80</field>
+        </record>
+
+        <record id="lesson_08_orm_methods" model="slide.slide">
+            <field name="name">ORM Methods &amp; Recordset Operations</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_08_orm_methods"/>
+            <field name="sequence">81</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. search/browse/create/write/unlink, domain syntax in depth, filtered/mapped/sorted, and sudo/with_context/with_user — exercised on overdue invoices.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Everything you do in Odoo is a recordset operation. This lesson is the API reference you will actually use.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;CRUD: &lt;code&gt;create(vals)&lt;/code&gt; (single &amp; multi), &lt;code&gt;write(vals)&lt;/code&gt;, &lt;code&gt;unlink()&lt;/code&gt;; &lt;code&gt;browse(ids)&lt;/code&gt; vs &lt;code&gt;search(domain)&lt;/code&gt; (recordsets, not lists).&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;search&lt;/code&gt; options: &lt;code&gt;offset&lt;/code&gt;, &lt;code&gt;limit&lt;/code&gt;, &lt;code&gt;order&lt;/code&gt;, &lt;code&gt;count=True&lt;/code&gt;, &lt;code&gt;search_count&lt;/code&gt;; &lt;code&gt;search_read&lt;/code&gt; for dict rows.&lt;/li&gt;
+    &lt;li&gt;Domain syntax: &lt;code&gt;[('state','=','open')]&lt;/code&gt;; operators =, !=, &amp;gt;, &amp;gt;=, &amp;lt;, &amp;lt;=, like/ilike, in, not in, child_of; prefixes &lt;code&gt;'|'&lt;/code&gt; (OR) and &lt;code&gt;'!'&lt;/code&gt; (NOT) and implicit AND; common traps (OR chaining, date comparisons).&lt;/li&gt;
+    &lt;li&gt;Recordset pipelines: &lt;code&gt;filtered(lambda r: ...)&lt;/code&gt;, &lt;code&gt;filtered('state')&lt;/code&gt;, &lt;code&gt;mapped('field')&lt;/code&gt;, &lt;code&gt;sorted(key=...)&lt;/code&gt;, &lt;code&gt;+&lt;/code&gt; union, &lt;code&gt;ids&lt;/code&gt;, &lt;code&gt;ensure_one()&lt;/code&gt;, &lt;code&gt;exists()&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Environment switching: &lt;code&gt;sudo()&lt;/code&gt; (bypass rights — use with care), &lt;code&gt;with_context(key=value)&lt;/code&gt; (tracking_disable, mail_notrack, custom flags), &lt;code&gt;with_user(user)&lt;/code&gt; (act as someone else, rights still apply).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Write a script/method (run via shell or a server action) that finds unpaid &lt;code&gt;account.move&lt;/code&gt; invoices more than 30 days past invoice date, groups them by commercial partner, and returns a printable summary sorted by amount due.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 9 — Form & List Views — XML Architecture
+             ============================================================== -->
+        <record id="section_09_form_list_views" model="slide.slide">
+            <field name="name">Form &amp; List Views — XML Architecture</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">90</field>
+        </record>
+
+        <record id="lesson_09_form_list_views" model="slide.slide">
+            <field name="name">Form &amp; List Views — XML Architecture</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_09_form_list_views"/>
+            <field name="sequence">91</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. sheet/header/chatter, groups/notebooks/pages, list optional columns and decoration attributes, and buttons type=object vs type=action.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Views turn models into usable screens. Learn the form/list XML architecture properly once, and every module benefits.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;View record anatomy: &lt;code&gt;&amp;lt;record model="ir.ui.view"&amp;gt;&lt;/code&gt; with &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;model&lt;/code&gt;, &lt;code&gt;arch&lt;/code&gt; (the XML structure), plus the action and menu wiring (&lt;code&gt;ir.actions.act_window&lt;/code&gt;, &lt;code&gt;ir.ui.menu&lt;/code&gt;).&lt;/li&gt;
+    &lt;li&gt;Form layout: &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; → &lt;code&gt;&amp;lt;header&amp;gt;&lt;/code&gt; (buttons + statusbar), &lt;code&gt;&amp;lt;sheet&amp;gt;&lt;/code&gt; (&lt;code&gt;oe_button_box&lt;/code&gt;, title &lt;code&gt;h1&lt;/code&gt;, &lt;code&gt;oe_title&lt;/code&gt;), &lt;code&gt;&amp;lt;chatter/&amp;gt;&lt;/code&gt; (messages + activities, needs mail dependency).&lt;/li&gt;
+    &lt;li&gt;Organizing fields: &lt;code&gt;&amp;lt;group&amp;gt;&lt;/code&gt; and nested groups for two-column layouts, &lt;code&gt;&amp;lt;notebook&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;page&amp;gt;&lt;/code&gt; tabs, &lt;code&gt;invisible&lt;/code&gt;/&lt;code&gt;readonly&lt;/code&gt; attrs, &lt;code&gt;groups=&lt;/code&gt; for visibility by access group.&lt;/li&gt;
+    &lt;li&gt;List views: &lt;code&gt;&amp;lt;tree&amp;gt;&lt;/code&gt; (&lt;code&gt;&amp;lt;list&amp;gt;&lt;/code&gt;) columns, &lt;code&gt;optional="show/hide"&lt;/code&gt; for user-togglable columns, &lt;code&gt;decoration-info/success/danger/muted&lt;/code&gt; with expressions for row coloring, &lt;code&gt;default_order&lt;/code&gt;, &lt;code&gt;editable&lt;/code&gt; inline editing.&lt;/li&gt;
+    &lt;li&gt;Buttons: &lt;code&gt;type="object"&lt;/code&gt; calls a model method on the record; &lt;code&gt;type="action"&lt;/code&gt; triggers an &lt;code&gt;ir.actions&lt;/code&gt;; &lt;code&gt;confirm&lt;/code&gt;, &lt;code&gt;class&lt;/code&gt; (oe_highlight), &lt;code&gt;invisible&lt;/code&gt; attrs; smart buttons (stat buttons) in the button box.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build a complete form view for your task model — header with a "Mark Done" object button, sheet with title, two-column groups, a notebook (General / Time Entries / Notes pages), chatter at the bottom — plus a list view with two optional columns and a red decoration for overdue deadlines.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 10 — Search Views, Filters & Group By
+             ============================================================== -->
+        <record id="section_10_search_views" model="slide.slide">
+            <field name="name">Search Views, Filters &amp; Group By</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">100</field>
+        </record>
+
+        <record id="lesson_10_search_views" model="slide.slide">
+            <field name="name">Search Views, Filters &amp; Group By</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_10_search_views"/>
+            <field name="sequence">101</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1h. Search view architecture: fields, filters with domains, group-by options, and favorite searches — exercise: 3 custom filters + a group-by.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;A good search view makes a module feel professional. It is also mostly declarative XML.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Search view anatomy: &lt;code&gt;&amp;lt;search&amp;gt;&lt;/code&gt; with &lt;code&gt;&amp;lt;field name="..."&amp;gt;&lt;/code&gt; entries (quick search targets, with &lt;code&gt;filter_domain&lt;/code&gt; for custom matching), &lt;code&gt;&amp;lt;separator/&amp;gt;&lt;/code&gt; for UI grouping.&lt;/li&gt;
+    &lt;li&gt;Filters: &lt;code&gt;&amp;lt;filter name="..." string="..." domain="[...]"/&amp;gt;&lt;/code&gt;; combining multiple filters with OR/AND semantics; date filters with &lt;code&gt;date&lt;/code&gt; attribute and period grouping.&lt;/li&gt;
+    &lt;li&gt;Group by: &lt;code&gt;&amp;lt;filter name="groupby_..." context="{'group_by': 'field'}"/&amp;gt;&lt;/code&gt;; grouping by date fields with &lt;code&gt;date_stop&lt;/code&gt; style intervals; multiple group-by levels.&lt;/li&gt;
+    &lt;li&gt;Action integration: &lt;code&gt;search_view_id&lt;/code&gt;, context-driven defaults (&lt;code&gt;search_default_filtername&lt;/code&gt;), and the favorites users save themselves.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;For your task model add a search view with: quick search on title and assigned user; three filters — "My Tasks" (assigned to current user), "Overdue" (deadline &amp;lt; today, not done), "High Priority" (priority in high/critical); and group-bys by Assignee, Project and Month (deadline:month). Set "My Tasks" as default via search_default in the action context.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 11 — View Inheritance & Module Extension
+             ============================================================== -->
+        <record id="section_11_view_inheritance" model="slide.slide">
+            <field name="name">View Inheritance &amp; Module Extension</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">110</field>
+        </record>
+
+        <record id="lesson_11_view_inheritance" model="slide.slide">
+            <field name="name">View Inheritance &amp; Module Extension</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_11_view_inheritance"/>
+            <field name="sequence">111</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~1.5h. Extending native views with inherit_id and xpath positions, and the difference between _inherit (model extension) and _inherits (delegation inheritance). Exercise: add a custom field to the native Sale Order form.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Real projects rarely build from scratch — they extend. This lesson is the safe way to customize native Odoo.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;View inheritance: a new &lt;code&gt;ir.ui.view&lt;/code&gt; with &lt;code&gt;&amp;lt;field name="inherit_id" ref="sale.view_order_form"/&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;field name="arch"&amp;gt;&lt;/code&gt; containing &lt;code&gt;&amp;lt;xpath&amp;gt;&lt;/code&gt; nodes.&lt;/li&gt;
+    &lt;li&gt;xpath positions: &lt;code&gt;position="inside"&lt;/code&gt; (default — append into matched node), &lt;code&gt;before&lt;/code&gt; / &lt;code&gt;after&lt;/code&gt; (siblings), &lt;code&gt;replace&lt;/code&gt; (swap the node; keep it safe with minimal targets), &lt;code&gt;attributes&lt;/code&gt; (patch attrs like invisible/readonly in place).&lt;/li&gt;
+    &lt;li&gt;Writing robust xpath expressions: target by &lt;code&gt;name&lt;/code&gt; attribute or stable structure; why position-based paths break across versions; checking the final combined arch with developer mode's "view inheritance" debug.&lt;/li&gt;
+    &lt;li&gt;Model extension: &lt;code&gt;_inherit = 'sale.order'&lt;/code&gt; adds fields/methods to the existing model (same table); &lt;code&gt;_inherits = {'res.partner': 'partner_id'}&lt;/code&gt; creates a new model delegating to another (new table, copied columns conceptually) — when each is appropriate.&lt;/li&gt;
+    &lt;li&gt;Extension etiquette: never edit native XML directly; prefer attributes-position patches; keep custom modules upgrade-safe.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Create module &lt;code&gt;sale_order_custom&lt;/code&gt; that adds a &lt;code&gt;x_client_reference&lt;/code&gt; Char field to &lt;code&gt;sale.order&lt;/code&gt; via &lt;code&gt;_inherit&lt;/code&gt;, shows it in the native Sale Order form (after the Customer field) and list view (optional column) via xpath inheritance, and survives an upgrade with no other changes.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 12 — Business Methods, Workflows & Status Bars
+             ============================================================== -->
+        <record id="section_12_workflows" model="slide.slide">
+            <field name="name">Business Methods, Workflows &amp; Status Bars</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">120</field>
+        </record>
+
+        <record id="lesson_12_workflows" model="slide.slide">
+            <field name="name">Business Methods, Workflows &amp; Status Bars</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_12_workflows"/>
+            <field name="sequence">121</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. State fields and statusbar_visible, action_confirm/done/cancel method conventions, header buttons, and message_post() for the chatter — exercise: a 3-stage approval workflow.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Documents in Odoo live through states: draft → confirmed → done, or cancelled. Build that machinery yourself.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;State fields: &lt;code&gt;state = fields.Selection([...], default='draft', tracking=True)&lt;/code&gt;; &lt;code&gt;tracking=True&lt;/code&gt; logs changes to the chatter automatically.&lt;/li&gt;
+    &lt;li&gt;Status bar widget in the header: &lt;code&gt;&amp;lt;field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/&amp;gt;&lt;/code&gt;; clicking visible states to jump (with &lt;code&gt;statusbar_colors&lt;/code&gt; legacy note).&lt;/li&gt;
+    &lt;li&gt;Transition methods: the &lt;code&gt;action_confirm()&lt;/code&gt; / &lt;code&gt;action_done()&lt;/code&gt; / &lt;code&gt;action_cancel()&lt;/code&gt; naming convention; writing &lt;code&gt;{'state': 'confirmed'}&lt;/code&gt;; validating preconditions with &lt;code&gt;UserError&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Header buttons: &lt;code&gt;&amp;lt;button name="action_confirm" type="object" string="Confirm" class="oe_highlight" invisible="state != 'draft'"/&amp;gt;&lt;/code&gt;; button visibility driven by state attrs.&lt;/li&gt;
+    &lt;li&gt;Communication: &lt;code&gt;message_post(body=..., subtype_xmlid=...)&lt;/code&gt; to document transitions in the chatter; &lt;code&gt;activity_schedule()&lt;/code&gt; for follow-ups.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Give your task model a 3-stage approval flow — Draft → Approved → Done, plus Cancelled from any non-done state: statusbar with visible states, header buttons with proper invisibility, precondition checks (e.g. cannot approve without an assignee) raising UserError, and a message_post entry on every transition.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 13 — Wizards (TransientModel)
+             ============================================================== -->
+        <record id="section_13_wizards" model="slide.slide">
+            <field name="name">Wizards (TransientModel)</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">130</field>
+        </record>
+
+        <record id="lesson_13_wizards" model="slide.slide">
+            <field name="name">Wizards (TransientModel)</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_13_wizards"/>
+            <field name="sequence">131</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_intermediate'))]"/>
+            <field name="description">Level: Intermediate | Duration: ~1.5h. TransientModel lifecycle, dialog forms, context passing from the active record, and returning actions — exercise: a 'Send Quotation' wizard.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Wizards collect user input for a one-shot action without cluttering your real models.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;models.TransientModel&lt;/code&gt;: same fields/API as Model, but rows live in a temporary table and are vacuumed automatically (&lt;code&gt;_transient_max_hours&lt;/code&gt;/&lt;code&gt;_transient_max_count&lt;/code&gt;).&lt;/li&gt;
+    &lt;li&gt;Wizard structure: model file, a form view with &lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; without sheet/chatter, footer buttons (&lt;code&gt;class="btn-primary"&lt;/code&gt; for the action, &lt;code&gt;special="cancel"&lt;/code&gt; for discard), and an &lt;code&gt;ir.actions.act_window&lt;/code&gt; with &lt;code&gt;target="new"&lt;/code&gt; for the dialog.&lt;/li&gt;
+    &lt;li&gt;Context passing: &lt;code&gt;active_id&lt;/code&gt;/&lt;code&gt;active_ids&lt;/code&gt;/&lt;code&gt;active_model&lt;/code&gt; from the calling view; &lt;code&gt;default_&amp;lt;field&amp;gt;&lt;/code&gt; keys prefilling wizard fields; reading them safely with &lt;code&gt;self.env.context&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Wizard action methods: validating input, doing the work on real records (&lt;code&gt;self.env[model].browse(ids)&lt;/code&gt;), then &lt;code&gt;return {'type': 'ir.actions.act_window_close'}&lt;/code&gt; — or return a window action to open what was created.&lt;/li&gt;
+    &lt;li&gt;Multi-record wizards and report-launching wizards; common mistakes (storing computed defaults at class level, forgetting sudo for privileged operations).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build a "Send Quotation" wizard: opened from sale orders (active_ids), fields for a custom subject and message, a "Send by Email" button that posts the message to each order's chatter (and marks them sent), and a cancel button. Handle both single and multiple selected orders.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 14 — Security — Groups, Access Rights & Record Rules
+             ============================================================== -->
+        <record id="section_14_security" model="slide.slide">
+            <field name="name">Security — Groups, Access Rights &amp; Record Rules</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">140</field>
+        </record>
+
+        <record id="lesson_14_security" model="slide.slide">
+            <field name="name">Security — Groups, Access Rights &amp; Record Rules</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_14_security"/>
+            <field name="sequence">141</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~1.5h. ir.model.access.csv, res.groups, ir.rule record rules, and groups= in views — exercise: managers see everything, users see only their own records.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Security in Odoo is four layers. Miss one and your data is either open to everyone or hidden from everyone.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Access rights (ACL): &lt;code&gt;security/ir.model.access.csv&lt;/code&gt; columns (id, name, model_id:id, group_id:id, perm_read/write/create/unlink); the wildcard group for public/portal cases; listing models in the manifest's data list in dependency order.&lt;/li&gt;
+    &lt;li&gt;Groups: &lt;code&gt;res.groups&lt;/code> records in a &lt;code&gt;security/*.xml&lt;/code&gt; file; categories (&lt;code&gt;ir.module.category&lt;/code&gt;); implied groups (user → manager); putting users in groups via the settings form.&lt;/li&gt;
+    &lt;li&gt;Record rules (&lt;code&gt;ir.rule&lt;/code&gt;): per-group domain filters applied invisibly to every search/read/write; global vs group rules; the manager-sees-all / user-sees-own pattern; multi-company rules as the reference example.&lt;/li&gt;
+    &lt;li&gt;Field- and view-level security: &lt;code&gt;groups_id&lt;/code&gt; on fields and &lt;code&gt;groups="..."&lt;/code&gt; on view elements; &lt;code&gt;groups="base.group_no_one"&lt;/code&gt; for developer-mode-only fields.&lt;/li&gt;
+    &lt;li&gt;Debugging: effective permissions with &lt;code&gt;--log-level=debug_rpc&lt;/code&gt; habits, "Access Denied" tracebacks, checking rules in developer mode.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;For your task module define "Task User" and "Task Manager" groups with proper ACLs; add a record rule so users see only tasks where they are the assignee (or creator), while managers see all; hide a "Cost" field from users via &lt;code&gt;groups=&lt;/code&gt; in the form view. Verify by logging in as each.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 15 — QWeb Reports — PDF & Print Layouts
+             ============================================================== -->
+        <record id="section_15_qweb_reports" model="slide.slide">
+            <field name="name">QWeb Reports — PDF &amp; Print Layouts</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">150</field>
+        </record>
+
+        <record id="lesson_15_qweb_reports" model="slide.slide">
+            <field name="name">QWeb Reports — PDF &amp; Print Layouts</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_15_qweb_reports"/>
+            <field name="sequence">151</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~1.5h. ir.actions.report, QWeb directives (t-if/t-foreach/t-field/t-call), headers/footers/logo, and print SCSS — exercise: a branded PDF.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Every PDF Odoo prints is a QWeb template rendered to HTML and converted by wkhtmltopdf. Learn to design your own.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Report wiring: &lt;code&gt;&amp;lt;record model="ir.actions.report"&amp;gt;&lt;/code&gt; with &lt;code&gt;model&lt;/code&gt;, &lt;code&gt;report_type="qweb-pdf"&lt;/code&gt;, &lt;code&gt;report_name&lt;/code&gt; (dotted template name), &lt;code&gt;report_file&lt;/code&gt;, &lt;code&gt;print_report_name&lt;/code&gt;; the Print menu appears automatically.&lt;/li&gt;
+    &lt;li&gt;QWeb template: &lt;code&gt;&amp;lt;template id="report_task_document"&amp;gt;&lt;/code&gt; and the wrapping &lt;code&gt;t-call="web.html_container"&lt;/code&gt; + &lt;code&gt;t-call="web.external_layout"&lt;/code&gt;; the &lt;code&gt;t-foreach="docs"&lt;/code&gt; loop and &lt;code&gt;t-esc/t-field/t-raw&lt;/code&gt; output directives.&lt;/li&gt;
+    &lt;li&gt;Logic in templates: &lt;code&gt;t-if&lt;/code&gt;, &lt;code&gt;t-elif/t-else&lt;/code&gt;, &lt;code&gt;t-set&lt;/code&gt; variables, &lt;code&gt;t-call&lt;/code&gt; sub-templates, &lt;code&gt;t-attf-class&lt;/code&gt; dynamic attributes; calling model methods with &lt;code&gt;t-field&lt;/code&gt; widget options (date, monetary, contact).&lt;/li&gt;
+    &lt;li&gt;Paper &amp;amp; layout: &lt;code&gt;report.paperformat&lt;/code&gt; records (A4/Letter, margins, header spacing), company header/footer/logo via the external layout and &lt;code&gt;web.layout&lt;/code&gt; inheritance, &lt;code&gt;webkit header&lt;/code&gt; per-report override.&lt;/li&gt;
+    &lt;li&gt;Print styling: report assets in the manifest (&lt;code&gt;web.report_assets_common&lt;/code&gt;) with dedicated SCSS; wkhtmltopdf limitations (no flexbox gaps, use tables and Bootstrap grid carefully).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Create a branded "Task Summary" PDF: company logo and header via external_layout, task title/state/deadline/assignee table, a time-entries section with totals, a footer with page numbers and your company tagline, styled with a small print SCSS file using the ProspireNext purple (#6D28D9).&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 16 — Scheduled Actions & Automated Rules
+             ============================================================== -->
+        <record id="section_16_scheduled_actions" model="slide.slide">
+            <field name="name">Scheduled Actions &amp; Automated Rules</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">160</field>
+        </record>
+
+        <record id="lesson_16_scheduled_actions" model="slide.slide">
+            <field name="name">Scheduled Actions &amp; Automated Rules</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_16_scheduled_actions"/>
+            <field name="sequence">161</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~1.5h. ir.cron scheduled actions, base.automation rules, server actions and email templates — exercise: a reminder email 3 days before the deadline.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Let the system work while nobody is logged in: cron jobs, automated rules and templated emails.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Scheduled actions (&lt;code&gt;ir.cron&lt;/code&gt;): XML record with &lt;code&gt;model_id&lt;/code&gt;, &lt;code&gt;code&lt;/code&gt; or &lt;code&gt;function&lt;/code&gt; call, &lt;code&gt;interval_number/interval_type&lt;/code&gt;, &lt;code&gt;nextcall&lt;/code&gt;, &lt;code&gt;numbercall&lt;/code&gt;, &lt;code&gt;doall&lt;/code&gt;; user the job runs as; avoiding overlap and long transactions.&lt;/li&gt;
+    &lt;li&gt;Automated rules (&lt;code&gt;base.automation&lt;/code&gt;, Automation app): triggers on create/write/delete or on time conditions (&lt;code&gt;delay_after_field&lt;/code&gt; pattern: "3 days before deadline"); filter domains; executed server actions.&lt;/li&gt;
+    &lt;li&gt;Server actions (&lt;code&gt;ir.actions.server&lt;/code&gt;): action types (Execute Python Code, Create/Update Record, Send Email, Add Followers); evaluation context (&lt;code&gt;records&lt;/code&gt;, &lt;code&gt;env&lt;/code&gt;, &lt;code&gt;log()&lt;/code&gt;); reusable named actions callable from buttons/automations.&lt;/li&gt;
+    &lt;li&gt;Email templates (&lt;code&gt;mail.template&lt;/code&gt;): &lt;code&gt;subject&lt;/code&gt;, &lt;code&gt;email_to&lt;/code&gt; with placeholders, QWeb/HTML body with &lt;code&gt;${object.field}&lt;/code&gt; placeholders and &lt;code&gt;t-field&lt;/code&gt; rendering; sending via &lt;code&gt;message_post_with_template&lt;/code&gt; or the automation.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Build a deadline reminder: an automated rule on tasks that triggers 3 days before the deadline for unfinished tasks, sending a branded email template to the assignee (with task name, deadline and a link); log every send in the chatter; test by backdating a task's deadline.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 17 — External API & JSON-RPC Deep Dive
+             ============================================================== -->
+        <record id="section_17_external_api" model="slide.slide">
+            <field name="name">External API &amp; JSON-RPC Deep Dive</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">170</field>
+        </record>
+
+        <record id="lesson_17_external_api" model="slide.slide">
+            <field name="name">External API &amp; JSON-RPC Deep Dive</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_17_external_api"/>
+            <field name="sequence">171</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">1.5</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~1.5h. /web/dataset/call_kw internals, xmlrpc.client clients, custom HTTP controllers, and a webhook receiver — exercise: GET /api/orders endpoint.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Odoo is not just an app — it is a platform. Open it up safely to other systems.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The internal JSON-RPC endpoints: &lt;code&gt;/web/dataset/call_kw&lt;/code&gt; (model + method + args/kwargs), &lt;code&gt;/web/dataset/search_read&lt;/code&gt;, &lt;code&gt;/web/session/authenticate&lt;/code&gt;, &lt;code&gt;/jsonrpc&lt;/code&gt; envelope format; what the web client itself uses.&lt;/li&gt;
+    &lt;li&gt;External clients: &lt;code&gt;xmlrpc.client&lt;/code&gt; (common/models endpoints), Python &lt;code&gt;requests&lt;/code&gt; against JSON-RPC, official API keys per user (Settings → Users → API keys) for scripted access.&lt;/li&gt;
+    &lt;li&gt;Custom HTTP controllers: &lt;code&gt;from odoo import http&lt;/code&gt;, &lt;code&gt;@http.route('/api/...', type='json'|'http', auth='public'|'user'|'none', methods=[...], csrf=False)&lt;/code&gt;; &lt;code&gt;request.env['model']&lt;/code&gt;, returning JSON with &lt;code&gt;request.make_response&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;Securing public routes: token/API-key checks, rate limiting considerations, never leak tracebacks, CORS for browser clients.&lt;/li&gt;
+    &lt;li&gt;Webhook receiver pattern: an &lt;code&gt;auth='none'&lt;/code&gt; POST route that validates a shared secret and creates/updates records; queuing heavy work via &lt;code&gt;env['ir.cron']._trigger()&lt;/code&gt; or immediate processing for light payloads.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Create a controller module exposing &lt;code&gt;GET /api/orders?partner_email=...&lt;/code&gt; (JSON list of that customer's confirmed sale orders with lines, secured by an API key header) and &lt;code&gt;POST /api/webhook/payment&lt;/code&gt; that validates a secret and marks the matching order as paid. Document both with curl examples.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 18 — On-Prem & Cloud Deployment
+             ============================================================== -->
+        <record id="section_18_deployment" model="slide.slide">
+            <field name="name">On-Prem &amp; Cloud Deployment</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">180</field>
+        </record>
+
+        <record id="lesson_18_deployment" model="slide.slide">
+            <field name="name">On-Prem &amp; Cloud Deployment</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_18_deployment"/>
+            <field name="sequence">181</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">2.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~2h. Ubuntu 22.04 + PostgreSQL + Nginx + systemd, reverse proxy and SSL with Certbot, Hetzner/DigitalOcean/AWS choices, production odoo.conf, and pg_dump backups. Exercise: deploy your module to a VPS with Nginx + SSL.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;Development is done when it runs in production. Here is the full production stack, end to end.&lt;/p&gt;
+  &lt;h4&gt;Key topics&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Server baseline: Ubuntu 22.04 LTS setup (users, SSH hardening, ufw), installing PostgreSQL and creating the Odoo role/database.&lt;/li&gt;
+    &lt;li&gt;Odoo as a systemd service: unit file for &lt;code&gt;odoo-bin -c /etc/odoo.conf&lt;/code&gt;, restart policies, journald logs, running under a dedicated user.&lt;/li&gt;
+    &lt;li&gt;Nginx reverse proxy: proxy_pass to Odoo's port, &lt;code&gt;proxy_set_header&lt;/code&gt; directives for X-Forwarded-* and Host, client_max_body_size, serving static files directly, gzip.&lt;/li&gt;
+    &lt;li&gt;SSL with Certbot: &lt;code&gt;certbot --nginx&lt;/code&gt;, auto-renewal timers, HTTP→HTTPS redirect, HSTS basics.&lt;/li&gt;
+    &lt;li&gt;Cloud providers compared: Hetzner (price/performance), DigitalOcean (simplicity), AWS (scale, complexity); sizing for small/medium installs.&lt;/li&gt;
+    &lt;li&gt;Production &lt;code&gt;odoo.conf&lt;/code&gt;: &lt;code&gt;workers&lt;/code&gt; (≈ CPU×2), &lt;code&gt;max_cron_threads&lt;/code&gt;, &lt;code&gt;limit_memory_soft/hard&lt;/code&gt;, &lt;code&gt;limit_time_cpu/real&lt;/code&gt;, &lt;code&gt;dbfilter&lt;/code&gt;, &lt;code&gt;proxy_mode = True&lt;/code&gt;, logging.&lt;/li&gt;
+    &lt;li&gt;Backups: &lt;code&gt;pg_dump&lt;/code&gt; (custom format), filestore/ir_attachment sync, retention policy, restore drills; off-server copies (object storage or another host).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Exercise / deliverable&lt;/h4&gt;
+  &lt;p&gt;Deploy your task module to a VPS: Ubuntu 22.04, PostgreSQL, Odoo behind Nginx with a Certbot SSL certificate on a real domain, systemd auto-start, production-tuned odoo.conf, and a nightly pg_dump + filestore backup script with 7-day retention. Verify HTTPS access and a test restore.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+        <!-- ==============================================================
+             SECTION 19 — Capstone — Full Custom Module Build
+             ============================================================== -->
+        <record id="section_19_capstone" model="slide.slide">
+            <field name="name">Capstone — Full Custom Module Build</field>
+            <field name="is_category" eval="True"/>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="sequence">190</field>
+        </record>
+
+        <record id="lesson_19_capstone" model="slide.slide">
+            <field name="name">Capstone — Full Custom Module Build</field>
+            <field name="channel_id" ref="prospire_elearning.channel_sdtekh_odoo_technical"/>
+            <field name="category_id" ref="prospire_elearning.section_19_capstone"/>
+            <field name="sequence">191</field>
+            <field name="slide_category">article</field>
+            <field name="is_published" eval="True"/>
+            <field name="completion_time">6.0</field>
+            <field name="tag_ids" eval="[(4, ref('prospire_elearning.slide_tag_level_advanced'))]"/>
+            <field name="description">Level: Advanced | Duration: ~6h. Build a Service Request Management module end-to-end: 8+ fields, form/list/search views, 3-stage workflow, security rules, QWeb PDF, auto-email, FastAPI endpoint, and a staging deployment.</field>
+            <field name="html_content">&lt;div class="prospire-lesson"&gt;
+  &lt;p&gt;The capstone integrates every section of this course into one deliverable: a production-shaped custom module for managing service requests.&lt;/p&gt;
+  &lt;h4&gt;Requirements&lt;/h4&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Model:&lt;/strong&gt; &lt;code&gt;service.request&lt;/code&gt; with 8+ fields across types — Char (reference, title), Text (description), Selection (category: it/support/maintenance; priority), Date (deadline), Float (estimated/actual hours), Many2one (customer → res.partner, assigned engineer → res.users), Many2many (tags), Boolean (billable), plus a stored computed field and a constraint from Section 7.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Views:&lt;/strong&gt; form with header buttons, statusbar, groups, notebook pages and chatter; list with optional columns and decorations; search view with 3+ filters and group-bys (Sections 9–10).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Workflow:&lt;/strong&gt; 3-stage lifecycle (New → In Progress → Done) with Cancel, precondition validation and message_post logging (Section 12).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Security:&lt;/strong&gt; user/manager groups, ACLs, and a record rule limiting users to their own requests (Section 14).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Reporting:&lt;/strong&gt; branded QWeb PDF summary of a request (Section 15).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Automation:&lt;/strong&gt; reminder email 3 days before the deadline, and a weekly digest cron to the manager (Section 16).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; FastAPI endpoint &lt;code&gt;POST /service-requests&lt;/code&gt; creating a request in Odoo over RPC (Section 3); plus a native &lt;code&gt;GET /api/service-requests&lt;/code&gt; controller (Section 17).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Deployment:&lt;/strong&gt; install on a staging VPS behind Nginx + SSL with backups configured (Section 18).&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4&gt;Deliverable&lt;/h4&gt;
+  &lt;p&gt;A module repository with README (install, configure, API docs), clean commit history, the module running on a public staging URL, and a short demo video or screenshots of each requirement working.&lt;/p&gt;
+&lt;/div&gt;</field>
+        </record>
+
+    </data>
+</odoo>

@@ -28,13 +28,13 @@ PGPASSWORD="${DB_PASSWORD:-}" psql \
     -c "UPDATE ir_model_data SET module='prospire_login' WHERE module='raptron_admin';" \
     || echo "Module rename migration skipped (fresh database or already migrated)."
 
-# ALWAYS ensure prospire_login is installed and up-to-date on every startup
+# ALWAYS ensure prospire_login and prospire_elearning are installed and up-to-date on every startup
 # --init installs if missing, --update applies changes if already installed
-echo "Installing / Updating prospire_login module..."
+echo "Installing / Updating prospire_login, prospire_elearning modules..."
 python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
     -d "${DB_NAME:-prospire_hq}" \
-    --init=prospire_login \
-    --update=prospire_login \
+    --init=prospire_login,prospire_elearning \
+    --update=prospire_login,prospire_elearning \
     --stop-after-init
 
 # Enforce correct base URL and website domain settings

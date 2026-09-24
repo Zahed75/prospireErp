@@ -1,0 +1,86 @@
+// Prospire eLearning — ProspireNext brand look for /slides pages only.
+// Every rule is scoped under .o_wslides (or body:has(.o_wslides) for the
+// navbar) so the rest of the site and the backend are untouched.
+
+$prospire-primary: #6D28D9;
+$prospire-primary-dark: #5B21B6;
+$prospire-primary-darker: #4C1D95;
+
+.o_wslides {
+    // Links
+    a {
+        color: $prospire-primary;
+
+        &:hover,
+        &:focus {
+            color: $prospire-primary-darker;
+        }
+    }
+
+    // Buttons
+    .btn-primary {
+        background-color: $prospire-primary;
+        border-color: $prospire-primary;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $prospire-primary-dark;
+            border-color: $prospire-primary-dark;
+        }
+    }
+
+    .btn-outline-primary {
+        color: $prospire-primary;
+        border-color: $prospire-primary;
+
+        &:hover,
+        &:focus {
+            color: #FFFFFF;
+            background-color: $prospire-primary;
+            border-color: $prospire-primary;
+        }
+    }
+
+    .text-primary {
+        color: $prospire-primary !important;
+    }
+
+    .bg-primary {
+        background-color: $prospire-primary !important;
+    }
+
+    // Rounded cards (course cards, lesson cards, sidebar cards)
+    .card,
+    .o_wslides_course_card,
+    .o_wslides_slide_card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    // Rounded search / filter inputs on the courses page
+    .form-control,
+    .form-select {
+        border-radius: 8px;
+    }
+
+    // Progress bars pick up the brand color
+    .progress-bar {
+        background-color: $prospire-primary;
+    }
+
+    // Active nav pills / tabs inside eLearning
+    .nav-pills .nav-link.active,
+    .nav-tabs .nav-link.active {
+        background-color: $prospire-primary;
+        border-color: $prospire-primary;
+        color: #FFFFFF;
+    }
+}
+
+// Navbar link hover on eLearning pages only
+body:has(.o_wslides) {
+    header .nav-link:hover {
+        color: $prospire-primary;
+    }
+}
