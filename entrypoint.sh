@@ -83,6 +83,30 @@ except Exception as e:
     print(f'[entrypoint] URL enforcement warning: {e}')
 " || echo "URL enforcement skipped"
 
+# Sync eLearning course content on every startup (idempotent). The module's
+# post_init_hook only runs on install, so the course setup is re-applied here
+# to survive module updates and manual uninstalls.
+echo "Syncing eLearning course content..."
+python3 -c "
+import os, odoo
+from odoo.modules.registry import Registry
+db = os.environ.get('DB_NAME', 'prospire_hq')
+try:
+    odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
+    registry = Registry(db)
+    with registry.cursor() as cr:
+        env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
+        if 'slide.channel' in env:
+            from odoo.addons.prospire_elearning import post_init_hook
+            post_init_hook(env)
+            env.cr.commit()
+            print('[entrypoint] eLearning course sync completed')
+        else:
+            print('[entrypoint] eLearning sync skipped: website_slides not installed')
+except Exception as e:
+    print(f'[entrypoint] eLearning sync warning: {e}')
+" || echo "eLearning sync skipped"
+
 # Clear asset cache to force fresh CSS/JS bundles
 echo "Clearing asset cache..."
 rm -rf /var/lib/odoo/assets-*

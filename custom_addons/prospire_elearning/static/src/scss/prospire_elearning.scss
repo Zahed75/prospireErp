@@ -76,6 +76,39 @@ $prospire-primary-darker: #4C1D95;
         border-color: $prospire-primary;
         color: #FFFFFF;
     }
+
+    // Course header sits on the dark cover image: keep text readable and
+    // kill any residual theme purple behind it.
+    .o_record_cover_container {
+        background-color: #0D0B1E;
+
+        .o_record_cover_image {
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    .o_wslides_course_header {
+        .breadcrumb,
+        .breadcrumb-item,
+        .breadcrumb-item a {
+            color: rgba(245, 243, 250, 0.85);
+        }
+
+        .breadcrumb-item.active {
+            color: #FFFFFF;
+        }
+    }
+
+    // Instructor card on the course page
+    .prospire-course-instructor {
+        .prospire-instructor-card {
+            border: 1px solid rgba(109, 40, 217, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+            background: rgba(109, 40, 217, 0.04);
+        }
+    }
 }
 
 // Navbar link hover on eLearning pages only

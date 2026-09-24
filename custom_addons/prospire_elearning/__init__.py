@@ -21,6 +21,8 @@ HANDBOOK_SLIDE_SUMMARY = (
     'curriculum overview, setup checklists and reference material for the full track.'
 )
 HANDBOOK_PDF_RELPATH = os.path.join('static', 'src', 'pdf', 'OdooTechnical.pdf')
+COVER_IMAGE_RELPATH = os.path.join('static', 'src', 'img', 'course_cover.png')
+TRAINER_LOGIN = 'zahed.hasan.rabbi@gmail.com'
 
 # Every name the curriculum owns; anything else under the target channel is
 # sample/demo content and gets archived (never unlinked).
@@ -104,6 +106,34 @@ def _resolve_target_channel(Channel, env):
         channel.name, channel.id,
     )
     return channel
+
+
+def _apply_channel_branding(env, channel):
+    """Refresh course cover image, trainer and description on every sync."""
+    values = {
+        'description_short': CHANNEL_DESCRIPTION_SHORT,
+        'description': CHANNEL_DESCRIPTION,
+        'description_html': CHANNEL_DESCRIPTION_HTML,
+    }
+    cover_path = os.path.join(os.path.dirname(__file__), COVER_IMAGE_RELPATH)
+    try:
+        with open(cover_path, 'rb') as cover_file:
+            values['image_1920'] = base64.b64encode(cover_file.read())
+    except Exception:
+        _logger.warning(
+            'prospire_elearning: course cover missing or unreadable at %s',
+            cover_path, exc_info=True,
+        )
+    trainer = env['res.users'].sudo().search(
+        [('login', '=', TRAINER_LOGIN)], limit=1,
+    )
+    if trainer:
+        values['user_id'] = trainer.id
+    channel.write(values)
+    _logger.info(
+        'prospire_elearning: channel %r branding refreshed (cover=%s, trainer=%s)',
+        channel.name, 'image_1920' in values, trainer.login if trainer else 'not found',
+    )
 
 
 def _archive_legacy_channel(env, Channel, Slide, target):
@@ -241,6 +271,7 @@ def _setup_course(env):
         _logger.warning('prospire_elearning: no target channel available, aborting')
         return
 
+    _apply_channel_branding(env, channel)
     _archive_legacy_channel(env, Channel, Slide, channel)
 
     existing = _archive_sample_slides(Slide, channel)
