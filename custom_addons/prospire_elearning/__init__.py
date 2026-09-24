@@ -23,6 +23,7 @@ HANDBOOK_SLIDE_NAME = 'Technical Orientation — Course Handbook'
 COUPON_PARAM = 'prospire.course.coupon'
 COUPON_CODE = 'SD@2026'
 COMPANY_PHONE = '+880 16118 14937'
+COURSE_DOMAIN = 'edu.prospirenext.com'
 HANDBOOK_SLIDE_SUMMARY = (
     'Level: Beginner | Duration: ~0.5h. Download the course handbook (PDF): '
     'curriculum overview, setup checklists and reference material for the full track.'
@@ -73,7 +74,7 @@ def post_init_hook(env):
 
 
 def _setup_website_branding(env):
-    """Branding setup: website name, logo and company phone.
+    """Branding setup: website name, logo, phone and course domain.
 
     The logo is ALWAYS overwritten with the company logo (the current
     placeholder is the stock "Your Logo"). The company email is left alone:
@@ -84,6 +85,8 @@ def _setup_website_branding(env):
         values = {}
         if not website.name:
             values['name'] = website.company_id.name or 'ProspireNext'
+        if website.domain != COURSE_DOMAIN:
+            values['domain'] = COURSE_DOMAIN
         if website.company_id.logo and website.logo != website.company_id.logo:
             values['logo'] = website.company_id.logo
         company = website.company_id

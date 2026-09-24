@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Course page: coupon unlock card + instructor card in the sidebar -->
+    <!-- Course page: coupon unlock card in the sidebar -->
     <template id="course_sidebar_prospire" name="Prospire: course sidebar extras"
               inherit_id="website_slides.course_main">
         <xpath expr="//t[@t-call='website_slides.course_sidebar']" position="after">
@@ -58,18 +58,6 @@
                 </script>
             </div>
 
-            <!-- Instructor card: always visible -->
-            <div class="prospire-instructor-side">
-                <div class="prospire-instructor-avatar">ZH</div>
-                <div class="prospire-instructor-body">
-                    <div class="prospire-instructor-name">Zahed Hasan — Odoo Technical Trainer</div>
-                    <div class="prospire-instructor-bio">Engineering Manager &amp; ERP architect,
-                        5+ years Odoo v17–19, Fair Group Odoo 19 implementation lead.</div>
-                    <a class="prospire-instructor-link" href="https://thezhasan.com"
-                       target="_blank" rel="noopener">thezhasan.com</a>
-                </div>
-            </div>
-
         </xpath>
     </template>
 
@@ -79,7 +67,7 @@
         <xpath expr="//footer[@id='bottom']" position="inside">
             <div class="prospire-footer-contact">
                 ProspireNext — Ventura Iconia, Level 3, House 37, Road 11, Block H,
-                Banani C/A, Dhaka, Bangladesh · consult@syscomatic.com · +880 16118 14937
+                Banani C/A, Dhaka, Bangladesh · +880 16118 14937
             </div>
         </xpath>
     </template>
