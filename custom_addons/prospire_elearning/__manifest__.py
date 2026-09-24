@@ -6,7 +6,7 @@
     'author': 'ProspireNext',
     'website': 'https://prospirenext.com',
     'license': 'LGPL-3',
-    'depends': ['website_slides', 'website'],
+    'depends': ['website_slides', 'website', 'portal'],
     'data': [
         'views/course_templates.xml',
     ],

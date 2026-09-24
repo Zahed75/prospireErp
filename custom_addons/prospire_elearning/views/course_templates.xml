@@ -85,10 +85,10 @@
     </template>
 
     <!-- Website header: send learners back to /slides after login -->
-    <template id="prospire_navbar_sign_in" inherit_id="website.navbar_sign_in"
+    <template id="prospire_user_sign_in" inherit_id="portal.user_sign_in"
               name="Prospire: redirect sign-in to /slides">
-        <xpath expr="//a[@href='/web/login']" position="attributes">
-            <attribute name="href">/web/login?redirect=/slides</attribute>
+        <xpath expr="//a" position="attributes">
+            <attribute name="t-attf-href">/web/login?redirect=/slides</attribute>
         </xpath>
     </template>
 
