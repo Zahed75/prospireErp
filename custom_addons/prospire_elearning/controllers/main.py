@@ -5,6 +5,7 @@ from odoo import http
 from odoo.http import request
 
 from odoo.addons.web.controllers.home import Home
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 
 _logger = logging.getLogger(__name__)
 
@@ -22,6 +23,20 @@ class Home(Home):
         if not request.env.user._is_internal():
             return request.redirect('/slides')
         return super().login_successful_external_user(**kwargs)
+
+
+class AuthSignupHome(AuthSignupHome):
+    """Force newly-signed-up learners to land on /slides."""
+
+    @http.route()
+    def web_auth_signup(self, *args, **kw):
+        # Make sure the signup form always carries a redirect back to the
+        # course catalog. This covers direct /web/signup visits and any
+        # signup link that does not already include ?redirect=/slides.
+        if not kw.get('redirect') and not request.params.get('redirect'):
+            kw['redirect'] = '/slides'
+            request.params['redirect'] = '/slides'
+        return super().web_auth_signup(*args, **kw)
 
 
 class ProspireSlidesController(http.Controller):
