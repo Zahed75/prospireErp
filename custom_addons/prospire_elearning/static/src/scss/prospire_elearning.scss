@@ -109,6 +109,105 @@ $prospire-primary-darker: #4C1D95;
             background: rgba(109, 40, 217, 0.04);
         }
     }
+
+    // Responsive hero: the cover image must never overflow its column
+    .o_wslides_course_pict {
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 767px) {
+        .o_wslides_course_pict {
+            max-height: 220px;
+        }
+
+        .o_wslides_course_header {
+            padding-top: 0.5rem;
+        }
+    }
+
+    // Coupon unlock card (invite-only courses)
+    .prospire-coupon-card {
+        border: 1px solid rgba(109, 40, 217, 0.35);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+        background: linear-gradient(160deg, rgba(109, 40, 217, 0.08), rgba(76, 29, 149, 0.03));
+
+        .prospire-coupon-title {
+            color: $prospire-primary-darker;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .prospire-coupon-text {
+            font-size: 0.9rem;
+            color: rgba(13, 11, 30, 0.75);
+            margin-bottom: 12px;
+        }
+
+        #prospire_coupon_input {
+            margin-bottom: 10px;
+        }
+
+        .prospire-coupon-error {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #B91C1C;
+        }
+    }
+
+    // Instructor sidebar card
+    .prospire-instructor-side {
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(109, 40, 217, 0.25);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 24px;
+        background: rgba(109, 40, 217, 0.04);
+
+        .prospire-instructor-avatar {
+            flex: 0 0 auto;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 55%, #4C1D95 100%);
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+        }
+
+        .prospire-instructor-name {
+            font-weight: 700;
+            color: $prospire-primary-darker;
+        }
+
+        .prospire-instructor-bio {
+            font-size: 0.85rem;
+            color: rgba(13, 11, 30, 0.7);
+            margin: 2px 0;
+        }
+
+        .prospire-instructor-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// Footer contact bar: deliberately NOT scoped to .o_wslides — it is part
+// of the site-wide footer.
+.prospire-footer-contact {
+    background: #0D0B1E;
+    color: rgba(245, 243, 250, 0.85);
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 12px 16px;
 }
 
 // Navbar link hover on eLearning pages only

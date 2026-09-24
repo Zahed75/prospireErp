@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Course page: coupon unlock card + instructor card in the sidebar -->
+    <template id="course_sidebar_prospire" name="Prospire: course sidebar extras"
+              inherit_id="website_slides.course_main">
+        <xpath expr="//t[@t-call='website_slides.course_sidebar']" position="after">
+
+            <!-- Coupon unlock card: only for non-members of an invite-only course -->
+            <div t-if="not channel.is_member and channel.enroll == 'invite'"
+                 class="prospire-coupon-card">
+                <h5 class="prospire-coupon-title">Unlock full course</h5>
+                <p class="prospire-coupon-text">
+                    The first sections are a free preview — no coupon needed.
+                    Have a coupon? Enter it below to enroll instantly.
+                </p>
+                <input type="text" id="prospire_coupon_input" class="form-control"
+                       placeholder="Coupon code" autocomplete="off"/>
+                <button type="button" id="prospire_coupon_apply"
+                        class="btn btn-primary w-100"
+                        t-att-data-channel-id="channel.id">Apply</button>
+                <div id="prospire_coupon_error" class="prospire-coupon-error"
+                     style="display: none;"></div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var btn = document.getElementById('prospire_coupon_apply');
+                        if (!btn) { return; }
+                        btn.addEventListener('click', function () {
+                            var input = document.getElementById('prospire_coupon_input');
+                            var errBox = document.getElementById('prospire_coupon_error');
+                            errBox.style.display = 'none';
+                            fetch('/slides/coupon_join', {
+                                method: 'POST',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({
+                                    jsonrpc: '2.0',
+                                    method: 'call',
+                                    params: {
+                                        channel_id: parseInt(btn.getAttribute('data-channel-id'), 10),
+                                        coupon: input.value
+                                    }
+                                })
+                            }).then(function (response) { return response.json(); })
+                              .then(function (resp) {
+                                  var result = resp.result || {};
+                                  if (result.success) {
+                                      location.reload();
+                                  } else {
+                                      errBox.textContent = result.error || 'Invalid coupon code';
+                                      errBox.style.display = 'block';
+                                  }
+                              }).catch(function () {
+                                  errBox.textContent = 'Something went wrong, please try again.';
+                                  errBox.style.display = 'block';
+                              });
+                        });
+                    });
+                </script>
+            </div>
+
+            <!-- Instructor card: always visible -->
+            <div class="prospire-instructor-side">
+                <div class="prospire-instructor-avatar">ZH</div>
+                <div class="prospire-instructor-body">
+                    <div class="prospire-instructor-name">Zahed Hasan — Odoo Technical Trainer</div>
+                    <div class="prospire-instructor-bio">Engineering Manager &amp; ERP architect,
+                        5+ years Odoo v17–19, Fair Group Odoo 19 implementation lead.</div>
+                    <a class="prospire-instructor-link" href="https://thezhasan.com"
+                       target="_blank" rel="noopener">thezhasan.com</a>
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+
+    <!-- Site-wide footer contact bar -->
+    <template id="layout_footer_contact" name="Prospire: footer contact bar"
+              inherit_id="website.layout">
+        <xpath expr="//footer[@id='bottom']" position="inside">
+            <div class="prospire-footer-contact">
+                ProspireNext — Ventura Iconia, Level 3, House 37, Road 11, Block H,
+                Banani C/A, Dhaka, Bangladesh · consult@syscomatic.com · +880 16118 14937
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Website header: send learners back to /slides after login -->
+    <template id="prospire_navbar_sign_in" inherit_id="website.navbar_sign_in"
+              name="Prospire: redirect sign-in to /slides">
+        <xpath expr="//a[@href='/web/login']" position="attributes">
+            <attribute name="href">/web/login?redirect=/slides</attribute>
+        </xpath>
+    </template>
+
+</odoo>

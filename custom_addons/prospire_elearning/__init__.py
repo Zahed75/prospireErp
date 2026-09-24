@@ -11,12 +11,18 @@ from .course_content import (
     CURRICULUM,
 )
 
+from . import controllers  # noqa: F401
+from . import models  # noqa: F401
+
 _logger = logging.getLogger(__name__)
 
 TARGET_CHANNEL_NAME = 'Odoo Technical Training SDTek'
 LEGACY_CHANNEL_NAME = 'SDTEKH — Odoo Technical Training'
 HANDBOOK_SECTION_NAME = 'Course Orientation'
 HANDBOOK_SLIDE_NAME = 'Technical Orientation — Course Handbook'
+COUPON_PARAM = 'prospire.course.coupon'
+COUPON_CODE = 'SD@2026'
+COMPANY_PHONE = '+880 16118 14937'
 HANDBOOK_SLIDE_SUMMARY = (
     'Level: Beginner | Duration: ~0.5h. Download the course handbook (PDF): '
     'curriculum overview, setup checklists and reference material for the full track.'
@@ -33,6 +39,15 @@ for _section in CURRICULUM:
     for _lesson in _section['lessons']:
         CURRICULUM_NAMES.add(_lesson['name'])
 
+# Sections whose lessons are free preview (accessible without joining):
+# the orientation plus the first two curriculum sections. Applied only on
+# the creation path — existing slides are never touched.
+PREVIEW_SECTION_NAMES = {
+    HANDBOOK_SECTION_NAME,
+    CURRICULUM[0]['name'],
+    CURRICULUM[1]['name'],
+}
+
 
 def post_init_hook(env):
     try:
@@ -47,20 +62,37 @@ def post_init_hook(env):
         _logger.exception(
             'prospire_elearning: post-init course setup skipped due to an error'
         )
+    try:
+        # Runs on every boot by design; escape hatch via the
+        # 'prospire.auto_portal' config parameter (see models/res_users.py).
+        env['res.users'].sudo()._prospire_demote_plain_users()
+    except Exception:
+        _logger.exception(
+            'prospire_elearning: post-init auto-portal demotion skipped due to an error'
+        )
 
 
 def _setup_website_branding(env):
-    """Light branding setup: website name + company logo fallback.
+    """Branding setup: website name, logo and company phone.
 
-    Never overwrites an existing logo.
+    The logo is ALWAYS overwritten with the company logo (the current
+    placeholder is the stock "Your Logo"). The company email is left alone:
+    it doubles as the SMTP sender identity.
     """
     Website = env['website'].sudo()
     for website in Website.search([]):
         values = {}
         if not website.name:
             values['name'] = website.company_id.name or 'ProspireNext'
-        if not website.logo and website.company_id.logo:
+        if website.company_id.logo and website.logo != website.company_id.logo:
             values['logo'] = website.company_id.logo
+        company = website.company_id
+        if company.phone != COMPANY_PHONE:
+            company.phone = COMPANY_PHONE
+            _logger.info(
+                'prospire_elearning: company %s phone set to %s',
+                company.id, COMPANY_PHONE,
+            )
         if values:
             website.write(values)
             _logger.info(
@@ -110,12 +142,17 @@ def _resolve_target_channel(Channel, env):
 
 
 def _apply_channel_branding(env, channel):
-    """Refresh course cover image, trainer and description on every sync."""
+    """Refresh course cover, access policy, trainer and description on every sync."""
     values = {
         'description_short': CHANNEL_DESCRIPTION_SHORT,
         'description': CHANNEL_DESCRIPTION,
         'description_html': CHANNEL_DESCRIPTION_HTML,
+        # Paid course: only members see content; joining requires an
+        # invitation or a coupon (see /slides/coupon_join).
+        'visibility': 'members',
+        'enroll': 'invite',
     }
+    env['ir.config_parameter'].sudo().set_param(COUPON_PARAM, COUPON_CODE)
     cover_path = os.path.join(os.path.dirname(__file__), COVER_IMAGE_RELPATH)
     try:
         with open(cover_path, 'rb') as cover_file:
@@ -206,6 +243,7 @@ def _create_orientation(Slide, channel, seq):
         'sequence': seq + 1,
         'slide_category': 'document',
         'is_published': True,
+        'is_preview': True,
         'completion_time': 0.5,
         'description': HANDBOOK_SLIDE_SUMMARY,
     }
@@ -256,6 +294,9 @@ def _create_curriculum(Slide, channel, tags, seq, existing):
                 'sequence': seq,
                 'slide_category': 'article',
                 'is_published': True,
+                # Free preview for the orientation + first two sections;
+                # creation path only — existing slides are never touched.
+                'is_preview': section_data['name'] in PREVIEW_SECTION_NAMES,
                 'completion_time': lesson_data['hours'],
                 'tag_ids': [(6, 0, [tags[lesson_data['level']].id])],
                 'description': lesson_data['summary'],
