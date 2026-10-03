@@ -37049,7 +37049,7 @@ var XlsxSheetExtractor = class extends XlsxBaseExtractor {
 		this.theme = theme;
 	}
 	getSheet() {
-		return this.mapOnElements({
+		const extractedSheet = this.mapOnElements({
 			query: "worksheet",
 			parent: this.rootFile.file.xml
 		}, (sheetElement) => {
@@ -37072,6 +37072,32 @@ var XlsxSheetExtractor = class extends XlsxBaseExtractor {
 				isVisible: sheetWorkbookInfo.state === "visible"
 			};
 		})[0];
+		if (extractedSheet) return extractedSheet;
+		let sheetName = "Sheet";
+		let sheetState = "visible";
+		try {
+			sheetName = this.extractSheetName();
+			sheetState = this.getSheetWorkbookInfo().state;
+		} catch (e) {
+			this.catchErrorOnElement(e);
+		}
+		return {
+			sheetName,
+			sheetViews: [],
+			sheetFormat: void 0,
+			sheetProperties: void 0,
+			cols: [],
+			rows: [],
+			sharedFormulas: [],
+			merges: [],
+			cfs: [],
+			dataValidations: [],
+			figures: [],
+			hyperlinks: [],
+			tables: [],
+			pivotTables: [],
+			isVisible: sheetState === "visible"
+		};
 	}
 	extractSheetViews(worksheet) {
 		return this.mapOnElements({
@@ -37574,8 +37600,13 @@ var XlsxReader = class {
 		const theme = xlsxFileStructure.theme ? new XlsxMiscExtractor(xlsxFileStructure.theme, xlsxFileStructure, this.warningManager).getTheme() : void 0;
 		const sharedStrings = xlsxFileStructure.sharedStrings ? new XlsxMiscExtractor(xlsxFileStructure.sharedStrings, xlsxFileStructure, this.warningManager).getSharedStrings() : [];
 		const sheets = xlsxFileStructure.sheets.sort((a, b) => a.file.fileName.localeCompare(b.file.fileName, void 0, { numeric: true })).map((sheetFile) => {
-			return new XlsxSheetExtractor(sheetFile, xlsxFileStructure, this.warningManager, theme).getSheet();
-		});
+			try {
+				return new XlsxSheetExtractor(sheetFile, xlsxFileStructure, this.warningManager, theme).getSheet();
+			} catch (e) {
+				this.warningManager.addParsingWarning(`Error when parsing sheet file ${sheetFile.file.fileName}, skip this sheet. \n${e.stack}`);
+				return void 0;
+			}
+		}).filter((sheet) => sheet !== void 0);
 		const externalBooks = xlsxFileStructure.externalLinks.map((externalLinkFile) => {
 			return new XlsxExternalBookExtractor(externalLinkFile, xlsxFileStructure, this.warningManager).getExternalBook();
 		});
