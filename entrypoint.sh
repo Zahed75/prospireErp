@@ -206,9 +206,17 @@ try:
             print(f'[entrypoint] SMTP server created for {smtp_user}')
         param = env['ir.config_parameter'].sudo()
         param.set_param('mail.default.from', smtp_user)
-        param.set_param('mail.catchall.domain', smtp_user.rsplit('@', 1)[-1])
+        # Never use gmail.com (or any public provider) as catchall domain: the
+        # Reply-To alias <alias>@gmail.com can never receive mail — replies are
+        # lost and spam filters flag the mismatch. Empty catchall means Odoo
+        # replies go to the actual sender's address, which is what a Gmail-SMTP
+        # deployment wants. Set MAIL_CATCHALL_DOMAIN in .env only if you run
+        # mail for your own domain and created the catchall alias mailbox.
+        param.set_param('mail.catchall.domain', os.environ.get('MAIL_CATCHALL_DOMAIN', '').strip())
         for company in env['res.company'].sudo().search([]):
-            if not company.email:
+            # VexaNext-branded companies get the Vexa sender (see Vexa SMTP
+            # block below), not the Prospire one.
+            if not company.email and 'vexanext' not in company.name.lower():
                 company.write({'email': smtp_user})
         template = env.ref('auth_signup.set_password_email', raise_if_not_found=False)
         if template:
@@ -219,6 +227,62 @@ except Exception as e:
     print(f'[entrypoint] SMTP update FAILED: {e}')
     raise
 "
+
+# Optional second outgoing mail server for the VexaNext company.
+# Odoo routes each outgoing message through the server whose "From Filtering"
+# matches the message From address: VexaNext mail is sent AS vexanext@gmail.com
+# through vexanext's own Gmail login (proper auth alignment) instead of
+# masquerading through the Prospire login — the pattern Gmail spam-filters.
+# VEXA_SMTP_PASSWORD must be a 16-character Gmail app password
+# (Google account → 2FA → App passwords) for vexanext@gmail.com.
+if [ -n "${VEXA_SMTP_USER:-}" ]; then
+echo "Updating Vexa SMTP server configuration..."
+python3 -c "
+import os, odoo
+from odoo.modules.registry import Registry
+db = os.environ.get('DB_NAME', 'prospire_hq')
+vexa_user = os.environ['VEXA_SMTP_USER'].strip()
+vexa_pass = ''.join(os.environ.get('VEXA_SMTP_PASSWORD', '').split())
+try:
+    odoo.tools.config.parse_config(['-c', '/opt/odoo/odoo.conf'])
+    registry = Registry(db)
+    with registry.cursor() as cr:
+        env = odoo.api.Environment(cr, odoo.SUPERUSER_ID, {})
+        Smtp = env['ir.mail_server'].sudo()
+        existing = Smtp.search([('name', '=', 'Vexa SMTP')], limit=1)
+        values = {
+            'name': 'Vexa SMTP',
+            'smtp_authentication': 'login',
+            'smtp_host': os.environ.get('VEXA_SMTP_HOST', 'smtp.gmail.com').strip(),
+            'smtp_port': int(os.environ.get('VEXA_SMTP_PORT', '587')),
+            'smtp_user': vexa_user,
+            'smtp_pass': vexa_pass,
+            'smtp_encryption': os.environ.get('VEXA_SMTP_ENCRYPTION', 'starttls').strip(),
+            # Matches any message sent from this exact address
+            'from_filter': vexa_user,
+            'sequence': 5,
+            'active': True,
+        }
+        if existing:
+            existing.write(values)
+            print(f'[entrypoint] Vexa SMTP server updated for {vexa_user}')
+        else:
+            Smtp.create(values)
+            print(f'[entrypoint] Vexa SMTP server created for {vexa_user}')
+        # Brand the VexaNext company with the Vexa sender
+        company = env['res.company'].sudo().search([('name', 'ilike', 'vexanext')], limit=1)
+        if company:
+            company.write({'email': vexa_user})
+            print(f'[entrypoint] Company {company.name} email set to {vexa_user}')
+        env.cr.commit()
+        print('[entrypoint] Vexa SMTP configuration completed')
+except Exception as e:
+    print(f'[entrypoint] Vexa SMTP update FAILED: {e}')
+    raise
+"
+else
+    echo "VEXA_SMTP_USER not set, skipping Vexa SMTP server configuration."
+fi
 
 # Clean old assets on every startup
 rm -rf /var/lib/odoo/assets-*
