@@ -1,7 +1,7 @@
 import os
 
 from odoo import api, fields, models
-from ..mail_config import configure_mail_sender, get_smtp_config
+from ..mail_config import configure_mail_sender, configure_vexa_mail_server, get_smtp_config
 
 
 class ResUsers(models.Model):
@@ -142,6 +142,7 @@ class ResUsers(models.Model):
                 Smtp.create(smtp_values)
 
             configure_mail_sender(self.env)
+            configure_vexa_mail_server(self.env)
 
             # 7. Disable base auto-vacuum cron
             # With workers=0, cron jobs run in the same process and can grab locks
