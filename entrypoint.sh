@@ -33,8 +33,8 @@ PGPASSWORD="${DB_PASSWORD:-}" psql \
 echo "Installing / Updating prospire_login, prospire_elearning modules..."
 python3 /opt/odoo/odoo-bin -c /opt/odoo/odoo.conf \
     -d "${DB_NAME:-prospire_hq}" \
-    --init=prospire_login,prospire_elearning \
-    --update=prospire_login,prospire_elearning \
+    --init=prospire_login,prospire_elearning,vexanext_brand \
+    --update=prospire_login,prospire_elearning,vexanext_brand \
     --stop-after-init
 
 # Enforce correct base URL and website domain settings
