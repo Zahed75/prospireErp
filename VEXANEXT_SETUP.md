@@ -3,7 +3,7 @@
 Everything needed to run VexaNext (vexanext.com) as a second branded company
 on the same Odoo instance as ProspireNext.
 
-- ERP entry point: `https://hq.vexanext.com` → same Odoo (ports 8070/8071),
+- ERP entry point: `https://hq.vexanext.com` → same Odoo (ports 8070/8074),
   same database (`dbfilter = ^prospire_hq$`). Users pick the company after login.
 - Mail: VexaNext sends AS `vexanext@gmail.com` through its own Gmail login.
 

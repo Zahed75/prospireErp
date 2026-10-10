@@ -36,7 +36,7 @@ services:
       - db
     ports:
       - "${ODOO_PORT:-8070}:8069"
-      - "${LONGPOLLING_PORT:-8071}:8072"
+      - "${LONGPOLLING_PORT:-8074}:8072"
     volumes:
       - prospire-web-data:/var/lib/odoo
       - prospire-logs:/var/log/odoo
